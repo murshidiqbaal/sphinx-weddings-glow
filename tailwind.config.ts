@@ -13,7 +13,15 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ['Cormorant Garamond', 'serif'],
+        sans: ['Montserrat', 'sans-serif'],
+      },
       colors: {
+        cream: 'hsl(var(--cream))',
+        beige: 'hsl(var(--beige))',
+        sage: 'hsl(var(--sage))',
+        forest: 'hsl(var(--forest))',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
