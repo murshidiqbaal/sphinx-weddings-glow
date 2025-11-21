@@ -95,20 +95,19 @@ const Gallery = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
-        <div className="container mx-auto px-4 py-4">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-sage/20">
+        <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex flex-col">
-              <h1 className="text-2xl md:text-3xl font-serif font-bold text-primary tracking-wide">
+              <h1 className="text-2xl md:text-3xl font-serif font-light text-sage tracking-wider">
                 SphinxWeddings
               </h1>
-              <p className="text-xs md:text-sm text-muted-foreground font-light">Event & Wedding Planner</p>
             </Link>
             
             <Link to="/">
-              <Button variant="outline" size="sm" className="gap-2">
+              <Button variant="ghost" size="sm" className="gap-2 text-sage hover:text-sage/80 hover:bg-sage/5">
                 <Home className="w-4 h-4" />
-                <span className="hidden sm:inline">Back to Home</span>
+                <span className="hidden sm:inline">Home</span>
               </Button>
             </Link>
           </div>
@@ -116,30 +115,45 @@ const Gallery = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-12 md:pt-40 md:pb-20 bg-beige">
+      <section className="pt-32 pb-12 md:pt-40 md:pb-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-serif font-light text-primary mb-6 animate-fade-in">
-            Our Gallery
+          <h2 className="text-5xl md:text-7xl font-serif font-light text-sage mb-8 tracking-wide animate-fade-in">
+            Gallery
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-            Explore our collection of beautifully curated celebrations and unforgettable moments
+          
+          {/* Collection Links */}
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <Link to="/gallery/outdoor-events">
+              <Button variant="outline" className="border-sage/30 text-sage hover:bg-sage/10 hover:border-sage/50 font-light">
+                Outdoor Events
+              </Button>
+            </Link>
+            <Link to="/gallery/night-events">
+              <Button variant="outline" className="border-sage/30 text-sage hover:bg-sage/10 hover:border-sage/50 font-light">
+                Night Events
+              </Button>
+            </Link>
+          </div>
+
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light animate-fade-in">
+            Explore our collection of beautifully curated celebrations
           </p>
         </div>
       </section>
 
       {/* Filter Navigation */}
-      <section className="py-8 bg-background border-b border-border/50 sticky top-[73px] z-40">
+      <section className="py-8 bg-background border-b border-sage/20 sticky top-[89px] z-40">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             {categories.map((category) => (
               <Button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                variant={selectedCategory === category.id ? "default" : "outline"}
-                className={`gap-2 ${
+                variant={selectedCategory === category.id ? "default" : "ghost"}
+                className={`gap-2 font-light ${
                   selectedCategory === category.id
-                    ? "bg-sage hover:bg-sage/90 text-white"
-                    : "hover:bg-beige"
+                    ? "bg-sage hover:bg-sage/90 text-background"
+                    : "text-sage hover:bg-sage/10"
                 }`}
               >
                 {category.icon}
@@ -153,28 +167,28 @@ const Gallery = () => {
       {/* Gallery Grid */}
       <section className="py-12 md:py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {filteredImages.map((image, index) => (
               <div
                 key={`${image.src}-${index}`}
-                className="group relative overflow-hidden rounded-lg aspect-square cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                className="group relative overflow-hidden aspect-square cursor-pointer bg-muted/30 transition-all duration-500"
                 onClick={() => setSelectedImage(image.src)}
               >
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-white font-serif text-xl md:text-2xl font-semibold">
+                <div className="absolute inset-0 bg-sage/0 group-hover:bg-sage/10 transition-all duration-500">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <h3 className="text-sage font-serif text-xl font-light">
                       {image.title}
                     </h3>
                     <div className="flex gap-2 mt-2 flex-wrap">
                       {image.category.map((cat) => (
                         <span
                           key={cat}
-                          className="text-xs px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white"
+                          className="text-xs px-2 py-1 bg-sage/20 rounded-full text-sage font-light"
                         >
                           {cat}
                         </span>
@@ -197,11 +211,11 @@ const Gallery = () => {
       {/* Lightbox Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-[100] bg-forest/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setSelectedImage(null)}
         >
           <button
-            className="absolute top-4 right-4 text-white hover:text-sage transition-colors text-4xl font-light"
+            className="absolute top-4 right-4 text-sage hover:text-sage/60 transition-colors text-4xl font-light"
             onClick={() => setSelectedImage(null)}
           >
             ×
@@ -209,23 +223,23 @@ const Gallery = () => {
           <img
             src={selectedImage}
             alt="Gallery preview"
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            className="max-w-full max-h-[90vh] object-contain"
             onClick={(e) => e.stopPropagation()}
           />
         </div>
       )}
 
       {/* Call to Action */}
-      <section className="py-20 bg-beige">
+      <section className="py-20 border-t border-sage/20">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-3xl md:text-5xl font-serif font-light text-primary mb-6">
+          <h3 className="text-3xl md:text-5xl font-serif font-light text-sage mb-6">
             Ready to Create Your Own Story?
           </h3>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto font-light">
             Let's start planning your unforgettable celebration together
           </p>
           <Link to="/#contact">
-            <Button className="bg-sage hover:bg-sage/90 text-white px-8 py-6 text-lg">
+            <Button className="bg-sage hover:bg-sage/90 text-background px-8 py-6 text-lg font-light">
               Get in Touch
             </Button>
           </Link>
@@ -233,11 +247,9 @@ const Gallery = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-forest text-white">
+      <footer className="py-12 border-t border-sage/20">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-2xl font-serif font-semibold mb-2">SphinxWeddings</h3>
-          <p className="text-white/80 mb-6">Event Management and Wedding Planning</p>
-          <p className="text-sm text-white/60">© 2025 SphinxWeddings. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground font-light">© 2025 SphinxWeddings</p>
         </div>
       </footer>
     </div>
