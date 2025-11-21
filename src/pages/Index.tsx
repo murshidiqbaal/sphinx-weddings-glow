@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -67,6 +68,12 @@ const Index = () => {
                   {item === "our-works" ? "Our Works" : item}
                 </button>
               ))}
+              <Link
+                to="/gallery"
+                className="text-sm font-medium text-foreground hover:text-sage transition-colors"
+              >
+                Gallery
+              </Link>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -90,6 +97,13 @@ const Index = () => {
                   {item === "our-works" ? "Our Works" : item}
                 </button>
               ))}
+              <Link
+                to="/gallery"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-left text-sm font-medium text-foreground hover:text-sage transition-colors"
+              >
+                Gallery
+              </Link>
             </nav>
           )}
         </div>
@@ -222,6 +236,13 @@ const Index = () => {
                 <div className="absolute inset-0 bg-forest/0 group-hover:bg-forest/20 transition-colors duration-500" />
               </div>
             ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link to="/gallery">
+              <Button className="bg-sage hover:bg-sage/90 text-white px-8 py-3">
+                View Full Gallery
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
