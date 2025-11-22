@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Moon, Star, Sparkles } from "lucide-react";
-import venueLights from "@/assets/venue-lights.jpg";
-import weddingTable from "@/assets/wedding-table.jpg";
 import rings from "@/assets/rings.jpg";
+import venueLights from "@/assets/venue-lights.jpg";
 import weddingCeremony from "@/assets/wedding-ceremony.jpg";
+import weddingTable from "@/assets/wedding-table.jpg";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Moon, Sparkles, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const NightEvents = () => {
   const nightImages = [
@@ -19,17 +19,17 @@ const NightEvents = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Minimal Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-sage/20">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-primary/20">
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex flex-col">
-              <h1 className="text-2xl md:text-3xl font-serif font-light text-sage tracking-wider">
+              <h1 className="text-2xl md:text-3xl font-serif font-light text-primary tracking-wider">
                 SphinxWeddings
               </h1>
             </Link>
             
             <Link to="/gallery">
-              <Button variant="ghost" size="sm" className="gap-2 text-sage hover:text-sage/80 hover:bg-sage/5">
+              <Button variant="ghost" size="sm" className="gap-2 text-primary hover:text-primary/80 hover:bg-primary/10">
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back to Gallery</span>
               </Button>
@@ -70,8 +70,8 @@ const NightEvents = () => {
                   className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-sage/0 group-hover:bg-sage/10 transition-all duration-500">
-                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <h3 className="text-sage font-serif text-xl font-light">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                    <h3 className="text-white font-serif text-xl font-light">
                       {image.title}
                     </h3>
                   </div>

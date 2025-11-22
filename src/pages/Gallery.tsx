@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { Heart, Leaf, Camera, Home } from "lucide-react";
+import bouquet from "@/assets/bouquet.jpg";
+import coupleHands from "@/assets/couple-hands.jpg";
+import plannerConsultation from "@/assets/planner-consultation.jpg";
+import rings from "@/assets/rings.jpg";
+import venueLights from "@/assets/venue-lights.jpg";
 import weddingCeremony from "@/assets/wedding-ceremony.jpg";
 import weddingTable from "@/assets/wedding-table.jpg";
-import coupleHands from "@/assets/couple-hands.jpg";
-import bouquet from "@/assets/bouquet.jpg";
-import venueLights from "@/assets/venue-lights.jpg";
-import rings from "@/assets/rings.jpg";
-import plannerConsultation from "@/assets/planner-consultation.jpg";
+import { Button } from "@/components/ui/button";
+import { Camera, Heart, Home, Leaf } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 type Category = "all" | "weddings" | "baptisms" | "corporate";
 
@@ -95,17 +95,17 @@ const Gallery = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-sage/20">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/20">
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex flex-col">
-              <h1 className="text-2xl md:text-3xl font-serif font-light text-sage tracking-wider">
+              <h1 className="text-2xl md:text-3xl font-serif font-light tracking-wider" style={{ color: "#859a77" }}>
                 SphinxWeddings
               </h1>
             </Link>
             
             <Link to="/">
-              <Button variant="ghost" size="sm" className="gap-2 text-sage hover:text-sage/80 hover:bg-sage/5">
+              <Button variant="ghost" size="sm" className="gap-2 hover:bg-white/10" style={{ color: "#859a77" }}>
                 <Home className="w-4 h-4" />
                 <span className="hidden sm:inline">Home</span>
               </Button>
@@ -142,7 +142,7 @@ const Gallery = () => {
       </section>
 
       {/* Filter Navigation */}
-      <section className="py-8 bg-background border-b border-sage/20 sticky top-[89px] z-40">
+      <section className="py-8 bg-background border-b border-sage/20">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             {categories.map((category) => (
@@ -180,15 +180,15 @@ const Gallery = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-sage/0 group-hover:bg-sage/10 transition-all duration-500">
-                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <h3 className="text-sage font-serif text-xl font-light">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                    <h3 className="text-white font-serif text-xl font-light">
                       {image.title}
                     </h3>
                     <div className="flex gap-2 mt-2 flex-wrap">
                       {image.category.map((cat) => (
                         <span
                           key={cat}
-                          className="text-xs px-2 py-1 bg-sage/20 rounded-full text-sage font-light"
+                          className="text-xs px-2 py-1 bg-white/20 rounded-full text-white font-light"
                         >
                           {cat}
                         </span>

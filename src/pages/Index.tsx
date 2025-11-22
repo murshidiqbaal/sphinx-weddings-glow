@@ -1,20 +1,29 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import bouquet from "@/assets/bouquet.jpg";
+import coupleHands from "@/assets/couple-hands.jpg";
+import rings from "@/assets/imgs/IMG_6162.JPEG.jpg";
+import plannerConsultation from "@/assets/imgs/IMG_6163.JPEG.jpg";
+import venueLights from "@/assets/imgs/IMG_6166.JPEG.jpg";
+import weddingTable from "@/assets/imgs/IMG_6172.JPEG.jpg";
+import heroImage from "@/assets/wedding-ceremony.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Heart, Leaf, Camera, ChevronDown, Menu, X, Facebook, Instagram } from "lucide-react";
-import heroImage from "@/assets/wedding-ceremony.jpg";
-import weddingTable from "@/assets/wedding-table.jpg";
-import coupleHands from "@/assets/couple-hands.jpg";
-import bouquet from "@/assets/bouquet.jpg";
-import venueLights from "@/assets/venue-lights.jpg";
-import rings from "@/assets/rings.jpg";
-import plannerConsultation from "@/assets/planner-consultation.jpg";
+import { Camera, ChevronDown, Facebook, Heart, Instagram, Leaf, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState("wedding-planning");
+  const [headerDark, setHeaderDark] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    service: "wedding-planning",
+    message: "",
+  });
+  const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
   
   useEffect(() => {
     const observerOptions = {
@@ -36,6 +45,16 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollHeight = window.innerHeight * 1.1; // 300vh
+      setHeaderDark(window.scrollY > scrollHeight);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -44,17 +63,70 @@ const Index = () => {
     }
   };
 
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitting(true);
+    setFormMessage("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "3a0165cf-d681-426f-96dc-5c7a950d9556",
+          name: formData.name,
+          email: formData.email,
+          service: formData.service,
+          message: formData.message,
+          to_email: "murshidiqbaalkm@gmail.com",
+          from_name: "SphinxWeddings Contact Form",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setFormMessage("Message sent successfully! We'll get back to you soon.");
+        setFormData({
+          name: "",
+          email: "",
+          service: "wedding-planning",
+          message: "",
+        });
+        // Auto-clear message after 5 seconds
+        setTimeout(() => setFormMessage(""), 5000);
+      } else {
+        setFormMessage(result.message || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setFormMessage("Error sending message. Please check your connection and try again.");
+    } finally {
+      setFormSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-border/50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex flex-col">
-              <h1 className="text-2xl md:text-3xl font-serif font-bold text-primary tracking-wide">
+              <h1 className={`text-2xl md:text-3xl font-serif font-bold ${headerDark ? "text-primary" : "text-white"} tracking-wide transition-colors duration-300`}>
                 SphinxWeddings
               </h1>
-              <p className="text-xs md:text-sm text-muted-foreground font-light">Event & Wedding Planner</p>
+              <p className={`text-xs md:text-sm ${headerDark ? "text-muted-foreground" : "text-white/80"} font-light transition-colors duration-300`}>Event & Wedding Planner</p>
             </div>
             
             {/* Desktop Navigation */}
@@ -63,14 +135,14 @@ const Index = () => {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="text-sm font-medium text-foreground hover:text-sage transition-colors capitalize"
+                  className={`text-sm font-medium ${headerDark ? "text-foreground" : "text-white"} hover:text-sage transition-colors capitalize`}
                 >
                   {item === "our-works" ? "Our Works" : item}
                 </button>
               ))}
               <Link
                 to="/gallery"
-                className="text-sm font-medium text-foreground hover:text-sage transition-colors"
+                className={`text-sm font-medium ${headerDark ? "text-foreground" : "text-white"} hover:text-sage transition-colors`}
               >
                 Gallery
               </Link>
@@ -78,7 +150,7 @@ const Index = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-foreground"
+              className={`md:hidden ${headerDark ? "text-foreground" : "text-white"} transition-colors`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -92,7 +164,7 @@ const Index = () => {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="text-left text-sm font-medium text-foreground hover:text-sage transition-colors capitalize"
+                  className={`text-left text-sm font-medium ${headerDark ? "text-foreground" : "text-white"} hover:text-sage transition-colors capitalize`}
                 >
                   {item === "our-works" ? "Our Works" : item}
                 </button>
@@ -100,7 +172,7 @@ const Index = () => {
               <Link
                 to="/gallery"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-left text-sm font-medium text-foreground hover:text-sage transition-colors"
+                className={`text-left text-sm font-medium ${headerDark ? "text-foreground" : "text-white"} hover:text-sage transition-colors`}
               >
                 Gallery
               </Link>
@@ -112,11 +184,12 @@ const Index = () => {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative h-screen flex items-center justify-center text-center"
+        className="relative h-screen flex items-center justify-center text-center mt-0"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${heroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundAttachment: "scroll",
         }}
       >
         <div className="container mx-auto px-4 z-10">
@@ -376,13 +449,13 @@ const Index = () => {
               <h3 className="text-2xl font-serif font-semibold text-primary mb-6">Contact Information</h3>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  <strong>Email:</strong> hello@sphinxweddings.com
+                  <strong>Email:</strong> sphinxweddings2025@gmail.com
                 </p>
                 <p className="text-muted-foreground">
-                  <strong>Phone:</strong> +1 (555) 123-4567
+                  <strong>Phone:</strong> 9072140083
                 </p>
                 <p className="text-muted-foreground">
-                  <strong>Address:</strong> 123 Wedding Lane, Love City, LC 12345
+                  <strong>Address:</strong> College Rd, near Ann theater, Kothamangalam, Kerala 686691
                 </p>
                 <div className="flex gap-4 mt-6">
                   <Button variant="outline" size="icon" className="rounded-full">
@@ -395,21 +468,54 @@ const Index = () => {
               </div>
             </div>
             <div className="observe-scroll opacity-0">
-              <form className="space-y-4">
-                <Input placeholder="Your Name" className="bg-background" />
-                <Input type="email" placeholder="Your Email" className="bg-background" />
+              <form className="space-y-4" onSubmit={handleFormSubmit}>
+                <Input 
+                  placeholder="Your Name" 
+                  className="bg-background" 
+                  name="name"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  required
+                />
+                <Input 
+                  type="email" 
+                  placeholder="Your Email" 
+                  className="bg-background" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  required
+                />
                 <select
                   className="w-full px-3 py-2 bg-background border border-input rounded-md text-sm"
-                  value={selectedService}
-                  onChange={(e) => setSelectedService(e.target.value)}
+                  name="service"
+                  value={formData.service}
+                  onChange={handleFormChange}
                 >
                   <option value="wedding-planning">Wedding Planning</option>
                   <option value="baptism">Baptism & Christening</option>
                   <option value="corporate">Corporate Events</option>
                 </select>
-                <Textarea placeholder="Your Message" rows={5} className="bg-background" />
-                <Button className="w-full bg-sage hover:bg-sage/90 text-white">
-                  Send Message
+                <Textarea 
+                  placeholder="Your Message" 
+                  rows={5} 
+                  className="bg-background" 
+                  name="message"
+                  value={formData.message}
+                  onChange={handleFormChange}
+                  required
+                />
+                {formMessage && (
+                  <p className={`text-sm ${formMessage.includes("successfully") ? "text-green-600" : "text-red-600"}`}>
+                    {formMessage}
+                  </p>
+                )}
+                <Button 
+                  type="submit"
+                  className="w-full bg-sage hover:bg-sage/90 text-white" 
+                  disabled={formSubmitting}
+                >
+                  {formSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </div>
@@ -423,10 +529,10 @@ const Index = () => {
           <h3 className="text-2xl font-serif font-semibold mb-2">SphinxWeddings</h3>
           <p className="text-white/80 mb-6">Event Management and Wedding Planning</p>
           <div className="flex justify-center gap-4 mb-6">
-            <Button variant="ghost" size="icon" className="text-white hover:text-sage">
+            <Button variant="ghost" size="icon" className="text-white hover:text-sage" onClick={() => window.open('https://www.facebook.com/sphinxinternational', '_blank')}>
               <Facebook className="w-5 h-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-white hover:text-sage">
+            <Button variant="ghost" size="icon" className="text-white hover:text-sage" onClick={() => window.open('https://www.instagram.com/ms_sphinx_decore/', '_blank')}>
               <Instagram className="w-5 h-5" />
             </Button>
           </div>
