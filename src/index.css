@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -149,5 +151,68 @@ All colors MUST be HSL.
   
   .animate-bounce-slow {
     animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee-track {
+    animation: marquee-scroll 25s linear infinite;
+  }
+
+  @keyframes marquee-scroll-reverse {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .marquee-track-reverse {
+    animation: marquee-scroll-reverse 25s linear infinite;
+  }
+
+  .torn-divider,
+  .torn-edge {
+    background-image: url("data:image/svg+xml,%3Csvg width='1200' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 70 C 80 40 180 40 260 70 C 340 100 420 80 500 60 C 580 40 660 20 740 50 C 820 80 900 90 980 70 C 1060 50 1130 60 1200 80 L 1200 120 L 0 120 Z' fill='%23fdf8f4'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 1200px 120px;
+    margin-top: -60px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .torn-edge {
+    height: 100px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    margin-top: 0;
+  }
+
+  .brush-edge {
+    position: absolute;
+    top: -48px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 48H1440V0C1440 0 1142 48 720 48C298 48 0 0 0 0V48Z' fill='%23fff5ed'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 10;
+  }
+
+  .brush-edge-white {
+     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100H1440V0C1440 0 1380 20 1320 30C1260 40 1200 20 1140 10C1080 0 1020 30 960 40C900 50 840 20 780 10C720 0 660 30 600 40C540 50 480 20 420 10C360 0 300 30 240 40C180 50 120 20 60 10C30 5 15 2 0 0V100Z' fill='white'/%3E%3C/svg%3E");
+     height: 100px;
+     top: -99px;
   }
 }

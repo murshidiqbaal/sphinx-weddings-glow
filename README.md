@@ -71,3 +71,24 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## Admin Panel & Firebase Content Sync
+
+- Navigate to `/admin` and log in with the hard-coded password found in `src/pages/Admin.tsx`. Update that value before deploying.
+- Text blocks and gallery images can be edited directly in the panel. Uploaded images are stored in Firebase Storage and their URLs are persisted in Firestore.
+- The public site listens to live Firestore updates, so saved changes appear immediately without redeploying.
+
+### Environment Variables
+
+Copy `env.template` to `.env` and supply your Firebase credentials:
+
+```
+VITE_FIREBASE_API_KEY=your-key
+VITE_FIREBASE_AUTH_DOMAIN=your-domain.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-bucket.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+VITE_FIREBASE_APP_ID=your-app-id
+```
+
+All keys are required for the admin upload workflow. Without them, changes only persist locally in the browser.
