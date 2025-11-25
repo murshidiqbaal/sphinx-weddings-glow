@@ -1,8 +1,9 @@
-import coupleHands from "@/assets/couple-hands.jpg"; // Placeholder until generation works
+import { useContent } from "@/hooks/useContent";
 import { useEffect, useRef } from "react";
 
 const WeddingSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const { getText, getImage } = useContent();
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -33,53 +34,37 @@ const WeddingSection = () => {
                             <p className="text-xs uppercase tracking-[0.4em] text-sage font-medium">
                                 Our Philosophy
                             </p>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-primary leading-tight">
-                                Perfectly Planned, <br />
-                                <span className="italic text-accent">Beautifully</span> Executed
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-primary leading-tight whitespace-pre-line">
+                                {getText("wedding-section-title")}
                             </h2>
                         </div>
 
                         <div className="space-y-8 text-muted-foreground text-lg font-light leading-relaxed">
                             <div>
-                                <h3 className="text-2xl font-serif text-primary mb-4">The Vision</h3>
+                                <h3 className="text-2xl font-serif text-primary mb-4">{getText("wedding-vision-title")}</h3>
                                 <p>
-                                    We believe that every love story deserves a setting as unique as the couple itself.
-                                    Our process begins not with logistics, but with listening—understanding the nuances
-                                    of your journey, your shared aesthetics, and the atmosphere you wish to cultivate.
-                                    We don't just plan weddings; we curate experiences that feel authentically yours.
+                                    {getText("wedding-vision-desc")}
                                 </p>
                             </div>
 
                             <div>
-                                <h3 className="text-2xl font-serif text-primary mb-4">The Process</h3>
+                                <h3 className="text-2xl font-serif text-primary mb-4">{getText("wedding-process-title")}</h3>
                                 <p>
-                                    From the initial concept board to the final floral arrangement, our approach is
-                                    meticulous and collaborative. We handle the complexities of vendor management,
-                                    timeline creation, and budget allocation with transparency and grace. This allows
-                                    you to enjoy the creative aspects of planning without the weight of administrative
-                                    stress. We are your advocates, your designers, and your peace of mind.
+                                    {getText("wedding-process-desc")}
                                 </p>
                             </div>
 
                             <div>
-                                <h3 className="text-2xl font-serif text-primary mb-4">The Celebration</h3>
+                                <h3 className="text-2xl font-serif text-primary mb-4">{getText("wedding-celebration-title")}</h3>
                                 <p>
-                                    On the day of, our presence is felt but rarely seen. We orchestrate the flow of
-                                    events seamlessly, ensuring that you and your guests are immersed in the moment.
-                                    From the quiet anticipation of the morning preparations to the last dance under
-                                    the stars, we safeguard the magic of your celebration, allowing you to be fully
-                                    present in the joy of your union.
+                                    {getText("wedding-celebration-desc")}
                                 </p>
                             </div>
 
                             <div>
-                                <h3 className="text-2xl font-serif text-primary mb-4">The Legacy</h3>
+                                <h3 className="text-2xl font-serif text-primary mb-4">{getText("wedding-legacy-title")}</h3>
                                 <p>
-                                    Long after the cake is cut and the flowers have faded, what remains are the memories
-                                    of a day filled with love, laughter, and beauty. We take pride in creating
-                                    timeless celebrations that you will look back on with fondness for decades to come.
-                                    Your wedding is the first chapter of your new life together, and we are honored to
-                                    help you write it beautifully.
+                                    {getText("wedding-legacy-desc")}
                                 </p>
                             </div>
                         </div>
@@ -87,7 +72,7 @@ const WeddingSection = () => {
                         <div className="pt-4">
                             <button className="group relative px-8 py-4 bg-transparent border border-primary/20 rounded-full overflow-hidden transition-all hover:border-primary/50">
                                 <span className="relative z-10 text-sm uppercase tracking-widest text-primary group-hover:text-primary transition-colors">
-                                    Start Your Journey
+                                    {getText("wedding-cta-button")}
                                 </span>
                                 <div className="absolute inset-0 bg-beige transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out -z-0" />
                             </button>
@@ -95,14 +80,42 @@ const WeddingSection = () => {
                     </div>
 
                     {/* Right Column: Sticky Image */}
-                    <div className="lg:w-7/12 relative lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)]">
-                        <div className="h-[500px] lg:h-full w-full rounded-[40px] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.1)]">
-                            <img
-                                src={coupleHands}
-                                alt="Romantic wedding moment"
-                                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000 ease-out"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60" />
+                    {/* Right Column: Sticky Image Grid */}
+                    <div className="lg:w-7/12 relative lg:sticky lg:top-24 h-fit">
+                        <div className="grid grid-cols-2 gap-4">
+                            {/* Tall Image - Left */}
+                            <div className="row-span-2 h-[600px] rounded-[30px] overflow-hidden shadow-lg group">
+                                <img
+                                    src={getImage("wedding-image-tall")}
+                                    alt="Wedding couple"
+                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                                />
+                            </div>
+
+                            {/* Stacked Images - Right */}
+                            <div className="h-[290px] rounded-[30px] overflow-hidden shadow-lg group">
+                                <img
+                                    src={getImage("wedding-image-stacked-1")}
+                                    alt="Wedding detail"
+                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                                />
+                            </div>
+                            <div className="h-[290px] rounded-[30px] overflow-hidden shadow-lg group">
+                                <img
+                                    src={getImage("wedding-image-stacked-2")}
+                                    alt="Wedding atmosphere"
+                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                                />
+                            </div>
+
+                            {/* Wide Image - Bottom */}
+                            <div className="col-span-2 h-[300px] rounded-[30px] overflow-hidden shadow-lg group">
+                                <img
+                                    src={getImage("wedding-image-wide")}
+                                    alt="Wedding celebration"
+                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

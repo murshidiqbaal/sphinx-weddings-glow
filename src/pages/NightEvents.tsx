@@ -1,7 +1,7 @@
-import rings from "@/assets/rings.jpg";
-import venueLights from "@/assets/venue-lights.jpg";
-import weddingCeremony from "@/assets/wedding-ceremony.jpg";
-import weddingTable from "@/assets/wedding-table.jpg";
+import rings from "@/assets/imgs/IMG_6162.JPEG.jpg";
+import weddingTable from "@/assets/imgs/IMG_7841.JPG";
+import venueLights from "@/assets/imgs/IMG_7842.JPG";
+import weddingCeremony from "@/assets/imgs/IMG_7843.JPG";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Moon, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -27,7 +27,7 @@ const NightEvents = () => {
                 SphinxWeddings
               </h1>
             </Link>
-            
+
             <Link to="/gallery">
               <Button variant="ghost" size="sm" className="gap-2 text-primary hover:text-primary/80 hover:bg-primary/10">
                 <ArrowLeft className="w-4 h-4" />

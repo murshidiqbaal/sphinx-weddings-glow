@@ -1,15 +1,8 @@
-import bouquet from "@/assets/bouquet.jpg";
-import coupleHands from "@/assets/couple-hands.jpg";
-import rings from "@/assets/imgs/IMG_6162.JPEG.jpg";
-import plannerConsultation from "@/assets/imgs/IMG_6163.JPEG.jpg";
-import venueLights from "@/assets/imgs/IMG_6166.JPEG.jpg";
-import weddingTable from "@/assets/imgs/IMG_6172.JPEG.jpg";
-import heroImage from "@/assets/wedding-ceremony.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import WeddingSection from "@/components/WeddingSection";
-import { getContent } from "@/lib/firebaseService";
+import { useContent } from "@/hooks/useContent";
 import { Camera, ChevronDown, Facebook, Heart, Instagram, Leaf, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -27,129 +20,27 @@ const Index = () => {
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [formMessage, setFormMessage] = useState("");
 
-  // Content from Firebase
-  const [heroTitle, setHeroTitle] = useState("FOR THE LAID-BACK AND\nTHE WILDLY IN LOVE");
-  const [heroSubtitle, setHeroSubtitle] = useState("Because you deserve to preserve your memories, beautifully.");
-  const [heroImageUrl, setHeroImageUrl] = useState(heroImage);
-  const [introTitle, setIntroTitle] = useState("IMAGINE HAVING A BEAUTIFULLY CRAFTED, TRULY EXCEPTIONAL CELEBRATION THAT PERFECTLY REFLECTS YOUR LOVE STORY");
-  const [introDescription, setIntroDescription] = useState("As newly engaged couples, the excitement of wedding planning quickly turns into stress when juggling vendors, timelines, and endless details. That's where we come in—transforming your vision into reality with seamless coordination, thoughtful design, and expert guidance every step of the way.");
-  const [aboutTitle, setAboutTitle] = useState("UNIQUELY, YOU'RE LOOKING FOR A PLANNER WHO CAN HELP YOU FEEL AT EASE THROUGH EVERY STEP OF THE JOURNEY.");
-  const [aboutImageUrl, setAboutImageUrl] = useState(plannerConsultation);
-  const [contactEmail, setContactEmail] = useState("sphinxweddings2025@gmail.com");
-  const [contactPhone, setContactPhone] = useState("9072140083");
-  const [contactAddress, setContactAddress] = useState("College Rd, near Ann theater, Kothamangalam, Kerala 686691");
-  const [galleryImages, setGalleryImages] = useState([
-    weddingTable,
-    coupleHands,
-    bouquet,
-    venueLights,
-    rings,
-    plannerConsultation,
-  ]);
+  const { getText, getImage } = useContent();
 
-  // Load content from Firebase
-  useEffect(() => {
-    const loadContent = async () => {
-      try {
-        const content = await getContent();
-        if (content.length > 0) {
-          content.forEach((item) => {
-            switch (item.id) {
-              case "hero-title":
-                if (item.value) setHeroTitle(item.value);
-                break;
-              case "hero-subtitle":
-                if (item.value) setHeroSubtitle(item.value);
-                break;
-              case "hero-image":
-                if (item.value) setHeroImageUrl(item.value);
-                break;
-              case "intro-title":
-                if (item.value) setIntroTitle(item.value);
-                break;
-              case "intro-description":
-                if (item.value) setIntroDescription(item.value);
-                break;
-              case "about-title":
-                if (item.value) setAboutTitle(item.value);
-                break;
-              case "about-image":
-                if (item.value) setAboutImageUrl(item.value);
-                break;
-              case "contact-email":
-                if (item.value) setContactEmail(item.value);
-                break;
-              case "contact-phone":
-                if (item.value) setContactPhone(item.value);
-                break;
-              case "contact-address":
-                if (item.value) setContactAddress(item.value);
-                break;
-              case "gallery-image-1":
-                if (item.value) {
-                  setGalleryImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[0] = item.value;
-                    return newImages;
-                  });
-                }
-                break;
-              case "gallery-image-2":
-                if (item.value) {
-                  setGalleryImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[1] = item.value;
-                    return newImages;
-                  });
-                }
-                break;
-              case "gallery-image-3":
-                if (item.value) {
-                  setGalleryImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[2] = item.value;
-                    return newImages;
-                  });
-                }
-                break;
-              case "gallery-image-4":
-                if (item.value) {
-                  setGalleryImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[3] = item.value;
-                    return newImages;
-                  });
-                }
-                break;
-              case "gallery-image-5":
-                if (item.value) {
-                  setGalleryImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[4] = item.value;
-                    return newImages;
-                  });
-                }
-                break;
-              case "gallery-image-6":
-                if (item.value) {
-                  setGalleryImages((prev) => {
-                    const newImages = [...prev];
-                    newImages[5] = item.value;
-                    return newImages;
-                  });
-                }
-                break;
-            }
-          });
-        }
-      } catch (error) {
-        console.error("Error loading content from Firebase:", error);
-        // Use default values if Firebase fails
-      }
-    };
+  const galleryImages = [
+    getImage("gallery-image-1"),
+    'src/assets/imgs/IMG_6166.JPEG.jpg',
+    getImage("gallery-image-3"),
+    getImage("gallery-image-4"),
+    getImage("gallery-image-5"),
+    getImage("gallery-image-6"),
+  ];
 
-    loadContent();
-  }, []);
+  const heroTitle = getText("hero-title");
+  const heroSubtitle = getText("hero-subtitle");
+  const heroImageUrl = getImage("hero-image");
+  const introTitle = getText("intro-title");
+  const introDescription = getText("intro-description");
+  const aboutTitle = getText("about-title");
+  const aboutImageUrl = getImage("about-image");
+  const contactEmail = getText("contact-email");
+  const contactPhone = getText("contact-phone");
+  const contactAddress = getText("contact-address");
 
   useEffect(() => {
     const observerOptions = {
@@ -324,7 +215,7 @@ const Index = () => {
         id="home"
         className="relative h-screen flex items-center justify-center text-center mt-0"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${heroImageUrl})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('src/assets/wedding-ceremony.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "scroll",
@@ -332,12 +223,7 @@ const Index = () => {
       >
         <div className="container mx-auto px-4 z-10">
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light text-white mb-6 leading-tight">
-            {heroTitle.split("\n").map((line, i) => (
-              <span key={i}>
-                {line}
-                {i < heroTitle.split("\n").length - 1 && <br />}
-              </span>
-            ))}
+            FOR THE LAID-BACK AND <br /> THE WILDLY IN LOVE
           </h2>
           <p className="text-lg md:text-xl text-white/90 font-light max-w-2xl mx-auto">
             {heroSubtitle}
@@ -534,7 +420,7 @@ const Index = () => {
                   <div className="absolute -top-6 -left-6 bg-[#b27b61] text-white text-xs uppercase tracking-[0.4em] px-4 py-2 rounded-full shadow-lg">
                     Est. 2025
                   </div>
-                  <img src={galleryImages[0]} alt="Celebration toast" className="w-full h-[360px] object-cover" />
+                  <img src={'src/assets/imgs/IMG_7349.JPEG.jpg'} alt="Celebration toast" className="w-full h-[360px] object-cover" />
                   <div className="px-8 py-6 text-center space-y-2">
                     <p className="text-xs uppercase tracking-[0.4em] text-sage">Signature curation</p>
                     <p className="text-sm text-muted-foreground">
@@ -685,49 +571,49 @@ const Index = () => {
               {
                 id: "engagement",
                 title: "Engagement",
-                image: rings,
+                image: getImage("gallery-image-5"), // rings
                 description: "The beginning of your forever, marked with elegance.",
               },
               {
                 id: "wedding-planning",
                 title: "Wedding Planning",
-                image: heroImage,
+                image: getImage("hero-image"),
                 description: "Full-service coordination for your perfect day.",
               },
               {
                 id: "reception",
                 title: "Reception",
-                image: weddingTable,
+                image: getImage("gallery-image-1"), // weddingTable
                 description: "An evening of joy, dining, and unforgettable toasts.",
               },
               {
                 id: "haldi",
                 title: "Haldi Ceremony",
-                image: weddingTable, // Placeholder, reusing for now
+                image: getImage("gallery-image-1"), // Placeholder, reusing weddingTable
                 description: "Vibrant traditions soaked in love and laughter.",
               },
               {
                 id: "mehandi",
                 title: "Mehandi",
-                image: coupleHands,
+                image: 'src/assets/imgs/IMG_6166.JPEG.jpg', // coupleHands
                 description: "Intricate artistry and festive pre-wedding vibes.",
               },
               {
                 id: "baptism",
                 title: "Baptism",
-                image: bouquet,
+                image: getImage("gallery-image-3"), // bouquet
                 description: "Welcoming new life with grace and sanctity.",
               },
               {
                 id: "birthday",
                 title: "Birthday Bash",
-                image: venueLights,
+                image: getImage("gallery-image-4"), // venueLights
                 description: "Celebrating another year of life in style.",
               },
               {
                 id: "corporate",
                 title: "Corporate Events",
-                image: plannerConsultation,
+                image: getImage("gallery-image-6"), // plannerConsultation
                 description: "Professional gatherings executed with flawlessness.",
               },
             ].map((service) => (

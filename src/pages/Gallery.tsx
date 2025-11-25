@@ -1,13 +1,13 @@
-import bouquet from "@/assets/bouquet.jpg";
-import coupleHands from "@/assets/couple-hands.jpg";
-import plannerConsultation from "@/assets/planner-consultation.jpg";
-import rings from "@/assets/rings.jpg";
-import venueLights from "@/assets/venue-lights.jpg";
-import weddingCeremony from "@/assets/wedding-ceremony.jpg";
-import weddingTable from "@/assets/wedding-table.jpg";
+import rings from "@/assets/imgs/IMG_6162.JPEG.jpg";
+import plannerConsultation from "@/assets/imgs/IMG_6163.JPEG.jpg";
+import coupleHands from "@/assets/imgs/IMG_6172.JPEG.jpg";
+import bouquet from "@/assets/imgs/IMG_7448.JPG";
+import weddingTable from "@/assets/imgs/IMG_7841.JPG";
+import venueLights from "@/assets/imgs/IMG_7842.JPG";
+import weddingCeremony from "@/assets/imgs/IMG_7843.JPG";
 import { Button } from "@/components/ui/button";
 import { Camera, Heart, Home, Leaf } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 type Category = "all" | "weddings" | "baptisms" | "corporate";
@@ -22,6 +22,10 @@ interface GalleryImage {
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("all");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const galleryImages: GalleryImage[] = [
     {
@@ -78,6 +82,67 @@ const Gallery = () => {
       category: ["corporate"],
       title: "Corporate Gala",
     },
+    // Duplicated items for masonry effect
+    {
+      src: bouquet,
+      alt: "Wedding details",
+      category: ["weddings"],
+      title: "Delicate Blooms",
+    },
+    {
+      src: coupleHands,
+      alt: "Romantic moment",
+      category: ["weddings"],
+      title: "Forever Yours",
+    },
+    {
+      src: weddingCeremony,
+      alt: "Ceremony setup",
+      category: ["weddings"],
+      title: "Vows Exchange",
+    },
+    {
+      src: plannerConsultation,
+      alt: "Event planning",
+      category: ["corporate"],
+      title: "Strategic Planning",
+    },
+    {
+      src: rings,
+      alt: "Engagement rings",
+      category: ["weddings"],
+      title: "The Promise",
+    },
+    {
+      src: venueLights,
+      alt: "Party atmosphere",
+      category: ["weddings", "corporate"],
+      title: "Night to Remember",
+    },
+    {
+      src: weddingTable,
+      alt: "Table setting",
+      category: ["weddings", "baptisms"],
+      title: "Elegant Dining",
+    },
+    {
+      src: coupleHands,
+      alt: "Together",
+      category: ["weddings"],
+      title: "Hand in Hand",
+    },
+    {
+      src: bouquet,
+      alt: "Floral arrangement",
+      category: ["weddings"],
+      title: "Natural Beauty",
+    },
+    {
+      src: weddingCeremony,
+      alt: "Wedding day",
+      category: ["weddings"],
+      title: "The Big Day",
+    },
   ];
 
   const filteredImages =
@@ -93,7 +158,7 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#fdf8f4]">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/20">
         <div className="container mx-auto px-4 py-6">
@@ -103,7 +168,7 @@ const Gallery = () => {
                 SphinxWeddings
               </h1>
             </Link>
-            
+
             <Link to="/">
               <Button variant="ghost" size="sm" className="gap-2 hover:bg-white/10" style={{ color: "#859a77" }}>
                 <Home className="w-4 h-4" />
@@ -120,7 +185,7 @@ const Gallery = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-light text-sage mb-8 tracking-wide animate-fade-in">
             Gallery
           </h2>
-          
+
           {/* Collection Links */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Link to="/gallery/outdoor-events">
@@ -150,11 +215,10 @@ const Gallery = () => {
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
                 variant={selectedCategory === category.id ? "default" : "ghost"}
-                className={`gap-2 font-light ${
-                  selectedCategory === category.id
-                    ? "bg-sage hover:bg-sage/90 text-background"
-                    : "text-sage hover:bg-sage/10"
-                }`}
+                className={`gap-2 font-light ${selectedCategory === category.id
+                  ? "bg-sage hover:bg-sage/90 text-background"
+                  : "text-sage hover:bg-sage/10"
+                  }`}
               >
                 {category.icon}
                 <span>{category.label}</span>
@@ -165,19 +229,19 @@ const Gallery = () => {
       </section>
 
       {/* Gallery Grid */}
-      <section className="py-12 md:py-20 bg-background">
+      <section className="py-12 md:py-20 bg-[#fdf8f4]">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
             {filteredImages.map((image, index) => (
               <div
                 key={`${image.src}-${index}`}
-                className="group relative overflow-hidden aspect-square cursor-pointer bg-muted/30 transition-all duration-500"
+                className="group relative overflow-hidden cursor-pointer bg-muted/30 transition-all duration-500 break-inside-avoid mb-4 rounded-lg"
                 onClick={() => setSelectedImage(image.src)}
               >
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-sage/0 group-hover:bg-sage/10 transition-all duration-500">
                   <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-black/40 to-transparent">

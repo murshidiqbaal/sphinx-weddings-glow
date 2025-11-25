@@ -1,7 +1,7 @@
-import bouquet from "@/assets/bouquet.jpg";
-import coupleHands from "@/assets/couple-hands.jpg";
-import venueLights from "@/assets/venue-lights.jpg";
-import weddingCeremony from "@/assets/wedding-ceremony.jpg";
+import coupleHands from "@/assets/imgs/IMG_6172.JPEG.jpg";
+import bouquet from "@/assets/imgs/IMG_7448.JPG";
+import venueLights from "@/assets/imgs/IMG_7842.JPG";
+import weddingCeremony from "@/assets/imgs/IMG_7843.JPG";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Flower2, Sun, Trees } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -27,7 +27,7 @@ const OutdoorEvents = () => {
                 SphinxWeddings
               </h1>
             </Link>
-            
+
             <Link to="/gallery">
               <Button variant="ghost" size="sm" className="gap-2 text-primary hover:text-primary/80 hover:bg-primary/10">
                 <ArrowLeft className="w-4 h-4" />
