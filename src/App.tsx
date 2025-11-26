@@ -1,13 +1,13 @@
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Gallery from "./pages/Gallery";
-import OutdoorEvents from "./pages/OutdoorEvents";
+import Index from "./pages/Index";
 import NightEvents from "./pages/NightEvents";
-import Admin from "./pages/Admin";
+import OutdoorEvents from "./pages/OutdoorEvents";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,7 +23,7 @@ const App = () => (
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/gallery/outdoor-events" element={<OutdoorEvents />} />
           <Route path="/gallery/night-events" element={<NightEvents />} />
-          <Route path="/admin" element={<Admin />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -73,7 +73,7 @@ export const contentItems: ContentItemDefinition[] = [
     id: "gallery-image-2",
     label: "Gallery Image 2 (Couple Hands)",
     type: "image",
-    defaultValue: 'src/assets/imgs/IMG',
+    defaultValue: coupleHands,
   },
   {
     id: "gallery-image-3",

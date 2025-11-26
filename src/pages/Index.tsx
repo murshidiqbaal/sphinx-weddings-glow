@@ -24,7 +24,7 @@ const Index = () => {
 
   const galleryImages = [
     getImage("gallery-image-1"),
-    'src/assets/imgs/IMG_6166.JPEG.jpg',
+    getImage("wedding-image-wide"),
     getImage("gallery-image-3"),
     getImage("gallery-image-4"),
     getImage("gallery-image-5"),
@@ -33,7 +33,7 @@ const Index = () => {
 
   const heroTitle = getText("hero-title");
   const heroSubtitle = getText("hero-subtitle");
-  const heroImageUrl = 'src/assets/wedding-ceremony.jpg';
+  const heroImageUrl = getImage("hero-image");
   const introTitle = getText("intro-title");
   const introDescription = getText("intro-description");
   const aboutTitle = getText("about-title");
@@ -215,7 +215,7 @@ const Index = () => {
         id="home"
         className="relative h-screen flex items-center justify-center text-center mt-0"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('src/assets/wedding-ceremony.jpg')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('${heroImageUrl}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "scroll",
@@ -577,7 +577,7 @@ const Index = () => {
               {
                 id: "wedding-planning",
                 title: "Wedding Planning",
-                image: 'src/assets/imgs/IMG_7428.JPG',
+                image: getImage("wedding-image-stacked-2"),
                 description: "Full-service coordination for your perfect day.",
               },
               {
@@ -595,7 +595,7 @@ const Index = () => {
               {
                 id: "mehandi",
                 title: "Mehandi",
-                image: 'src/assets/imgs/IMG_6166.JPEG.jpg', // coupleHands
+                image: getImage("wedding-image-wide"), // coupleHands
                 description: "Intricate artistry and festive pre-wedding vibes.",
               },
               {
