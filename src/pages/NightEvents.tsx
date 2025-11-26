@@ -1,7 +1,7 @@
 import rings from "@/assets/imgs/IMG_6162.JPEG.jpg";
 import weddingTable from "@/assets/imgs/IMG_7841.JPG";
 import venueLights from "@/assets/imgs/IMG_7842.JPG";
-import weddingCeremony from "@/assets/imgs/IMG_7843.JPG";
+import weddingCeremony from "@/assets/wedding-ceremony.jpg";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Moon, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";

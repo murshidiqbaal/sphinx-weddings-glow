@@ -33,7 +33,7 @@ const Index = () => {
 
   const heroTitle = getText("hero-title");
   const heroSubtitle = getText("hero-subtitle");
-  const heroImageUrl = getImage("hero-image");
+  const heroImageUrl = 'src/assets/wedding-ceremony.jpg';
   const introTitle = getText("intro-title");
   const introDescription = getText("intro-description");
   const aboutTitle = getText("about-title");
@@ -577,7 +577,7 @@ const Index = () => {
               {
                 id: "wedding-planning",
                 title: "Wedding Planning",
-                image: getImage("hero-image"),
+                image: 'src/assets/imgs/IMG_7428.JPG',
                 description: "Full-service coordination for your perfect day.",
               },
               {

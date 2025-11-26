@@ -6,7 +6,7 @@ import weddingAtmosphere from "@/assets/imgs/IMG_7428.JPG";
 import bouquet from "@/assets/imgs/IMG_7448.JPG";
 import weddingTable from "@/assets/imgs/IMG_7841.JPG";
 import venueLights from "@/assets/imgs/IMG_7842.JPG";
-import weddingCeremony from "@/assets/imgs/IMG_7843.JPG";
+import weddingCeremony from "@/assets/wedding-ceremony.jpg";
 
 export type ContentType = "text" | "textarea" | "image";
 
