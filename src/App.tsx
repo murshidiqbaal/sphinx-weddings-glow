@@ -8,6 +8,14 @@ import Index from "./pages/Index";
 import NightEvents from "./pages/NightEvents";
 import OutdoorEvents from "./pages/OutdoorEvents";
 
+import AdminLayout from "./components/admin/AdminLayout";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
+import Dashboard from "./pages/admin/Dashboard";
+import GalleryManager from "./pages/admin/GalleryManager";
+import ImageManager from "./pages/admin/ImageManager";
+import Login from "./pages/admin/Login";
+import Migration from "./pages/admin/Migration";
+import TextManager from "./pages/admin/TextManager";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,7 +32,17 @@ const App = () => (
           <Route path="/gallery/outdoor-events" element={<OutdoorEvents />} />
           <Route path="/gallery/night-events" element={<NightEvents />} />
 
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin" element={<ProtectedRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="texts" element={<TextManager />} />
+              <Route path="images" element={<ImageManager />} />
+              <Route path="gallery" element={<GalleryManager />} />
+              <Route path="migration" element={<Migration />} />
+            </Route>
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

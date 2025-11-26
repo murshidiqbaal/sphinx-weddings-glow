@@ -105,7 +105,7 @@ const Index = () => {
           email: formData.email,
           service: formData.service,
           message: formData.message,
-          to_email: "murshidiqbaalkm@gmail.com",
+          to_email: "sphinxweddings2025@gmail.com",
           from_name: "SphinxWeddings Contact Form",
         }),
       });

@@ -6,14 +6,27 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Moon, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { useGallery } from "@/hooks/useGallery";
+
 const NightEvents = () => {
-  const nightImages = [
+  const { images: dynamicImages } = useGallery("night");
+
+  const staticNightImages = [
     { src: venueLights, alt: "Evening venue with lights", title: "Starlit Ambiance" },
     { src: weddingTable, alt: "Night reception table", title: "Candlelit Elegance" },
     { src: rings, alt: "Rings with evening light", title: "Moonlit Promises" },
     { src: venueLights, alt: "Night celebration", title: "Evening Magic" },
     { src: weddingTable, alt: "Night dining setup", title: "Twilight Dining" },
     { src: weddingCeremony, alt: "Evening ceremony", title: "Dusk Celebration" },
+  ];
+
+  const nightImages = [
+    ...staticNightImages,
+    ...dynamicImages.map((img) => ({
+      src: img.image_url,
+      alt: img.alt || "Night Event",
+      title: img.title || "Night Event",
+    })),
   ];
 
   return (

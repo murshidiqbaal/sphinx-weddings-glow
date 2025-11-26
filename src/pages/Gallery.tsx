@@ -1,11 +1,6 @@
-import rings from "@/assets/imgs/IMG_6162.JPEG.jpg";
-import plannerConsultation from "@/assets/imgs/IMG_6163.JPEG.jpg";
-import coupleHands from "@/assets/imgs/IMG_6172.JPEG.jpg";
-import bouquet from "@/assets/imgs/IMG_7448.JPG";
-import weddingTable from "@/assets/imgs/IMG_7841.JPG";
-import venueLights from "@/assets/imgs/IMG_7842.JPG";
-import weddingCeremony from "@/assets/wedding-ceremony.jpg";
 import { Button } from "@/components/ui/button";
+import { useContent } from "@/hooks/useContent";
+import { useGallery } from "@/hooks/useGallery";
 import { Camera, Heart, Home, Leaf } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -22,128 +17,140 @@ interface GalleryImage {
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("all");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { images: dynamicImages } = useGallery("gallery");
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const galleryImages: GalleryImage[] = [
+  const { getText, getImage } = useContent();
+
+  const staticGalleryImages: GalleryImage[] = [
     {
-      src: weddingCeremony,
+      src: getImage("gallery-item-1-src"),
       alt: "Outdoor wedding ceremony",
       category: ["weddings"],
-      title: "Garden Ceremony",
+      title: getText("gallery-item-1-title"),
     },
     {
-      src: weddingTable,
+      src: getImage("gallery-item-2-src"),
       alt: "Wedding reception table",
       category: ["weddings"],
-      title: "Elegant Reception",
+      title: getText("gallery-item-2-title"),
     },
     {
-      src: coupleHands,
+      src: getImage("gallery-item-3-src"),
       alt: "Couple holding hands",
       category: ["weddings"],
-      title: "Intimate Moments",
+      title: getText("gallery-item-3-title"),
     },
     {
-      src: bouquet,
+      src: getImage("gallery-item-4-src"),
       alt: "Wedding bouquet",
       category: ["weddings"],
-      title: "Floral Artistry",
+      title: getText("gallery-item-4-title"),
     },
     {
-      src: venueLights,
+      src: getImage("gallery-item-5-src"),
       alt: "Venue with string lights",
       category: ["weddings", "corporate"],
-      title: "Evening Ambiance",
+      title: getText("gallery-item-5-title"),
     },
     {
-      src: rings,
+      src: getImage("gallery-item-6-src"),
       alt: "Wedding rings",
       category: ["weddings"],
-      title: "Symbol of Love",
+      title: getText("gallery-item-6-title"),
     },
     {
-      src: plannerConsultation,
+      src: getImage("gallery-item-7-src"),
       alt: "Planning consultation",
       category: ["weddings", "baptisms", "corporate"],
-      title: "Personal Consultation",
+      title: getText("gallery-item-7-title"),
     },
     {
-      src: weddingTable,
+      src: getImage("gallery-item-8-src"),
       alt: "Baptism celebration",
       category: ["baptisms"],
-      title: "Baptism Celebration",
+      title: getText("gallery-item-8-title"),
     },
     {
-      src: venueLights,
+      src: getImage("gallery-item-9-src"),
       alt: "Corporate event venue",
       category: ["corporate"],
-      title: "Corporate Gala",
+      title: getText("gallery-item-9-title"),
     },
-    // Duplicated items for masonry effect
     {
-      src: bouquet,
+      src: getImage("gallery-item-10-src"),
       alt: "Wedding details",
       category: ["weddings"],
-      title: "Delicate Blooms",
+      title: getText("gallery-item-10-title"),
     },
     {
-      src: coupleHands,
+      src: getImage("gallery-item-11-src"),
       alt: "Romantic moment",
       category: ["weddings"],
-      title: "Forever Yours",
+      title: getText("gallery-item-11-title"),
     },
     {
-      src: weddingCeremony,
+      src: getImage("gallery-item-12-src"),
       alt: "Ceremony setup",
       category: ["weddings"],
-      title: "Vows Exchange",
+      title: getText("gallery-item-12-title"),
     },
+    // Reusing items for the remaining slots to maintain layout
     {
-      src: plannerConsultation,
+      src: getImage("gallery-item-7-src"),
       alt: "Event planning",
       category: ["corporate"],
       title: "Strategic Planning",
     },
     {
-      src: rings,
+      src: getImage("gallery-item-6-src"),
       alt: "Engagement rings",
       category: ["weddings"],
       title: "The Promise",
     },
     {
-      src: venueLights,
+      src: getImage("gallery-item-5-src"),
       alt: "Party atmosphere",
       category: ["weddings", "corporate"],
       title: "Night to Remember",
     },
     {
-      src: weddingTable,
+      src: getImage("gallery-item-2-src"),
       alt: "Table setting",
       category: ["weddings", "baptisms"],
       title: "Elegant Dining",
     },
     {
-      src: coupleHands,
+      src: getImage("gallery-item-3-src"),
       alt: "Together",
       category: ["weddings"],
       title: "Hand in Hand",
     },
     {
-      src: bouquet,
+      src: getImage("gallery-item-4-src"),
       alt: "Floral arrangement",
       category: ["weddings"],
       title: "Natural Beauty",
     },
     {
-      src: weddingCeremony,
+      src: getImage("gallery-item-1-src"),
       alt: "Wedding day",
       category: ["weddings"],
       title: "The Big Day",
     },
   ];
+
+  const mappedDynamicImages: GalleryImage[] = dynamicImages.map((img) => ({
+    src: img.image_url,
+    alt: img.alt || "Gallery Image",
+    category: (img.category as Category[]) || ["weddings"],
+    title: img.title || "Gallery Image",
+  }));
+
+  const galleryImages = [...staticGalleryImages, ...mappedDynamicImages];
 
   const filteredImages =
     selectedCategory === "all"

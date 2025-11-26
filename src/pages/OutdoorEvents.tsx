@@ -6,14 +6,27 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Flower2, Sun, Trees } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { useGallery } from "@/hooks/useGallery";
+
 const OutdoorEvents = () => {
-  const outdoorImages = [
+  const { images: dynamicImages } = useGallery("outdoor");
+
+  const staticOutdoorImages = [
     { src: weddingCeremony, alt: "Outdoor wedding ceremony", title: "Garden Ceremony" },
     { src: coupleHands, alt: "Couple in nature", title: "Natural Setting" },
     { src: bouquet, alt: "Outdoor floral arrangements", title: "Fresh Blooms" },
     { src: venueLights, alt: "Outdoor venue with lights", title: "Open Air Elegance" },
     { src: weddingCeremony, alt: "Outdoor celebration", title: "Al Fresco Dining" },
     { src: bouquet, alt: "Garden details", title: "Nature's Beauty" },
+  ];
+
+  const outdoorImages = [
+    ...staticOutdoorImages,
+    ...dynamicImages.map((img) => ({
+      src: img.image_url,
+      alt: img.alt || "Outdoor Event",
+      title: img.title || "Outdoor Event",
+    })),
   ];
 
   return (
