@@ -6,6 +6,10 @@ import { useContent } from "@/hooks/useContent";
 import { Camera, ChevronDown, Facebook, Heart, Instagram, Leaf, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/autoplay";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -145,14 +149,16 @@ const Index = () => {
     "Golden Hour Vows",
   ];
 
+  const cardDescription = "Layered styling, thoughtful pacing, and a dedicated team on-site.";
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-border/50">
+      {/* Header backdrop-blur-sm border-b border-border/50 */}
+      <header className="fixed top-0 left-0 right-0 z-50 ">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex flex-col">
-              <h1 className={`text-2xl md:text-3xl font-serif font-bold ${headerDark ? "text-primary" : "text-white"} tracking-wide transition-colors duration-300`}>
+              <h1 className={`text-2xl md:text-3xl font-sans font-bold ${headerDark ? "text-primary" : "text-white"} tracking-wide transition-colors duration-300`}>
                 SphinxWeddings
               </h1>
               <p className={`text-xs md:text-sm ${headerDark ? "text-muted-foreground" : "text-white/80"} font-light transition-colors duration-300`}>Event & Wedding Planner</p>
@@ -222,7 +228,7 @@ const Index = () => {
         }}
       >
         <div className="container mx-auto px-4 z-10">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif font-light text-white mb-6 leading-tight">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-sans font-light-bold text-white mb-6 leading-tight">
             FOR THE LAID-BACK AND <br /> THE WILDLY IN LOVE
           </h2>
           <p className="text-lg md:text-xl text-white/90 font-light max-w-2xl mx-auto">
@@ -236,29 +242,29 @@ const Index = () => {
       </section>
 
       {/* Hero Transition Section */}
-      <section className="relative bg-gradient-to-b from-white to-[#faf6f1] pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden z-20">
+      <section className="relative bg-[#fdf2f2] pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden z-20">
         <div className="brush-edge" aria-hidden="true" />
-        <div className="container mx-auto px-4 relative">
+        <div className="container mx-auto px-4 relative"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] items-center">
             <div className="relative w-full max-w-md mx-auto lg:mx-0">
               {/* Arched Image */}
               <div className="relative z-10">
-                <div className="overflow-hidden rounded-t-full h-[400px] md:h-[500px] w-full border-[8px] border-white shadow-xl">
-                  <img src={galleryImages[0]} alt="Featured celebration" className="w-full h-full object-cover" />
+                <div className="overflow-hidden rounded-[40px] h-[400px] md:h-[500px] w-full bg-white/95 border border-[#f5e7db] shadow-[0_30px_80px_rgba(0,0,0,0.18)] p-2">
+                  <img src={galleryImages[0]} alt="Featured celebration" className="w-full h-full object-cover rounded-[32px]" />
                 </div>
               </div>
               {/* Decorative elements behind */}
-              <div className="absolute top-10 -left-4 w-full h-full rounded-t-full border border-[#b27b61]/30 -z-10 transform -rotate-3" />
-              <div className="absolute top-10 -right-4 w-full h-full rounded-t-full border border-[#b27b61]/30 -z-10 transform rotate-3" />
+              {/* <div className="absolute top-10 -left-4 w-full h-full rounded-t-full border border-[#b27b61]/30 -z-10 transform -rotate-3" />
+              <div className="absolute top-10 -right-4 w-full h-full rounded-t-full border border-[#b27b61]/30 -z-10 transform rotate-3" /> */}
             </div>
 
             <div className="text-center lg:text-left space-y-6">
               <p className="text-xs uppercase tracking-[0.4em] text-[#b27b61] font-medium">Sphinx Weddings</p>
-              <h2 className="text-5xl md:text-7xl font-serif text-primary leading-none">
+              <h2 className="text-5xl md:text-7xl font-sans text-primary leading-none">
                 <span className="font-script text-[#b27b61] text-6xl md:text-8xl block mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>unique</span>
                 WEDDING
               </h2>
-              <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed text-justify">
                 Personalized wedding planning for couples livin&apos; it up in KCMO. From one-hour consults to full-scale
                 production, we create artful timelines, manage every vendor, and keep you present in every moment.
               </p>
@@ -270,43 +276,48 @@ const Index = () => {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Intro Section */}
-      <section className="py-20 md:py-32 bg-[#faf6f1]">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-32 bg-[#e8f0e8]">
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="max-w-4xl mx-auto text-center observe-scroll opacity-0">
-            <h2 className="text-3xl md:text-5xl font-serif font-light text-primary mb-8 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-sans font-light text-primary mb-8 leading-tight">
               {introTitle}
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              {introDescription}
-            </p>
+            <div
+              className="text-base md:text-lg text-muted-foreground leading-relaxed text-justify"
+              dangerouslySetInnerHTML={{ __html: introDescription }}
+            />
           </div>
+        </div>
         </div>
       </section>
 
       {/* About Section */}
       <section
         id="about"
-        className="relative py-20 md:py-32 bg-gradient-to-b from-[#faf6f1] via-[#f8f1ea] to-[#fdf8f4]"
+        className="relative py-20 md:py-32 bg-[#f9f5f0]"
       >
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div
-              className="observe-scroll opacity-0 sticky top-24 h-[500px] md:h-[calc(100vh-6rem)] rounded-lg overflow-hidden"
-            >
-              <img
-                src={aboutImageUrl}
-                alt="About Sphinx Weddings"
-                className="w-full h-full object-cover"
-              />
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-10 border border-white/50">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="flex justify-center md:justify-start">
+              <div
+                className="observe-scroll opacity-0 w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden shadow-md"
+              >
+                <img
+                  src={aboutImageUrl}
+                  alt="About Sphinx Weddings"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
-            <div className="observe-scroll opacity-0 flex flex-col justify-center min-h-[60vh] py-10">
-              <h2 className="text-3xl md:text-5xl font-serif font-light text-primary mb-6 leading-tight">
+            <div className="observe-scroll opacity-0 flex flex-col justify-center py-4">
+              <h2 className="text-3xl md:text-4xl font-sans font-light text-primary mb-4 leading-tight">
                 {aboutTitle}
               </h2>
-              <div className="space-y-6 text-base md:text-lg text-muted-foreground leading-relaxed">
+              <div className="space-y-4 text-base text-muted-foreground leading-relaxed text-justify">
                 <p>
                   We believe that wedding planning should be as joyful as the celebration itself. Our approach is calm,
                   collaborative, and entirely focused on you. We take the time to understand your story, your style,
@@ -321,46 +332,15 @@ const Index = () => {
                   Our team brings years of experience in design, logistics, and hospitality. We anticipate needs before
                   they arise and handle the unexpected with grace, ensuring a seamless experience for you and your guests.
                 </p>
-                {/* <p>
-                  Whether you envision a rustic countryside affair or a chic city soirée, we have the expertise and
-                  creative vision to execute it flawlessly. Your love story is unique, and your wedding should be too.
-                </p> */}
               </div>
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* New Wedding Section */}
-      <WeddingSection />
-
-      {/* Script Intro & Marquee */}
-      <section className="py-16 bg-gradient-to-b from-[#fff5ed] to-[#fdf8f4]">
-        <div className="container mx-auto px-4 text-center">
-          <p
-            className="text-4xl md:text-5xl text-[#8b6247] mb-4"
-            style={{ fontFamily: "'Great Vibes', cursive" }}
-          >
-            We're getting married!
-          </p>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
-            Bask in the warmth of handcrafted celebrations where every detail feels soft, sunlit, and effortlessly
-            romantic. Glide through our latest moments below and feel the energy of a day curated just for you.
-          </p>
-        </div>
-        <div className="mt-12 overflow-hidden">
-          <div className="flex gap-6 marquee-track">
-            {marqueeImages.map((img, index) => (
-              <div
-                key={`${img}-${index}`}
-                className="min-w-[220px] md:min-w-[260px] bg-white/90 rounded-[28px] p-3"
-              >
-                <img src={img} alt={`marquee-${index}`} className="h-48 w-full object-cover rounded-[20px]" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WeddingSection images={marqueeImages} />
 
       {/* Storytelling Section
       <section className="py-20 md:py-28 bg-white">
@@ -368,7 +348,7 @@ const Index = () => {
           <div className="grid gap-8 md:grid-cols-[0.4fr_1.6fr] items-start mb-12">
             <div className="space-y-3">
               <p className="text-xs tracking-[0.4em] text-sage uppercase">About Agency</p>
-              <h2 className="text-3xl md:text-4xl font-serif text-primary leading-snug uppercase">
+              <h2 className="text-3xl md:text-4xl font-sans text-primary leading-snug uppercase">
                 We curate elevated, intimate wedding narratives
               </h2>
             </div>
@@ -401,7 +381,7 @@ const Index = () => {
       </section> */}
 
       {/* Signature Planning Section */}
-      <section className="relative py-24 md:py-32 bg-gradient-to-b from-[#fdf8f4] to-[#faf6f1] overflow-hidden">
+      <section className="relative py-24 md:py-32 bg-[#fdf2f2] overflow-hidden">
         <div
           className="absolute inset-x-0 top-0 h-24 opacity-50 pointer-events-none"
           style={{
@@ -411,7 +391,7 @@ const Index = () => {
             backgroundSize: "1200px 120px",
           }}
         />
-        <div className="container mx-auto px-4 relative">
+        <div className="container mx-auto px-4 relative"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-center">
             <div className="flex flex-col items-center lg:items-start gap-8">
               <div className="relative w-full max-w-sm">
@@ -432,6 +412,7 @@ const Index = () => {
               </div>
               <div className="text-center lg:text-left">
                 <p className="uppercase tracking-[0.35em] text-xs text-sage">Sphinx</p>
+                {/* <p className="text-4xl md:text-5xl font-sans text-primary mt-2 whitespace-nowrap"></p> */}
                 <p className="text-4xl md:text-5xl font-serif text-primary mt-2">
                   <span className="italic text-[#b27b61]">unique</span> wedding planning + coordination
                 </p>
@@ -443,7 +424,7 @@ const Index = () => {
                   <p className="text-lg uppercase tracking-[0.2em] text-[#b27b61]">
                     Personalized wedding planning for couples livin&apos; it up in KCMO
                   </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed text-justify">
                     Whether you&apos;ve got it all together and just need a day-of coordinator or feel a little overwhelmed
                     and want help with all the things, we&apos;re here to help you celebrate your intimate Sphinx wedding in
                     a big way.
@@ -452,13 +433,13 @@ const Index = () => {
                     Let&apos;s create something incredible
                   </Button>
                 </div>
-                <div className="self-start border border-[#d6bba3] rounded-full w-32 h-32 flex flex-col items-center justify-center text-xs uppercase tracking-[0.3em] text-[#b27b61]">
+                {/* <div className="self-start border border-[#d6bba3] rounded-full w-32 h-32 flex flex-col items-center justify-center text-xs uppercase tracking-[0.3em] text-[#b27b61]">
                   Est 2025
                   <span className="tracking-[0.1em] text-[10px] text-muted-foreground mt-1">Sphinx</span>
                   <span className="text-[9px] tracking-[0.4em] mt-1">Weddings</span>
-                </div>
+                </div> */}
               </div>
-              <div className="grid grid-cols-3 gap-4">
+              {/* <div className="grid grid-cols-3 gap-4">
                 {[galleryImages[2], galleryImages[3], galleryImages[5]].map((img, index) => (
                   <div
                     key={img}
@@ -471,15 +452,16 @@ const Index = () => {
                     <img src={img} alt={`Planning highlight ${index + 1}`} className="rounded-[12px] h-40 w-full object-cover" />
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
+        </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-[#faf6f1] to-white">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-32 bg-[#e8f0e8]">
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -503,70 +485,89 @@ const Index = () => {
                 className="observe-scroll opacity-0 text-center p-8 bg-background rounded-lg shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="flex justify-center mb-6">{value.icon}</div>
-                <h3 className="text-xl md:text-2xl font-serif font-semibold text-primary mb-4">
+                <h3 className="text-xl md:text-2xl font-sans font-semibold text-primary mb-4">
                   {value.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                <p className="text-muted-foreground leading-relaxed text-justify">{value.description}</p>
               </div>
             ))}
           </div>
         </div>
+        </div>
       </section>
 
       {/* Recent Works Section */}
-      <section id="our-works" className="py-20 md:py-32 bg-white">
-        <div className="container mx-auto px-4">
+      <section id="our-works" className="py-20 md:py-32 bg-[#f9f5f0]">
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-sm tracking-[0.4em] text-sage uppercase font-light">Recent Work</p>
-            <h2 className="text-3xl md:text-4xl font-serif text-primary leading-snug mt-4">
+            <h2 className="text-3xl md:text-4xl font-sans text-primary leading-snug mt-4">
               A living reel of the tender, modern celebrations we design.
             </h2>
-            <p className="text-muted-foreground text-base leading-relaxed mt-4">
+            <p className="text-muted-foreground text-base leading-relaxed mt-4 text-justify">
               Drift through a continuous ribbon of moments from our gallery. Each card is a real couple, a real story,
               and a glimpse into the ambience we create before mapping out your service suite below.
             </p>
           </div>
 
-          <div className="overflow-hidden mt-12">
-            <div className="flex gap-6 marquee-track-reverse">
+          <div className="mt-12">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={10}
+              slidesPerView={1.2}
+              breakpoints={{
+                640: { slidesPerView: 2.2 },
+                1024: { slidesPerView: 4 },
+              }}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              loop={true}
+              grabCursor={true}
+              className="pb-12"
+            >
               {servicesMarqueeImages.map((img, index) => (
-                <div
-                  key={`${img}-${index}`}
-                  className="min-w-[240px] md:min-w-[280px] bg-[#fffaf6] rounded-[28px] p-4 border border-[#f0e2d5]"
-                >
-                  <div className="rounded-[20px] overflow-hidden h-64">
-                    <img src={img} alt={`Marquee showcase ${index + 1}`} className="w-full h-full object-cover" />
+                <SwiperSlide key={`${img}-${index}`}>
+                  <div
+                    className="bg-[#fffaf6] rounded-[28px] p-4 border border-[#f0e2d5] h-full"
+                  >
+                    <div className="rounded-[20px] overflow-hidden h-[380px]">
+                      <img src={img} alt={`Marquee showcase ${index + 1}`} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="mt-4">
+                      {/* <p className="text-xs uppercase tracking-[0.4em] text-[#b27b61]">Curated</p> */}
+                      <p className="text-lg font-sans text-primary">
+                        {marqueeCardCaptions[index % marqueeCardCaptions.length]}
+                      </p>
+                      <p className={`${cardDescription.length > 80 ? "text-xs" : cardDescription.length > 40 ? "text-sm" : "text-base"
+                        } text-muted-foreground text-justify`}>
+                        {cardDescription}
+                      </p>
+                    </div>
                   </div>
-                  <div className="mt-4">
-                    <p className="text-xs uppercase tracking-[0.4em] text-[#b27b61]">Curated</p>
-                    <p className="text-lg font-serif text-primary">
-                      {marqueeCardCaptions[index % marqueeCardCaptions.length]}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Layered styling, thoughtful pacing, and a dedicated team on-site.
-                    </p>
-                  </div>
-                </div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           </div>
+        </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-white to-[#faf6f1]">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-32 bg-[#f2f2f5]">
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">Our Expertise</p>
-            <h2 className="text-4xl md:text-6xl font-serif font-light text-primary mb-6">
+            <h2 className="text-4xl md:text-6xl font-sans font-light text-primary mb-6">
               Curated Celebrations
             </h2>
-            <p className="text-muted-foreground text-lg font-light">
+            <p className="text-muted-foreground text-lg font-light text-justify">
               From intimate gatherings to grand affairs, we craft every detail with precision and grace.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
             {[
               {
                 id: "engagement",
@@ -631,10 +632,10 @@ const Index = () => {
 
                 <div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
                   <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-2xl font-serif text-white mb-2 italic">
+                    <h3 className="text-2xl font-sans text-white mb-2 italic">
                       {service.title}
                     </h3>
-                    <p className="text-white/90 font-light text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 transform translate-y-4 group-hover:translate-y-0 leading-relaxed">
+                    <p className="text-white/90 font-light text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 transform translate-y-4 group-hover:translate-y-0 leading-relaxed text-justify">
                       {service.description}
                     </p>
                     <div className="mt-4 w-8 h-[1px] bg-white/60 group-hover:w-full transition-all duration-700" />
@@ -644,11 +645,12 @@ const Index = () => {
             ))}
           </div>
         </div>
+        </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-[#faf6f1] to-[#fdf8f4]">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-32 bg-[#fffdf5]">
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -686,24 +688,25 @@ const Index = () => {
                     <p className="text-sm text-muted-foreground">{testimonial.type}</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground leading-relaxed italic">
+                <p className="text-muted-foreground leading-relaxed italic text-justify">
                   "{testimonial.testimonial}"
                 </p>
               </div>
             ))}
           </div>
         </div>
+        </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 md:py-32 bg-gradient-to-b from-[#fdf8f4] to-[#faf6f1]">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-serif font-light text-center text-primary mb-12">
+      <section id="contact" className="py-20 md:py-32 bg-[#fdf2f2]">
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+          <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-primary mb-12">
             Get in Touch
           </h2>
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div className="observe-scroll opacity-0">
-              <h3 className="text-2xl font-serif font-semibold text-primary mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-sans font-semibold text-primary mb-6">Contact Information</h3>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
                   <strong>Email:</strong> {contactEmail}
@@ -778,12 +781,13 @@ const Index = () => {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Footer */}
       <footer className="py-12 bg-forest text-white">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-2xl font-serif font-semibold mb-2">SphinxWeddings</h3>
+          <h3 className="text-2xl font-sans font-semibold mb-2">SphinxWeddings</h3>
           <p className="text-white/80 mb-6">Event Management and Wedding Planning</p>
           <div className="flex justify-center gap-4 mb-6">
             <Button variant="ghost" size="icon" className="text-white hover:text-sage" onClick={() => window.open('https://www.facebook.com/sphinxinternational', '_blank')}>

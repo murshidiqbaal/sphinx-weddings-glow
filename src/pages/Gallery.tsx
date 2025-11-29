@@ -207,7 +207,7 @@ const Gallery = () => {
             </Link>
           </div>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light animate-fade-in">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light animate-fade-in text-justify">
             Explore our collection of beautifully curated celebrations
           </p>
         </div>
@@ -306,7 +306,7 @@ const Gallery = () => {
           <h3 className="text-3xl md:text-5xl font-serif font-light text-sage mb-6">
             Ready to Create Your Own Story?
           </h3>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto font-light">
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto font-light text-justify">
             Let's start planning your unforgettable celebration together
           </p>
           <Link to="/#contact">

@@ -62,7 +62,7 @@ const NightEvents = () => {
           <h2 className="text-5xl md:text-7xl font-serif font-light text-sage mb-6 tracking-wide">
             Night Events
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light text-justify">
             Illuminated moments under the stars
           </p>
         </div>
