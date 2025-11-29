@@ -27,6 +27,7 @@ const AdminLayout = () => {
         { path: "/admin/texts", label: "Text Content", icon: <Type size={20} /> },
         { path: "/admin/images", label: "Site Images", icon: <ImageIcon size={20} /> },
         { path: "/admin/gallery", label: "Gallery Manager", icon: <Camera size={20} /> },
+        { path: "/admin/recent-works", label: "Recent Works", icon: <LayoutDashboard size={20} /> },
     ];
 
     return (
@@ -61,8 +62,8 @@ const AdminLayout = () => {
                             to={item.path}
                             onClick={() => setSidebarOpen(false)}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${location.pathname === item.path
-                                    ? "bg-sage/10 text-sage font-medium"
-                                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                ? "bg-sage/10 text-sage font-medium"
+                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                                 }`}
                         >
                             {item.icon}

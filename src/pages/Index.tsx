@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import WeddingSection from "@/components/WeddingSection";
 import { useContent } from "@/hooks/useContent";
+import { supabase } from "@/lib/supabase";
 import { Camera, ChevronDown, Facebook, Heart, Instagram, Leaf, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -140,6 +141,38 @@ const Index = () => {
   const marqueeImages = [...galleryImages, ...galleryImages];
   const agencyImages = galleryImages.slice(0, 3);
   const servicesMarqueeImages = [...galleryImages, ...galleryImages];
+
+  // Recent Works State
+  const [recentWorks, setRecentWorks] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchRecentWorks = async () => {
+      const { data } = await supabase
+        .from("recent_works")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (data && data.length > 0) {
+        setRecentWorks(data);
+      }
+    };
+    fetchRecentWorks();
+  }, []);
+
+  // Use DB data if available, otherwise fallback to hardcoded for now (or just empty)
+  // To make the marquee effect work with few items, we might need to duplicate them if count is low
+  const displayWorks = recentWorks.length > 0 ? recentWorks : [];
+  // If we want to keep the hardcoded ones as fallback until they add something:
+  // const servicesMarqueeImages = [...galleryImages, ...galleryImages]; 
+  // But we want to replace them.
+
+  // Let's construct the items to map over.
+  // If using DB items, we map them directly.
+  // We need to handle the infinite loop duplication if needed.
+  const finalWorks = displayWorks.length > 0
+    ? (displayWorks.length < 5 ? [...displayWorks, ...displayWorks, ...displayWorks] : displayWorks)
+    : servicesMarqueeImages; // Fallback to existing if no DB items
+
   const marqueeCardCaptions = [
     "City Soirée",
     "Sunlit Ceremony",
@@ -527,27 +560,33 @@ const Index = () => {
               grabCursor={true}
               className="pb-12"
             >
-              {servicesMarqueeImages.map((img, index) => (
-                <SwiperSlide key={`${img}-${index}`}>
-                  <div
-                    className="bg-[#fffaf6] rounded-[28px] p-4 border border-[#f0e2d5] h-full"
-                  >
-                    <div className="rounded-[20px] overflow-hidden h-[380px]">
-                      <img src={img} alt={`Marquee showcase ${index + 1}`} className="w-full h-full object-cover" />
+              {finalWorks.map((item, index) => {
+                const isDbItem = typeof item === 'object' && item !== null;
+                const imgUrl = isDbItem ? item.image_url : item;
+                const caption = isDbItem ? item.caption : marqueeCardCaptions[index % marqueeCardCaptions.length];
+                const desc = isDbItem ? item.description : cardDescription;
+
+                return (
+                  <SwiperSlide key={`${isDbItem ? item.id : imgUrl}-${index}`}>
+                    <div
+                      className="bg-[#fffaf6] rounded-[28px] p-4 border border-[#f0e2d5] h-full"
+                    >
+                      <div className="rounded-[20px] overflow-hidden h-[380px]">
+                        <img src={imgUrl} alt={caption} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="mt-4">
+                        <p className="text-lg font-sans text-primary">
+                          {caption}
+                        </p>
+                        <p className={`${desc.length > 80 ? "text-xs" : desc.length > 40 ? "text-sm" : "text-base"
+                          } text-muted-foreground text-justify`}>
+                          {desc}
+                        </p>
+                      </div>
                     </div>
-                    <div className="mt-4">
-                      {/* <p className="text-xs uppercase tracking-[0.4em] text-[#b27b61]">Curated</p> */}
-                      <p className="text-lg font-sans text-primary">
-                        {marqueeCardCaptions[index % marqueeCardCaptions.length]}
-                      </p>
-                      <p className={`${cardDescription.length > 80 ? "text-xs" : cardDescription.length > 40 ? "text-sm" : "text-base"
-                        } text-muted-foreground text-justify`}>
-                        {cardDescription}
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
           </div>
         </div>
