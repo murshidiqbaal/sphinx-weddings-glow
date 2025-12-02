@@ -1,3 +1,5 @@
+import celebrationToast from "@/assets/imgs/IMG_7349.JPEG.jpg";
+import logo from "@/assets/logo/logo1.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -110,7 +112,7 @@ const Index = () => {
           email: formData.email,
           service: formData.service,
           message: formData.message,
-          to_email: "sphinxweddings2025@gmail.com",
+          to_email: "murshidiqbaalkm@gmail.com",
           from_name: "SphinxWeddings Contact Form",
         }),
       });
@@ -190,12 +192,16 @@ const Index = () => {
       <header className="fixed top-0 left-0 right-0 z-50 ">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <div className="flex flex-col">
-              <h1 className={`text-2xl md:text-3xl font-sans font-bold ${headerDark ? "text-primary" : "text-white"} tracking-wide transition-colors duration-300`}>
-                SphinxWeddings
-              </h1>
-              <p className={`text-xs md:text-sm ${headerDark ? "text-muted-foreground" : "text-white/80"} font-light transition-colors duration-300`}>Event & Wedding Planner</p>
-            </div>
+            <Link to="/" onClick={() => scrollToSection("home")} className="flex items-center gap-2 drop-shadow-xl">
+              <img
+                src={logo}
+                alt="Logo"
+                className={`h-16 transition-all duration-300 ${headerDark ? "filter-none" : "filter brightness-0 invert"}`}
+              />
+              <span className={`text-xl font-bold ${headerDark ? "text-foreground" : "text-white"} transition-colors`}>
+                {getText("site-title")}
+              </span>
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex gap-8">
@@ -261,12 +267,14 @@ const Index = () => {
         }}
       >
         <div className="container mx-auto px-4 z-10">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-sans font-light-bold text-white mb-6 leading-tight">
-            FOR THE LAID-BACK AND <br /> THE WILDLY IN LOVE
-          </h2>
-          <p className="text-lg md:text-xl text-white/90 font-light max-w-2xl mx-auto">
-            {heroSubtitle}
-          </p>
+          <div
+            className="text-4xl md:text-6xl lg:text-7xl font-sans font-light-bold text-white mb-6 leading-tight"
+            dangerouslySetInnerHTML={{ __html: heroTitle }}
+          />
+          <div
+            className="text-lg md:text-xl text-white/90 font-light max-w-2xl mx-auto"
+            dangerouslySetInnerHTML={{ __html: heroSubtitle }}
+          />
         </div>
 
         <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2">
@@ -316,9 +324,10 @@ const Index = () => {
       <section className="py-20 md:py-32 bg-[#e8f0e8]">
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="max-w-4xl mx-auto text-center observe-scroll opacity-0">
-            <h2 className="text-3xl md:text-5xl font-sans font-light text-primary mb-8 leading-tight">
-              {introTitle}
-            </h2>
+            <div
+              className="text-3xl md:text-5xl font-sans font-light text-primary mb-8 leading-tight"
+              dangerouslySetInnerHTML={{ __html: introTitle }}
+            />
             <div
               className="text-base md:text-lg text-muted-foreground leading-relaxed text-justify"
               dangerouslySetInnerHTML={{ __html: introDescription }}
@@ -331,34 +340,31 @@ const Index = () => {
       {/* About Section */}
       <section
         id="about"
-        className="relative py-20 md:py-32 bg-[#f9f5f0]"
+        className="relative py-12 md:py-32 bg-[#f9f5f0]"
       >
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-10 border border-white/50">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="flex justify-center md:justify-start">
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[24px] md:rounded-[40px] shadow-sm p-6 md:p-10 border border-white/50">
+          <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-12 items-center">
+            <div className="observe-scroll opacity-0 flex flex-col justify-center py-2 md:py-4">
+              <p className="text-[#b27b61] text-2xl md:text-3xl mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
+                Who We Are
+              </p>
+
               <div
-                className="observe-scroll opacity-0 w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden shadow-md"
-              >
-                <img
-                  src={aboutImageUrl}
-                  alt="About Sphinx Weddings"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            <div className="observe-scroll opacity-0 flex flex-col justify-center py-4">
-              <h2 className="text-3xl md:text-4xl font-sans font-light text-primary mb-4 leading-tight">
-                {aboutTitle}
-              </h2>
-              <div className="space-y-4 text-base text-muted-foreground leading-relaxed text-justify">
+                className="text-2xl md:text-4xl font-sans font-light text-primary mb-4 md:mb-6 leading-tight"
+                dangerouslySetInnerHTML={{ __html: aboutTitle }}
+              />
+
+              <div className="w-12 h-[1px] bg-[#b27b61]/50 mb-4 md:mb-6" />
+
+              <div className="space-y-3 md:space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed text-justify mb-6 md:mb-8">
                 <p>
                   We believe that wedding planning should be as joyful as the celebration itself. Our approach is calm,
                   collaborative, and entirely focused on you. We take the time to understand your story, your style,
-                  and your dreams—then bring them to life with precision and care.
+                  and your dreams then bring them to life with precision and care.
                 </p>
                 <p>
                   From intimate gatherings to grand celebrations, we create moments that feel authentic, beautiful,
-                  and deeply personal. Because at the heart of it all, this is your day—and our job is to make sure
+                  and deeply personal. Because at the heart of it all, this is your day and our job is to make sure
                   it's everything you've imagined and more.
                 </p>
                 <p>
@@ -366,6 +372,40 @@ const Index = () => {
                   they arise and handle the unexpected with grace, ensuring a seamless experience for you and your guests.
                 </p>
               </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <Button variant="outline" className="border-[#b27b61] text-[#b27b61] hover:bg-[#b27b61] hover:text-white rounded-full px-8 uppercase tracking-widest text-xs h-10 md:h-12 transition-all w-full sm:w-auto">
+                  Read Our Story
+                </Button>
+
+                <div className="text-right hidden sm:block">
+                  <p className="text-sm text-muted-foreground uppercase tracking-widest mb-1">With Love,</p>
+                  <p className="text-2xl text-[#b27b61]" style={{ fontFamily: "'Great Vibes', cursive" }}>
+                    Sphinx Team
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-center md:justify-end relative order-first md:order-last">
+              {/* Decorative Offset Border
+              <div className="absolute top-4 -left-4 w-full h-full border border-[#b27b61]/30 rounded-2xl -z-10 hidden md:block" /> */}
+
+              <div
+                className="observe-scroll opacity-0 w-full max-w-[260px] md:max-w-[320px] aspect-[5/7] rounded-2xl overflow-hidden shadow-lg relative z-10"
+              >
+                <img
+                  src={aboutImageUrl}
+                  alt="About Sphinx Weddings"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="hidden md:block w-20" />
+
+              {/* Floating Badge
+              <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-full shadow-xl animate-spin-slow hidden md:block z-20">
+                <Sparkles className="w-6 h-6 text-[#b27b61]" />
+              </div> */}
             </div>
           </div>
         </div>
@@ -433,7 +473,7 @@ const Index = () => {
                   <div className="absolute -top-6 -left-6 bg-[#b27b61] text-white text-xs uppercase tracking-[0.4em] px-4 py-2 rounded-full shadow-lg">
                     Est. 2025
                   </div>
-                  <img src={'src/assets/imgs/IMG_7349.JPEG.jpg'} alt="Celebration toast" className="w-full h-[360px] object-cover" />
+                  <img src={celebrationToast} alt="Celebration toast" className="w-full h-[360px] object-cover" />
                   <div className="px-8 py-6 text-center space-y-2">
                     <p className="text-xs uppercase tracking-[0.4em] text-sage">Signature curation</p>
                     <p className="text-sm text-muted-foreground">
@@ -601,9 +641,9 @@ const Index = () => {
             <h2 className="text-4xl md:text-6xl font-sans font-light text-primary mb-6">
               Curated Celebrations
             </h2>
-            <p className="text-muted-foreground text-lg font-light text-justify">
+            {/* <p className="text-muted-foreground text-lg font-light text-justify">
               From intimate gatherings to grand affairs, we craft every detail with precision and grace.
-            </p>
+            </p> */}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
@@ -748,13 +788,13 @@ const Index = () => {
               <h3 className="text-2xl font-sans font-semibold text-primary mb-6">Contact Information</h3>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  <strong>Email:</strong> {contactEmail}
+                  <strong>Email:</strong> <span dangerouslySetInnerHTML={{ __html: contactEmail }} />
                 </p>
                 <p className="text-muted-foreground">
-                  <strong>Phone:</strong> {contactPhone}
+                  <strong>Phone:</strong> <span dangerouslySetInnerHTML={{ __html: contactPhone }} />
                 </p>
                 <p className="text-muted-foreground">
-                  <strong>Address:</strong> {contactAddress}
+                  <strong>Address:</strong> <span dangerouslySetInnerHTML={{ __html: contactAddress }} />
                 </p>
                 <div className="flex gap-4 mt-6">
                   <Button variant="outline" size="icon" className="rounded-full">

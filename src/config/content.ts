@@ -55,7 +55,7 @@ export const contentItems: ContentItemDefinition[] = [
     label: "About Section Title",
     type: "textarea",
     defaultValue:
-      "UNIQUELY, YOU'RE LOOKING FOR A PLANNER WHO CAN HELP YOU FEEL AT EASE THROUGH EVERY STEP OF THE JOURNEY.",
+      "<p>UNIQUELY, YOU'RE LOOKING FOR A PLANNER WHO CAN HELP YOU FEEL EASE THROUGH EVERY STEP OF THE JOURNEY.</p>",
   },
   {
     id: "about-image",

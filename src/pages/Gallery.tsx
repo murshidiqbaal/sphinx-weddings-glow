@@ -189,9 +189,10 @@ const Gallery = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-12 md:pt-40 md:pb-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-5xl md:text-7xl font-serif font-light text-sage mb-8 tracking-wide animate-fade-in">
-            Gallery
-          </h2>
+          <div
+            className="text-5xl md:text-7xl font-serif font-light text-sage mb-8 tracking-wide animate-fade-in"
+            dangerouslySetInnerHTML={{ __html: getText("gallery-title") }}
+          />
 
           {/* Collection Links */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -207,9 +208,10 @@ const Gallery = () => {
             </Link>
           </div>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light animate-fade-in text-justify">
-            Explore our collection of beautifully curated celebrations
-          </p>
+          <div
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light animate-fade-in text-justify"
+            dangerouslySetInnerHTML={{ __html: getText("gallery-subtitle") }}
+          />
         </div>
       </section>
 
@@ -252,9 +254,10 @@ const Gallery = () => {
                 />
                 <div className="absolute inset-0 bg-sage/0 group-hover:bg-sage/10 transition-all duration-500">
                   <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-                    <h3 className="text-white font-serif text-xl font-light">
-                      {image.title}
-                    </h3>
+                    <div
+                      className="text-white font-serif text-xl font-light"
+                      dangerouslySetInnerHTML={{ __html: image.title }}
+                    />
                     <div className="flex gap-2 mt-2 flex-wrap">
                       {image.category.map((cat) => (
                         <span

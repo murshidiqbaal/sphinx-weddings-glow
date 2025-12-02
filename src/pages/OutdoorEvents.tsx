@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Flower2, Sun, Trees } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { useContent } from "@/hooks/useContent";
 import { useGallery } from "@/hooks/useGallery";
 
 const OutdoorEvents = () => {
   const { images: dynamicImages } = useGallery("outdoor");
+  const { getText } = useContent();
 
   const staticOutdoorImages = [
     { src: weddingCeremony, alt: "Outdoor wedding ceremony", title: "Garden Ceremony" },
@@ -59,12 +61,14 @@ const OutdoorEvents = () => {
             <Trees className="w-8 h-8 text-sage" />
             <Flower2 className="w-8 h-8 text-sage" />
           </div>
-          <h2 className="text-5xl md:text-7xl font-serif font-light text-sage mb-6 tracking-wide">
-            Outdoor Events
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light text-justify">
-            Celebrating under the open sky
-          </p>
+          <div
+            className="text-5xl md:text-7xl font-serif font-light text-sage mb-6 tracking-wide"
+            dangerouslySetInnerHTML={{ __html: getText("outdoor-title") }}
+          />
+          <div
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light text-justify"
+            dangerouslySetInnerHTML={{ __html: getText("outdoor-subtitle") }}
+          />
         </div>
       </section>
 
@@ -84,9 +88,10 @@ const OutdoorEvents = () => {
                 />
                 <div className="absolute inset-0 bg-sage/0 group-hover:bg-sage/10 transition-all duration-500">
                   <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-                    <h3 className="text-white font-serif text-xl font-light">
-                      {image.title}
-                    </h3>
+                    <div
+                      className="text-white font-serif text-xl font-light"
+                      dangerouslySetInnerHTML={{ __html: image.title }}
+                    />
                   </div>
                 </div>
               </div>
