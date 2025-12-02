@@ -5,9 +5,7 @@ SphinxWeddings is a professionally designed, fast, and responsive web applicatio
 
 🚀 Live Website
 
-Production URL: [https://your-domain.com](https://sphinxweddings-4oxl5i545-murshidiqbaals-projects.vercel.app/](https://sphinxweddings-4oxl5i545-murshidiqbaals-projects.vercel.app/)
-
-(Replace with your actual domain)
+Production URL: https://sphinxweddings-4oxl5i545-murshidiqbaals-projects.vercel.app/
 
 📌 Project Features
 🌟 Frontend
@@ -64,7 +62,7 @@ Deployment	Vercel / Hostinger
 Version Control	GitHub
 🛠️ Installation & Development
 # 1. Clone the repository
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/murshidiqbaal/sphinx-weddings-glow/
 
 # 2. Go into the project folder
 cd sphinxweddings
