@@ -5,7 +5,7 @@ SphinxWeddings is a professionally designed, fast, and responsive web applicatio
 
 🚀 Live Website
 
-Production URL: https://your-domain.com
+Production URL: [https://your-domain.com](https://sphinxweddings-4oxl5i545-murshidiqbaals-projects.vercel.app/](https://sphinxweddings-4oxl5i545-murshidiqbaals-projects.vercel.app/)
 
 (Replace with your actual domain)
 
