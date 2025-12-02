@@ -1,94 +1,185 @@
-# Welcome to your Lovable project
+🌸 SphinxWeddings
+A Modern Wedding & Event Planning Website
 
-## Project info
+SphinxWeddings is a professionally designed, fast, and responsive web application built for wedding planners, event organizers, and creative studios. It provides a beautiful front-end experience along with a powerful admin dashboard for managing images, content, and galleries in real time.
 
-**URL**: https://lovable.dev/projects/9d4ae6e1-aa9d-4c63-85c2-b6c27e31be6c
+🚀 Live Website
 
-## How can I edit this code?
+Production URL: https://your-domain.com
 
-There are several ways of editing your application.
+(Replace with your actual domain)
 
-**Use Lovable**
+📌 Project Features
+🌟 Frontend
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9d4ae6e1-aa9d-4c63-85c2-b6c27e31be6c) and start prompting.
+Modern & responsive UI
 
-Changes made via Lovable will be committed automatically to this repo.
+Tailwind CSS for styling
 
-**Use your preferred IDE**
+shadcn-ui for polished components
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+High-performance Vite + React setup
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Dynamic image galleries
 
-Follow these steps:
+Smooth animations & transitions
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+SEO-friendly meta tags
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Custom OG image for link sharing
 
-# Step 3: Install the necessary dependencies.
-npm i
+🔐 Admin Panel
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+/admin route for content management
+
+Password-protected admin access
+
+Upload/manage images
+
+Edit service descriptions, text blocks, and galleries
+
+Content sync via Firebase or Supabase
+
+Changes appear instantly on the public site
+
+☁️ Backend (Firebase/Supabase)
+
+Firebase Storage for image uploads
+
+Firestore or Supabase for content storage
+
+Real-time updates
+
+Secure auth & API access
+
+Environment-based configuration
+
+🧰 Tech Stack
+Layer	Technology
+Frontend	React, TypeScript, Vite
+Styling	Tailwind CSS, shadcn/ui
+State/Logic	React Hooks, Context
+Backend	Firebase / Supabase
+Deployment	Vercel / Hostinger
+Version Control	GitHub
+🛠️ Installation & Development
+# 1. Clone the repository
+git clone <YOUR_REPOSITORY_URL>
+
+# 2. Go into the project folder
+cd sphinxweddings
+
+# 3. Install all dependencies
+npm install
+
+# 4. Start the development server
 npm run dev
-```
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Your development server will be available at:
+👉 http://localhost:5173
 
-**Use GitHub Codespaces**
+🔧 Environment Variables
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Create a .env file in the project root.
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/9d4ae6e1-aa9d-4c63-85c2-b6c27e31be6c) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
-
-## Admin Panel & Firebase Content Sync
-
-- Navigate to `/admin` and log in with the hard-coded password found in `src/pages/Admin.tsx`. Update that value before deploying.
-- Text blocks and gallery images can be edited directly in the panel. Uploaded images are stored in Firebase Storage and their URLs are persisted in Firestore.
-- The public site listens to live Firestore updates, so saved changes appear immediately without redeploying.
-
-### Environment Variables
-
-Copy `env.template` to `.env` and supply your Firebase credentials:
-
-```
-VITE_FIREBASE_API_KEY=your-key
-VITE_FIREBASE_AUTH_DOMAIN=your-domain.firebaseapp.com
+If using Firebase:
+VITE_FIREBASE_API_KEY=your-api-key
+VITE_FIREBASE_AUTH_DOMAIN=your-app.firebaseapp.com
 VITE_FIREBASE_PROJECT_ID=your-project-id
 VITE_FIREBASE_STORAGE_BUCKET=your-bucket.appspot.com
 VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
 VITE_FIREBASE_APP_ID=your-app-id
-```
 
-All keys are required for the admin upload workflow. Without them, changes only persist locally in the browser.
+If using Supabase:
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+
+🔐 Admin Panel
+Access:
+https://your-domain.com/admin
+
+Admin Password Location:
+
+You can modify the default admin password inside:
+
+src/pages/Admin.tsx
+
+
+⚠️ Important:
+Update this password before deployment.
+
+Admin Features:
+
+Upload & remove images
+
+Update text descriptions
+
+Manage gallery sections
+
+Real-time sync with Firebase/Supabase
+
+Zero redeployment required
+
+🌐 Deployment
+Deploy on Vercel (Recommended)
+
+Push project to GitHub
+
+Go to https://vercel.com
+
+Import your repository
+
+Set environment variables
+
+Deploy instantly
+
+Deploy to Hostinger
+
+Run:
+
+npm run build
+
+
+Upload the contents of the dist/ folder to:
+
+public_html
+
+
+Ensure domain’s DNS points correctly.
+
+🖼️ Social Sharing (OG Image)
+
+To control the preview image when sharing your link on WhatsApp, Facebook, etc., edit index.html:
+
+<meta property="og:title" content="SphinxWeddings" />
+<meta property="og:description" content="Elegant and modern wedding & event planning services." />
+<meta property="og:image" content="https://your-domain.com/og-image.jpg" />
+<meta property="og:url" content="https://your-domain.com" />
+<meta property="og:type" content="website" />
+
+📁 Project Structure
+sphinxweddings/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   ├── utils/
+│   └── styles/
+├── .env.example
+├── README.md
+└── vite.config.ts
+
+🤝 Contributing
+
+Contributions are welcome!
+To contribute:
+
+Fork the repo
+
+Create a new branch
+
+Make your changes
+
+Submit a pull request
