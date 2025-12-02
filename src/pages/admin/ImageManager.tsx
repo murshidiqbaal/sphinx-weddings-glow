@@ -91,7 +91,7 @@ const ImageManager = () => {
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-3xl font-serif font-bold text-gray-900">Site Images</h2>
+                <h2 className="text-3xl font-sans font-bold text-gray-900">Site Images</h2>
                 <p className="text-gray-500 mt-2">Manage static images across the site.</p>
             </div>
 

@@ -28,6 +28,7 @@ const AdminLayout = () => {
         { path: "/admin/images", label: "Site Images", icon: <ImageIcon size={20} /> },
         { path: "/admin/gallery", label: "Gallery Manager", icon: <Camera size={20} /> },
         { path: "/admin/recent-works", label: "Recent Works", icon: <LayoutDashboard size={20} /> },
+        { path: "/admin/wedding-section", label: "Wedding Section", icon: <LayoutDashboard size={20} /> },
     ];
 
     return (
@@ -46,7 +47,7 @@ const AdminLayout = () => {
                     }`}
             >
                 <div className="h-16 flex items-center justify-between px-6 border-b border-gray-200">
-                    <h1 className="text-xl font-serif font-bold text-primary">Admin Panel</h1>
+                    <h1 className="text-xl font-sans font-bold text-primary">Admin Panel</h1>
                     <button
                         onClick={() => setSidebarOpen(false)}
                         className="md:hidden text-gray-500 hover:text-gray-700"
@@ -94,7 +95,7 @@ const AdminLayout = () => {
                     >
                         <Menu size={24} />
                     </button>
-                    <span className="ml-4 font-serif font-bold text-primary">Admin Panel</span>
+                    <span className="ml-4 font-sans font-bold text-primary">Admin Panel</span>
                 </header>
 
                 <div className="flex-1 overflow-auto p-4 md:p-8">

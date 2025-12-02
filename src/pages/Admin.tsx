@@ -171,7 +171,7 @@ const Admin = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-          <h1 className="text-3xl font-serif font-bold text-primary mb-6 text-center">
+          <h1 className="text-3xl font-sans font-bold text-primary mb-6 text-center">
             Admin Login
           </h1>
           <form onSubmit={handleLogin} className="space-y-4">
@@ -189,11 +189,10 @@ const Admin = () => {
             </div>
             {savedMessage && (
               <p
-                className={`text-sm ${
-                  savedMessage.includes("successfully")
+                className={`text-sm ${savedMessage.includes("successfully")
                     ? "text-green-600"
                     : "text-red-600"
-                }`}
+                  }`}
               >
                 {savedMessage}
               </p>
@@ -213,7 +212,7 @@ const Admin = () => {
       <header className="fixed top-0 left-0 right-0 z-50 bg-forest text-white backdrop-blur-sm border-b border-forest/50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-serif font-bold">Admin Panel</h1>
+            <h1 className="text-2xl font-sans font-bold">Admin Panel</h1>
             <Button
               variant="ghost"
               size="sm"
@@ -231,17 +230,16 @@ const Admin = () => {
       <div className="pt-24 pb-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-serif font-bold text-primary mb-8">
+            <h2 className="text-2xl font-sans font-bold text-primary mb-8">
               Edit Content
             </h2>
 
             {savedMessage && (
               <div
-                className={`mb-6 p-4 rounded-lg ${
-                  savedMessage.includes("successfully")
+                className={`mb-6 p-4 rounded-lg ${savedMessage.includes("successfully")
                     ? "bg-green-100 text-green-800"
                     : "bg-red-100 text-red-800"
-                }`}
+                  }`}
               >
                 {savedMessage}
               </div>
@@ -256,7 +254,7 @@ const Admin = () => {
             <div className="space-y-8">
               {/* Text Content Section */}
               <div>
-                <h3 className="text-xl font-serif font-bold text-primary mb-4 pb-2 border-b-2 border-sage">
+                <h3 className="text-xl font-sans font-bold text-primary mb-4 pb-2 border-b-2 border-sage">
                   Text Content
                 </h3>
                 <div className="space-y-6">
@@ -281,7 +279,7 @@ const Admin = () => {
 
               {/* Textarea Content Section */}
               <div>
-                <h3 className="text-xl font-serif font-bold text-primary mb-4 pb-2 border-b-2 border-sage">
+                <h3 className="text-xl font-sans font-bold text-primary mb-4 pb-2 border-b-2 border-sage">
                   Descriptions & Long Text
                 </h3>
                 <div className="space-y-6">
@@ -307,7 +305,7 @@ const Admin = () => {
 
               {/* Image Content Section */}
               <div>
-                <h3 className="text-xl font-serif font-bold text-primary mb-4 pb-2 border-b-2 border-sage">
+                <h3 className="text-xl font-sans font-bold text-primary mb-4 pb-2 border-b-2 border-sage">
                   Images
                 </h3>
                 <div className="space-y-6 grid md:grid-cols-2 gap-6">
@@ -370,7 +368,7 @@ const Admin = () => {
 
           {/* Password Management Section */}
           <div className="bg-white rounded-lg shadow-lg p-8 mt-8">
-            <h3 className="text-xl font-serif font-bold text-primary mb-4">
+            <h3 className="text-xl font-sans font-bold text-primary mb-4">
               Security
             </h3>
             <p className="text-sm text-muted-foreground mb-4">

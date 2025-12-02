@@ -86,7 +86,7 @@ const TextManager = () => {
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-3xl font-serif font-bold text-gray-900">Text Content</h2>
+                <h2 className="text-3xl font-sans font-bold text-gray-900">Text Content</h2>
                 <p className="text-gray-500 mt-2">Manage website text sections.</p>
             </div>
 

@@ -112,7 +112,7 @@ const Migration = () => {
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-3xl font-serif font-bold text-gray-900">Content Migration</h2>
+                <h2 className="text-3xl font-sans font-bold text-gray-900">Content Migration</h2>
                 <p className="text-gray-500 mt-2">Migrate local content to Supabase.</p>
             </div>
 

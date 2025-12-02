@@ -164,7 +164,7 @@ const GalleryManager = () => {
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-3xl font-serif font-bold text-gray-900">Gallery Manager</h2>
+                <h2 className="text-3xl font-sans font-bold text-gray-900">Gallery Manager</h2>
                 <p className="text-gray-500 mt-2">Manage photo collections for different sections.</p>
             </div>
 

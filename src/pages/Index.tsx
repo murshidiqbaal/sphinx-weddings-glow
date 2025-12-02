@@ -146,6 +146,7 @@ const Index = () => {
 
   // Recent Works State
   const [recentWorks, setRecentWorks] = useState<any[]>([]);
+  const [weddingMoments, setWeddingMoments] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchRecentWorks = async () => {
@@ -159,21 +160,25 @@ const Index = () => {
       }
     };
     fetchRecentWorks();
+
+    const fetchWeddingMoments = async () => {
+      const { data } = await supabase
+        .from("wedding_moments")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (data && data.length > 0) {
+        setWeddingMoments(data);
+      }
+    };
+    fetchWeddingMoments();
   }, []);
 
   // Use DB data if available, otherwise fallback to hardcoded for now (or just empty)
   // To make the marquee effect work with few items, we might need to duplicate them if count is low
-  const displayWorks = recentWorks.length > 0 ? recentWorks : [];
-  // If we want to keep the hardcoded ones as fallback until they add something:
-  // const servicesMarqueeImages = [...galleryImages, ...galleryImages]; 
-  // But we want to replace them.
-
-  // Let's construct the items to map over.
-  // If using DB items, we map them directly.
-  // We need to handle the infinite loop duplication if needed.
-  const finalWorks = displayWorks.length > 0
-    ? (displayWorks.length < 5 ? [...displayWorks, ...displayWorks, ...displayWorks] : displayWorks)
-    : servicesMarqueeImages; // Fallback to existing if no DB items
+  const finalWorks = recentWorks.length > 0 && recentWorks.length < 5
+    ? [...recentWorks, ...recentWorks, ...recentWorks]
+    : recentWorks;
 
   const marqueeCardCaptions = [
     "City Soirée",
@@ -413,7 +418,7 @@ const Index = () => {
       </section>
 
       {/* New Wedding Section */}
-      <WeddingSection images={marqueeImages} />
+      <WeddingSection images={weddingMoments} />
 
       {/* Storytelling Section
       <section className="py-20 md:py-28 bg-white">
@@ -486,7 +491,7 @@ const Index = () => {
               <div className="text-center lg:text-left">
                 <p className="uppercase tracking-[0.35em] text-xs text-sage">Sphinx</p>
                 {/* <p className="text-4xl md:text-5xl font-sans text-primary mt-2 whitespace-nowrap"></p> */}
-                <p className="text-4xl md:text-5xl font-serif text-primary mt-2">
+                <p className="text-4xl md:text-5xl font-sans text-primary mt-2">
                   <span className="italic text-[#b27b61]">unique</span> wedding planning + coordination
                 </p>
               </div>
@@ -600,33 +605,26 @@ const Index = () => {
               grabCursor={true}
               className="pb-12"
             >
-              {finalWorks.map((item, index) => {
-                const isDbItem = typeof item === 'object' && item !== null;
-                const imgUrl = isDbItem ? item.image_url : item;
-                const caption = isDbItem ? item.caption : marqueeCardCaptions[index % marqueeCardCaptions.length];
-                const desc = isDbItem ? item.description : cardDescription;
-
-                return (
-                  <SwiperSlide key={`${isDbItem ? item.id : imgUrl}-${index}`}>
-                    <div
-                      className="bg-[#fffaf6] rounded-[28px] p-4 border border-[#f0e2d5] h-full"
-                    >
-                      <div className="rounded-[20px] overflow-hidden h-[380px]">
-                        <img src={imgUrl} alt={caption} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="mt-4">
-                        <p className="text-lg font-sans text-primary">
-                          {caption}
-                        </p>
-                        <p className={`${desc.length > 80 ? "text-xs" : desc.length > 40 ? "text-sm" : "text-base"
-                          } text-muted-foreground text-justify`}>
-                          {desc}
-                        </p>
-                      </div>
+              {finalWorks.map((item, index) => (
+                <SwiperSlide key={`${item.id}-${index}`}>
+                  <div
+                    className="bg-[#fffaf6] rounded-[28px] p-4 border border-[#f0e2d5] h-full"
+                  >
+                    <div className="rounded-[20px] overflow-hidden h-[380px]">
+                      <img src={item.image_url} alt={item.caption} className="w-full h-full object-cover" />
                     </div>
-                  </SwiperSlide>
-                );
-              })}
+                    <div className="mt-4">
+                      <p className="text-lg font-sans text-primary">
+                        {item.caption}
+                      </p>
+                      <p className={`${item.description?.length > 80 ? "text-xs" : item.description?.length > 40 ? "text-sm" : "text-base"
+                        } text-muted-foreground text-justify`}>
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>

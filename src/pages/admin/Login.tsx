@@ -33,7 +33,7 @@ const Login = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-background">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full border border-border">
-                <h1 className="text-3xl font-serif font-bold text-primary mb-6 text-center">
+                <h1 className="text-3xl font-sans font-bold text-primary mb-6 text-center">
                     Admin Login
                 </h1>
                 <form onSubmit={handleLogin} className="space-y-4">

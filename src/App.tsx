@@ -18,6 +18,7 @@ import Login from "./pages/admin/Login";
 import Migration from "./pages/admin/Migration";
 import RecentWorksManager from "./pages/admin/RecentWorksManager";
 import TextManager from "./pages/admin/TextManager";
+import WeddingSectionManager from "./pages/admin/WeddingSectionManager";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,6 +63,7 @@ const App = () => (
               <Route path="images" element={<ImageManager />} />
               <Route path="gallery" element={<GalleryManager />} />
               <Route path="recent-works" element={<RecentWorksManager />} />
+              <Route path="wedding-section" element={<WeddingSectionManager />} />
               <Route path="migration" element={<Migration />} />
             </Route>
           </Route>

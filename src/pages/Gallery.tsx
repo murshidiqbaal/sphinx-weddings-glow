@@ -1,7 +1,8 @@
+import logo from "@/assets/logo/logo1.png";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/hooks/useContent";
 import { useGallery } from "@/hooks/useGallery";
-import { Camera, Heart, Home, Leaf } from "lucide-react";
+import { Camera, Heart, Home, Leaf, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -15,6 +16,8 @@ interface GalleryImage {
 }
 
 const Gallery = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [headerDark, setHeaderDark] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<Category>("all");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { images: dynamicImages } = useGallery("gallery");
@@ -167,13 +170,18 @@ const Gallery = () => {
   return (
     <div className="min-h-screen bg-[#fdf8f4]">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/20">
+      <header className="fixed top-0 left-0 right-0 z-50  border-white/20">
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
-            <Link to="/" className="flex flex-col">
-              <h1 className="text-2xl md:text-3xl font-serif font-light tracking-wider" style={{ color: "#859a77" }}>
-                SphinxWeddings
-              </h1>
+            <Link to="/" className="flex items-center gap-2 drop-shadow-xl">
+              <img
+                src={logo}
+                alt="Logo"
+                className={`h-16 transition-all duration-300 ${headerDark ? "filter-none" : "filter brightness-0 invert"}`}
+              />
+              <span className={`text-xl font-bold ${headerDark ? "text-foreground" : "text-white"} transition-colors`}>
+                {getText("site-title")}
+              </span>
             </Link>
 
             <Link to="/">
@@ -190,19 +198,21 @@ const Gallery = () => {
       <section className="pt-32 pb-12 md:pt-40 md:pb-20">
         <div className="container mx-auto px-4 text-center">
           <div
-            className="text-5xl md:text-7xl font-serif font-light text-sage mb-8 tracking-wide animate-fade-in"
+            className="text-5xl md:text-7xl font-sans font-light text-sage mb-8 tracking-wide animate-fade-in"
             dangerouslySetInnerHTML={{ __html: getText("gallery-title") }}
           />
 
           {/* Collection Links */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Link to="/gallery/outdoor-events">
-              <Button variant="outline" className="border-sage/30 text-sage hover:bg-sage/10 hover:border-sage/50 font-light">
+              <Button variant="outline" className="gap-2 border-sage/30 text-sage hover:bg-sage/10 hover:border-sage/50 font-light">
+                <Sun className="w-4 h-4" />
                 Outdoor Events
               </Button>
             </Link>
             <Link to="/gallery/night-events">
-              <Button variant="outline" className="border-sage/30 text-sage hover:bg-sage/10 hover:border-sage/50 font-light">
+              <Button variant="outline" className="gap-2 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/50 font-light bg-primary/5">
+                <Moon className="w-4 h-4" />
                 Night Events
               </Button>
             </Link>
@@ -240,7 +250,7 @@ const Gallery = () => {
       {/* Gallery Grid */}
       <section className="py-12 md:py-20 bg-[#fdf8f4]">
         <div className="container mx-auto px-4">
-          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
+          <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-2 space-y-4">
             {filteredImages.map((image, index) => (
               <div
                 key={`${image.src}-${index}`}
@@ -255,7 +265,7 @@ const Gallery = () => {
                 <div className="absolute inset-0 bg-sage/0 group-hover:bg-sage/10 transition-all duration-500">
                   <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
                     <div
-                      className="text-white font-serif text-xl font-light"
+                      className="text-white font-sans text-xl font-light"
                       dangerouslySetInnerHTML={{ __html: image.title }}
                     />
                     <div className="flex gap-2 mt-2 flex-wrap">
@@ -306,7 +316,7 @@ const Gallery = () => {
       {/* Call to Action */}
       <section className="py-20 border-t border-sage/20">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-3xl md:text-5xl font-serif font-light text-sage mb-6">
+          <h3 className="text-3xl md:text-5xl font-sans font-light text-sage mb-6">
             Ready to Create Your Own Story?
           </h3>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto font-light text-justify">

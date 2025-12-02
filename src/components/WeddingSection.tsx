@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 interface WeddingSectionProps {
-    images?: string[];
+    images?: any[];
 }
 
 const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
@@ -27,29 +27,34 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
                 <div
                     className="flex gap-8 marquee-track w-max hover:[animation-play-state:paused]"
                 >
-                    {[...images, ...images, ...images].map((img, index) => (
-                        <div
-                            key={`${index}`}
-                            className="flex-none transform transition-transform hover:scale-105 duration-300"
-                            style={{
-                                transform: `rotate(${index % 2 === 0 ? '2deg' : '-2deg'})`,
-                            }}
-                        >
-                            <div className="bg-white p-4 pb-12 shadow-lg rounded-sm w-[280px] md:w-[320px] border border-gray-100">
-                                <div className="aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
-                                    <img
-                                        src={img}
-                                        alt={`Moment ${index + 1}`}
-                                        className="w-full h-full object-cover filter sepia-[0.2] contrast-[1.05]"
-                                    />
-                                </div>
-                                <div className="font-handwriting text-center text-gray-500 text-sm transform -rotate-1">
-                                    {/* Optional: Add captions here if available */}
-                                    Moment #{index + 1}
+                    {[...images, ...images, ...images].map((item, index) => {
+                        const isObject = typeof item === 'object' && item !== null;
+                        const src = isObject ? (item as any).image_url : item;
+                        const caption = isObject ? (item as any).caption : `Moment #${index + 1}`;
+
+                        return (
+                            <div
+                                key={`${index}`}
+                                className="flex-none transform transition-transform hover:scale-105 duration-300"
+                                style={{
+                                    transform: `rotate(${index % 2 === 0 ? '2deg' : '-2deg'})`,
+                                }}
+                            >
+                                <div className="bg-white p-4 pb-12 shadow-lg rounded-sm w-[280px] md:w-[320px] border border-gray-100">
+                                    <div className="aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
+                                        <img
+                                            src={src}
+                                            alt={caption}
+                                            className="w-full h-full object-cover filter sepia-[0.2] contrast-[1.05]"
+                                        />
+                                    </div>
+                                    <div className="font-handwriting text-center text-gray-500 text-sm transform -rotate-1">
+                                        {caption}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 {/* Gradient masks for smooth fade at edges */}
