@@ -30,6 +30,12 @@ const Index = () => {
 
   const { getText, getImage } = useContent();
 
+  // State Definitions moved to top to fix hoisting
+  const [recentWorks, setRecentWorks] = useState<any[]>([]);
+  const [weddingMoments, setWeddingMoments] = useState<any[]>([]);
+  const [showAllTestimonials, setShowAllTestimonials] = useState(false);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+
   const galleryImages = [
     getImage("gallery-image-1"),
     getImage("wedding-image-wide"),
@@ -68,7 +74,7 @@ const Index = () => {
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [testimonials, showAllTestimonials, recentWorks, weddingMoments]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -145,10 +151,7 @@ const Index = () => {
   const agencyImages = galleryImages.slice(0, 3);
   const servicesMarqueeImages = [...galleryImages, ...galleryImages];
 
-  // Recent Works State
-  const [recentWorks, setRecentWorks] = useState<any[]>([]);
-  const [weddingMoments, setWeddingMoments] = useState<any[]>([]);
-  const [showAllTestimonials, setShowAllTestimonials] = useState(false);
+
 
   useEffect(() => {
     const fetchRecentWorks = async () => {
@@ -175,22 +178,18 @@ const Index = () => {
     };
     fetchWeddingMoments();
 
+    const fetchTestimonials = async () => {
+      const { data } = await supabase
+        .from("testimonials")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (data && data.length > 0) {
+        setTestimonials(data);
+      }
+    };
     fetchTestimonials();
   }, []);
-
-  // Testimonials State
-  const [testimonials, setTestimonials] = useState<any[]>([]);
-
-  const fetchTestimonials = async () => {
-    const { data } = await supabase
-      .from("testimonials")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (data && data.length > 0) {
-      setTestimonials(data);
-    }
-  };
 
 
   // Use DB data if available, otherwise fallback to hardcoded for now (or just empty)
@@ -627,7 +626,7 @@ const Index = () => {
                 <h3 className="text-xl md:text-2xl font-sans font-semibold text-primary mb-4">
                   {value.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-justify">{value.description}</p>
+                <p className="text-muted-foreground leading-relaxed text-center">{value.description}</p>
               </div>
             ))}
           </div>
@@ -644,7 +643,7 @@ const Index = () => {
             <h2 className="text-3xl md:text-4xl font-sans text-primary leading-snug mt-4">
               A living reel of the tender, modern celebrations we design.
             </h2>
-            <p className="text-muted-foreground text-base leading-relaxed mt-4 text-justify">
+            <p className="text-muted-foreground text-base leading-relaxed mt-4 text-center">
               Drift through a continuous ribbon of moments from our gallery. Each card is a real couple, a real story,
               and a glimpse into the ambience we create before mapping out your service suite below.
             </p>
