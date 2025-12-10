@@ -17,6 +17,7 @@ import ImageManager from "./pages/admin/ImageManager";
 import Login from "./pages/admin/Login";
 import Migration from "./pages/admin/Migration";
 import RecentWorksManager from "./pages/admin/RecentWorksManager";
+import TestimonialsManager from "./pages/admin/TestimonialsManager";
 import TextManager from "./pages/admin/TextManager";
 import WeddingSectionManager from "./pages/admin/WeddingSectionManager";
 import NotFound from "./pages/NotFound";
@@ -64,6 +65,7 @@ const App = () => (
               <Route path="gallery" element={<GalleryManager />} />
               <Route path="recent-works" element={<RecentWorksManager />} />
               <Route path="wedding-section" element={<WeddingSectionManager />} />
+              <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="migration" element={<Migration />} />
             </Route>
           </Route>

@@ -29,6 +29,7 @@ const AdminLayout = () => {
         { path: "/admin/gallery", label: "Gallery Manager", icon: <Camera size={20} /> },
         { path: "/admin/recent-works", label: "Recent Works", icon: <LayoutDashboard size={20} /> },
         { path: "/admin/wedding-section", label: "Wedding Section", icon: <LayoutDashboard size={20} /> },
+        { path: "/admin/testimonials", label: "Testimonials", icon: <LayoutDashboard size={20} /> },
     ];
 
     return (

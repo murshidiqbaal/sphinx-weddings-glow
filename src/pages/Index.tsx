@@ -1,5 +1,6 @@
 import celebrationToast from "@/assets/imgs/IMG_7349.JPEG.jpg";
 import logo from "@/assets/logo/logo1.png";
+import decoration from "@/assets/logo/vector1.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -147,6 +148,7 @@ const Index = () => {
   // Recent Works State
   const [recentWorks, setRecentWorks] = useState<any[]>([]);
   const [weddingMoments, setWeddingMoments] = useState<any[]>([]);
+  const [showAllTestimonials, setShowAllTestimonials] = useState(false);
 
   useEffect(() => {
     const fetchRecentWorks = async () => {
@@ -172,13 +174,57 @@ const Index = () => {
       }
     };
     fetchWeddingMoments();
+
+    fetchTestimonials();
   }, []);
+
+  // Testimonials State
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+
+  const fetchTestimonials = async () => {
+    const { data } = await supabase
+      .from("testimonials")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (data && data.length > 0) {
+      setTestimonials(data);
+    }
+  };
+
 
   // Use DB data if available, otherwise fallback to hardcoded for now (or just empty)
   // To make the marquee effect work with few items, we might need to duplicate them if count is low
   const finalWorks = recentWorks.length > 0 && recentWorks.length < 5
     ? [...recentWorks, ...recentWorks, ...recentWorks]
     : recentWorks;
+
+  const allTestimonials = testimonials.length > 0 ? testimonials : [
+    {
+      name: "Sarah & Michael Johnson",
+      type: "Wedding Clients",
+      initials: "SJ",
+      testimonial:
+        "SPHINX made our wedding day absolutely perfect. Every detail was thoughtfully planned and beautifully executed. We couldn't have asked for a better team to bring our vision to life.",
+    },
+    {
+      name: "David Thompson",
+      type: "Corporate Client",
+      initials: "DT",
+      testimonial:
+        "Our corporate event turned out amazing. The professionalism and attention to detail exceeded our expectations. Highly recommend their services for any business event.",
+    },
+    {
+      name: "Maria Rodriguez",
+      type: "Baptism Client",
+      initials: "MR",
+      testimonial:
+        "The baptism ceremony was beautiful and meaningful. They handled everything with such care and respect. Our family will cherish these memories forever.",
+    },
+  ];
+
+  const displayedTestimonials = showAllTestimonials ? allTestimonials : allTestimonials.slice(0, 3);
+
 
   const marqueeCardCaptions = [
     "City Soirée",
@@ -298,6 +344,9 @@ const Index = () => {
                 <div className="overflow-hidden rounded-[40px] h-[400px] md:h-[500px] w-full bg-white/95 border border-[#f5e7db] shadow-[0_30px_80px_rgba(0,0,0,0.18)] p-2">
                   <img src={galleryImages[0]} alt="Featured celebration" className="w-full h-full object-cover rounded-[32px]" />
                 </div>
+                <div className="w-full flex justify-center mt-2">
+                  <img src={decoration} alt="" className="w-[140px] h-8 ml-2 inline-block opacity-80" />
+                </div>
               </div>
               {/* Decorative elements behind */}
               {/* <div className="absolute top-10 -left-4 w-full h-full rounded-t-full border border-[#b27b61]/30 -z-10 transform -rotate-3" />
@@ -359,6 +408,7 @@ const Index = () => {
                 dangerouslySetInnerHTML={{ __html: aboutTitle }}
               />
 
+
               <div className="w-12 h-[1px] bg-[#b27b61]/50 mb-4 md:mb-6" />
 
               <div className="space-y-3 md:space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed text-justify mb-6 md:mb-8">
@@ -375,6 +425,7 @@ const Index = () => {
                 <p>
                   Our team brings years of experience in design, logistics, and hospitality. We anticipate needs before
                   they arise and handle the unexpected with grace, ensuring a seamless experience for you and your guests.
+
                 </p>
               </div>
 
@@ -396,15 +447,22 @@ const Index = () => {
               {/* Decorative Offset Border
               <div className="absolute top-4 -left-4 w-full h-full border border-[#b27b61]/30 rounded-2xl -z-10 hidden md:block" /> */}
 
-              <div
-                className="observe-scroll opacity-0 w-full max-w-[260px] md:max-w-[320px] aspect-[5/7] rounded-2xl overflow-hidden shadow-lg relative z-10"
-              >
-                <img
-                  src={aboutImageUrl}
-                  alt="About Sphinx Weddings"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                />
+              <div className="flex flex-col items-center">
+                <div
+                  className="observe-scroll opacity-0 w-full max-w-[260px] md:max-w-[320px] aspect-[5/7] rounded-2xl overflow-hidden shadow-lg relative z-10"
+                >
+                  <img
+                    src={aboutImageUrl}
+                    alt="About Sphinx Weddings"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="w-full flex justify-center mt-2">
+                  <img src={decoration} alt="" className="w-[100px] h-6 ml-2 inline-block opacity-80" />
+                </div>
               </div>
+
+
               <div className="hidden md:block w-20" />
 
               {/* Floating Badge
@@ -486,6 +544,9 @@ const Index = () => {
                     </p>
                   </div>
                   <div className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full bg-white border border-[#f1e2d1] shadow-xl" />
+                </div>
+                <div className="w-full flex justify-center mt-4">
+                  <img src={decoration} alt="" className="w-[100px] h-6 inline-block opacity-80" />
                 </div>
               </div>
               <div className="text-center lg:text-left">
@@ -579,6 +640,7 @@ const Index = () => {
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-sm tracking-[0.4em] text-sage uppercase font-light">Recent Work</p>
+            <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
             <h2 className="text-3xl md:text-4xl font-sans text-primary leading-snug mt-4">
               A living reel of the tender, modern celebrations we design.
             </h2>
@@ -613,6 +675,7 @@ const Index = () => {
                     <div className="rounded-[20px] overflow-hidden h-[380px]">
                       <img src={item.image_url} alt={item.caption} className="w-full h-full object-cover" />
                     </div>
+                    {/* <img src={decoration} alt="" className="w-[200px] h-8 ml-2 inline-block opacity-80" /> */}
                     <div className="mt-4">
                       <p className="text-lg font-sans text-primary">
                         {item.caption}
@@ -635,7 +698,9 @@ const Index = () => {
       <section className="py-20 md:py-32 bg-[#f2f2f5]">
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="text-center max-w-3xl mx-auto mb-16">
+
             <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">Our Expertise</p>
+            <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
             <h2 className="text-4xl md:text-6xl font-sans font-light text-primary mb-6">
               Curated Celebrations
             </h2>
@@ -727,31 +792,15 @@ const Index = () => {
 
       {/* Testimonials Section */}
       <section className="py-20 md:py-32 bg-[#fffdf5]">
+
+        <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-primary mb-12">
+          Hear From Our Clients
+          <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
+        </h2>
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Sarah & Michael Johnson",
-                type: "Wedding Clients",
-                initials: "SJ",
-                testimonial:
-                  "SPHINX made our wedding day absolutely perfect. Every detail was thoughtfully planned and beautifully executed. We couldn't have asked for a better team to bring our vision to life.",
-              },
-              {
-                name: "David Thompson",
-                type: "Corporate Client",
-                initials: "DT",
-                testimonial:
-                  "Our corporate event turned out amazing. The professionalism and attention to detail exceeded our expectations. Highly recommend their services for any business event.",
-              },
-              {
-                name: "Maria Rodriguez",
-                type: "Baptism Client",
-                initials: "MR",
-                testimonial:
-                  "The baptism ceremony was beautiful and meaningful. They handled everything with such care and respect. Our family will cherish these memories forever.",
-              },
-            ].map((testimonial, index) => (
+            {displayedTestimonials.map((testimonial, index) => (
               <div
                 key={index}
                 className="observe-scroll opacity-0 bg-beige p-8 rounded-lg shadow-sm"
@@ -771,6 +820,19 @@ const Index = () => {
               </div>
             ))}
           </div>
+
+          {allTestimonials.length > 3 && (
+            <div className="flex justify-center mt-12">
+              <Button
+                variant="outline"
+                onClick={() => setShowAllTestimonials(!showAllTestimonials)}
+                className="rounded-full px-8 border-sage text-sage hover:bg-sage hover:text-white transition-colors"
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                {showAllTestimonials ? "Show Less" : "See More Testimonials"}
+              </Button>
+            </div>
+          )}
         </div>
         </div>
       </section>
@@ -779,8 +841,11 @@ const Index = () => {
       <section id="contact" className="py-20 md:py-32 bg-[#fdf2f2]">
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-primary mb-12">
+            <img src={decoration} alt="" className="w-[100px] h-6 inline-block opacity-80" />
             Get in Touch
+            <img src={decoration} alt="" className="w-[100px] h-6 inline-block opacity-80" />
           </h2>
+
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div className="observe-scroll opacity-0">
               <h3 className="text-2xl font-sans font-semibold text-primary mb-6">Contact Information</h3>
@@ -854,10 +919,13 @@ const Index = () => {
                 >
                   {formSubmitting ? "Sending..." : "Send Message"}
                 </Button>
+
               </form>
             </div>
           </div>
+
         </div>
+
         </div>
       </section>
 
