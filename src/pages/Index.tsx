@@ -839,10 +839,10 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20 md:py-32 bg-[#fdf2f2]">
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
-          <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-primary mb-12">
-            <img src={decoration} alt="" className="w-[100px] h-6 inline-block opacity-80" />
-            Get in Touch
-            <img src={decoration} alt="" className="w-[100px] h-6 inline-block opacity-80" />
+          <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-primary mb-12 flex items-center justify-center gap-2 md:gap-4">
+            <img src={decoration} alt="" className="w-[60px] md:w-[100px] h-4 md:h-6 opacity-80" />
+            <span className="shrink-0">Get in Touch</span>
+            <img src={decoration} alt="" className="w-[60px] md:w-[100px] h-4 md:h-6 opacity-80" />
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
