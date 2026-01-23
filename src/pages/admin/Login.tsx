@@ -17,6 +17,13 @@ const Login = () => {
         setLoading(true);
         setError("");
 
+        // Check for specific admin credentials
+        if (email === "sphinxweddings2025@gmail.com" && password === "mssphinx@2025") {
+            localStorage.setItem("sphinx_admin_auth", "true");
+            navigate("/admin");
+            return;
+        }
+
         const { error } = await supabase.auth.signInWithPassword({
             email,
             password,

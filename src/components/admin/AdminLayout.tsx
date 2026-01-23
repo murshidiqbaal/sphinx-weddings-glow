@@ -19,6 +19,7 @@ const AdminLayout = () => {
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
+        localStorage.removeItem("sphinx_admin_auth");
         navigate("/admin/login");
     };
 

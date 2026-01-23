@@ -836,6 +836,57 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Team Section */}
+      <section id="team" className="py-20 md:py-32 bg-[#e8f0e8]">
+        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+          <div className="text-center mb-16">
+            <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">The People</p>
+            <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
+            <h2 className="text-4xl md:text-6xl font-sans font-light text-primary mb-6">
+              Meet The Team
+            </h2>
+            <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto">
+              The creative minds and dedicated hearts behind every perfect celebration.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Murshid Iqbaal",
+                role: "Founder & Lead Planner",
+                image: getImage("about-image"),
+                bio: "With a passion for storytelling and an eye for detail, Murshid crafts weddings that are as unique as the couples he serves."
+              },
+              {
+                name: "Sarah Jenkins",
+                role: "Creative Director",
+                image: getImage("gallery-image-3"),
+                bio: "Bringing dreams to visual reality through color, texture, and light arrangement."
+              },
+              {
+                name: "David Chen",
+                role: "Event Coordinator",
+                image: getImage("gallery-image-6"),
+                bio: "Ensuring every logistical element flows seamlessly, so you can focus on the celebration."
+              }
+            ].map((member, index) => (
+              <div key={index} className="group text-center">
+                <div className="relative mb-6 inline-block">
+                  <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
+                    <img src={member.image} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                  </div>
+                </div>
+                <h3 className="text-2xl font-sans text-primary mb-2">{member.name}</h3>
+                <p className="text-[#b27b61] uppercase tracking-widest text-xs mb-4">{member.role}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mx-auto text-justify">{member.bio}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-20 md:py-32 bg-[#fdf2f2]">
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">

@@ -10,14 +10,16 @@ const ProtectedRoute = () => {
     useEffect(() => {
         const checkAuth = async () => {
             const { data: { session } } = await supabase.auth.getSession();
-            setAuthenticated(!!session);
+            const localAuth = localStorage.getItem("sphinx_admin_auth") === "true";
+            setAuthenticated(!!session || localAuth);
             setLoading(false);
         };
 
         checkAuth();
 
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setAuthenticated(!!session);
+            const localAuth = localStorage.getItem("sphinx_admin_auth") === "true";
+            setAuthenticated(!!session || localAuth);
         });
 
         return () => subscription.unsubscribe();
