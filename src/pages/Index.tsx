@@ -2,6 +2,7 @@ import landingImage from "@/assets/Gride 21.jpg.jpeg";
 import celebrationToast from "@/assets/imgs/IMG_7349.JPEG.jpg";
 import logo from "@/assets/logo/logo1.png";
 import decoration from "@/assets/logo/vector1.png";
+import CursorGlow from "@/components/CursorGlow";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -239,7 +240,13 @@ const Index = () => {
   const cardDescription = "Layered styling, thoughtful pacing, and a dedicated team on-site.";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div
+      className="min-h-screen w-full bg-fixed bg-cover bg-center font-sans text-foreground"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${landingImage}')`
+      }}
+    >
+      <CursorGlow />
       {/* Header backdrop-blur-sm border-b border-border/50 */}
       <header className="fixed top-0 left-0 right-0 z-50 ">
         <div className="container mx-auto px-4 py-4">
@@ -311,12 +318,6 @@ const Index = () => {
       <section
         id="home"
         className="relative h-screen flex items-center justify-center text-center mt-0"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('${heroImageUrl}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "scroll",
-        }}
       >
         <div className="container mx-auto px-4 z-10">
           <div
@@ -335,9 +336,9 @@ const Index = () => {
       </section>
 
       {/* Hero Transition Section */}
-      <section className="relative bg-[#fdf2f2] pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden z-20">
-        <div className="brush-edge" aria-hidden="true" />
-        <div className="container mx-auto px-4 relative"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+      <section className="relative bg-transparent pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden z-20">
+        {/* <div className="brush-edge" aria-hidden="true" /> */}
+        <div className="container mx-auto px-4 relative"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] items-center">
             <div className="relative w-full max-w-md mx-auto lg:mx-0">
               {/* Arched Image */}
@@ -355,12 +356,12 @@ const Index = () => {
             </div>
 
             <div className="text-center lg:text-left space-y-6">
-              <p className="text-xs uppercase tracking-[0.4em] text-[#b27b61] font-medium">Sphinx Weddings</p>
-              <h2 className="text-4xl md:text-6xl font-sans text-primary leading-none">
-                <span className="font-script text-[#b27b61] text-5xl md:text-7xl block mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>unique</span>
+              <p className="text-xs uppercase tracking-[0.4em] text-[#d6bba3] font-medium">Sphinx Weddings</p>
+              <h2 className="text-4xl md:text-6xl font-sans text-white leading-none">
+                <span className="font-script text-[#d6bba3] text-5xl md:text-7xl block mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>unique</span>
                 WEDDING
               </h2>
-              <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed text-justify">
+              <p className="text-base md:text-lg text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed text-justify">
                 Personalized wedding planning for couples livin&apos; it up in KCMO. From one-hour consults to full-scale
                 production, we create artful timelines, manage every vendor, and keep you present in every moment.
               </p>
@@ -376,15 +377,15 @@ const Index = () => {
       </section>
 
       {/* Intro Section */}
-      <section className="py-20 md:py-32 bg-[#e8f0e8]">
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+      <section className="py-20 md:py-32 bg-transparent">
+        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
           <div className="max-w-4xl mx-auto text-center observe-scroll opacity-0">
             <div
-              className="text-2xl md:text-4xl font-sans font-light text-primary mb-8 leading-tight"
+              className="text-2xl md:text-4xl font-sans font-light text-white mb-8 leading-tight"
               dangerouslySetInnerHTML={{ __html: introTitle }}
             />
             <div
-              className="text-base md:text-lg text-muted-foreground leading-relaxed text-justify"
+              className="text-base md:text-lg text-gray-200 leading-relaxed text-justify"
               dangerouslySetInnerHTML={{ __html: introDescription }}
             />
           </div>
@@ -395,24 +396,24 @@ const Index = () => {
       {/* About Section */}
       <section
         id="about"
-        className="relative py-12 md:py-32 bg-[#f9f5f0]"
+        className="relative py-12 md:py-32 bg-transparent"
       >
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[24px] md:rounded-[40px] shadow-sm p-6 md:p-10 border border-white/50">
+        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[24px] md:rounded-[40px] shadow-sm p-6 md:p-10 border border-white/10">
           <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-12 items-center">
             <div className="observe-scroll opacity-0 flex flex-col justify-center py-2 md:py-4">
-              <p className="text-[#b27b61] text-xl md:text-2xl mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              <p className="text-[#d6bba3] text-xl md:text-2xl mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
                 Who We Are
               </p>
 
               <div
-                className="text-xl md:text-3xl font-sans font-light text-primary mb-4 md:mb-6 leading-tight"
+                className="text-xl md:text-3xl font-sans font-light text-white mb-4 md:mb-6 leading-tight"
                 dangerouslySetInnerHTML={{ __html: aboutTitle }}
               />
 
 
-              <div className="w-12 h-[1px] bg-[#b27b61]/50 mb-4 md:mb-6" />
+              <div className="w-12 h-[1px] bg-[#d6bba3]/50 mb-4 md:mb-6" />
 
-              <div className="space-y-3 md:space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed text-justify mb-6 md:mb-8">
+              <div className="space-y-3 md:space-y-4 text-sm md:text-base text-gray-200 leading-relaxed text-justify mb-6 md:mb-8">
                 <p>
                   We believe that wedding planning should be as joyful as the celebration itself. Our approach is calm,
                   collaborative, and entirely focused on you. We take the time to understand your story, your style,
@@ -518,33 +519,33 @@ const Index = () => {
       </section> */}
 
       {/* Signature Planning Section */}
-      <section className="relative py-24 md:py-32 bg-[#fdf2f2] overflow-hidden">
+      <section className="relative py-24 md:py-32 bg-transparent overflow-hidden">
         <div
           className="absolute inset-x-0 top-0 h-24 opacity-50 pointer-events-none"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg width='1200' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80 C 150 20 350 20 500 80 C 650 140 850 140 1000 80 C 1100 40 1200 60 1200 60 L 1200 0 L 0 0 Z' fill='%23ffffff'/%3E%3C/svg%3E\")",
-            backgroundRepeat: "repeat-x",
-            backgroundSize: "1200px 120px",
-          }}
+        // style={{
+        //   backgroundImage:
+        //     "url(\"data:image/svg+xml,%3Csvg width='1200' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80 C 150 20 350 20 500 80 C 650 140 850 140 1000 80 C 1100 40 1200 60 1200 60 L 1200 0 L 0 0 Z' fill='%23ffffff'/%3E%3C/svg%3E\")",
+        //   backgroundRepeat: "repeat-x",
+        //   backgroundSize: "1200px 120px",
+        // }}
         />
-        <div className="container mx-auto px-4 relative"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+        <div className="container mx-auto px-4 relative"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-center">
             <div className="flex flex-col items-center lg:items-start gap-8">
               <div className="relative w-full max-w-sm">
                 <div className="absolute inset-0 bg-gradient-to-b from-[#fce7d4] to-[#f4d5bf] blur-[40px] opacity-50" />
-                <div className="relative bg-white/95 border border-[#f5e7db] rounded-[40px] shadow-[0_30px_80px_rgba(0,0,0,0.18)] overflow-hidden">
+                <div className="relative bg-black/30 backdrop-blur-md border border-white/10 rounded-[40px] shadow-[0_30px_80px_rgba(0,0,0,0.18)] overflow-hidden">
                   <div className="absolute -top-6 -left-6 bg-[#b27b61] text-white text-xs uppercase tracking-[0.4em] px-4 py-2 rounded-full shadow-lg">
                     Est. 2025
                   </div>
                   <img src={celebrationToast} alt="Celebration toast" className="w-full h-[360px] object-cover" />
                   <div className="px-8 py-6 text-center space-y-2">
                     <p className="text-xs uppercase tracking-[0.4em] text-sage">Signature curation</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-gray-300">
                       Layered textures, soft light, elevated palettes.
                     </p>
                   </div>
-                  <div className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full bg-white border border-[#f1e2d1] shadow-xl" />
+                  <div className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/10 shadow-xl" />
                 </div>
                 <div className="w-full flex justify-center mt-4">
                   <img src={decoration} alt="" className="w-[100px] h-6 inline-block opacity-80" />
@@ -553,18 +554,18 @@ const Index = () => {
               <div className="text-center lg:text-left">
                 <p className="uppercase tracking-[0.35em] text-xs text-sage">Sphinx</p>
                 {/* <p className="text-4xl md:text-5xl font-sans text-primary mt-2 whitespace-nowrap"></p> */}
-                <p className="text-3xl md:text-4xl font-sans text-primary mt-2">
-                  <span className="italic text-[#b27b61]">unique</span> wedding planning + coordination
+                <p className="text-3xl md:text-4xl font-sans text-white mt-2">
+                  <span className="italic text-[#d6bba3]">unique</span> wedding planning + coordination
                 </p>
               </div>
             </div>
             <div className="space-y-8">
               <div className="flex flex-col md:flex-row md:items-center gap-8">
                 <div className="space-y-4 max-w-lg">
-                  <p className="text-lg uppercase tracking-[0.2em] text-[#b27b61]">
+                  <p className="text-lg uppercase tracking-[0.2em] text-[#d6bba3]">
                     Personalized wedding planning for couples livin&apos; it up in KCMO
                   </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed text-justify">
+                  <p className="text-sm text-gray-200 leading-relaxed text-justify">
                     Whether you&apos;ve got it all together and just need a day-of coordinator or feel a little overwhelmed
                     and want help with all the things, we&apos;re here to help you celebrate your intimate Sphinx wedding in
                     a big way.
@@ -600,8 +601,8 @@ const Index = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 md:py-32 bg-[#e8f0e8]">
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+      <section className="py-20 md:py-32 bg-transparent">
+        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -622,13 +623,13 @@ const Index = () => {
             ].map((value, index) => (
               <div
                 key={index}
-                className="observe-scroll opacity-0 text-center p-8 bg-background rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                className="observe-scroll opacity-0 text-center p-8 bg-black/20 rounded-lg shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="flex justify-center mb-6">{value.icon}</div>
-                <h3 className="text-xl md:text-2xl font-sans font-semibold text-primary mb-4">
+                <h3 className="text-xl md:text-2xl font-sans font-semibold text-white mb-4">
                   {value.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-center">{value.description}</p>
+                <p className="text-gray-200 leading-relaxed text-center">{value.description}</p>
               </div>
             ))}
           </div>
@@ -637,15 +638,15 @@ const Index = () => {
       </section>
 
       {/* Recent Works Section */}
-      <section id="our-works" className="py-20 md:py-32 bg-[#f9f5f0]">
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+      <section id="our-works" className="py-20 md:py-32 bg-transparent">
+        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-sm tracking-[0.4em] text-sage uppercase font-light">Recent Work</p>
             <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-            <h2 className="text-2xl md:text-3xl font-sans text-primary leading-snug mt-4">
+            <h2 className="text-2xl md:text-3xl font-sans text-white leading-snug mt-4">
               A living reel of the tender, modern celebrations we design.
             </h2>
-            <p className="text-muted-foreground text-base leading-relaxed mt-4 text-center">
+            <p className="text-gray-200 text-base leading-relaxed mt-4 text-center">
               Drift through a continuous ribbon of moments from our gallery. Each card is a real couple, a real story,
               and a glimpse into the ambience we create before mapping out your service suite below.
             </p>
@@ -671,18 +672,18 @@ const Index = () => {
               {finalWorks.map((item, index) => (
                 <SwiperSlide key={`${item.id}-${index}`}>
                   <div
-                    className="bg-[#fffaf6] rounded-[28px] p-4 border border-[#f0e2d5] h-full"
+                    className="bg-black/40 backdrop-blur-md rounded-[28px] p-4 border border-white/10 h-full"
                   >
                     <div className="rounded-[20px] overflow-hidden h-[380px]">
                       <img src={item.image_url} alt={item.caption} className="w-full h-full object-cover" />
                     </div>
                     {/* <img src={decoration} alt="" className="w-[200px] h-8 ml-2 inline-block opacity-80" /> */}
                     <div className="mt-4">
-                      <p className="text-lg font-sans text-primary">
+                      <p className="text-lg font-sans text-white">
                         {item.caption}
                       </p>
                       <p className={`${item.description?.length > 80 ? "text-xs" : item.description?.length > 40 ? "text-sm" : "text-base"
-                        } text-muted-foreground text-justify`}>
+                        } text-gray-300 text-justify`}>
                         {item.description}
                       </p>
                     </div>
@@ -696,13 +697,13 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 md:py-32 bg-[#f2f2f5]">
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+      <section className="py-20 md:py-32 bg-transparent">
+        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
           <div className="text-center max-w-3xl mx-auto mb-16">
 
             <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">Our Expertise</p>
             <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-            <h2 className="text-3xl md:text-5xl font-sans font-light text-primary mb-6">
+            <h2 className="text-3xl md:text-5xl font-sans font-light text-white mb-6">
               Curated Celebrations
             </h2>
             {/* <p className="text-muted-foreground text-lg font-light text-justify">
@@ -792,30 +793,30 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 md:py-32 bg-[#fffdf5]">
+      <section className="py-20 md:py-32 bg-transparent">
 
-        <h2 className="text-2xl md:text-4xl font-sans font-light text-center text-primary mb-12">
+        <h2 className="text-2xl md:text-4xl font-sans font-light text-center text-white mb-12">
           Hear From Our Clients
           <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
         </h2>
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
 
           <div className="grid md:grid-cols-3 gap-8">
             {displayedTestimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="observe-scroll opacity-0 bg-beige p-8 rounded-lg shadow-sm"
+                className="observe-scroll opacity-0 bg-black/40 p-8 rounded-lg shadow-sm border border-white/5"
               >
                 <div className="flex items-center mb-6">
                   <div className="w-14 h-14 rounded-full bg-sage flex items-center justify-center text-white font-semibold text-lg mr-4">
                     {testimonial.initials}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary">{testimonial.name}</h4>
-                    <p className="text-sm text-muted-foreground">{testimonial.type}</p>
+                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                    <p className="text-sm text-gray-300">{testimonial.type}</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground leading-relaxed italic text-justify">
+                <p className="text-gray-200 leading-relaxed italic text-justify">
                   "{testimonial.testimonial}"
                 </p>
               </div>
@@ -839,12 +840,12 @@ const Index = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-20 md:py-32 bg-[#e8f0e8]">
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
+      <section id="team" className="py-20 md:py-32 bg-transparent">
+        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
           <div className="text-center mb-16">
             <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">The People</p>
             <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-            <h2 className="text-4xl md:text-6xl font-sans font-light text-primary mb-6">
+            <h2 className="text-4xl md:text-6xl font-sans font-light text-white mb-6">
               Meet The Team
             </h2>
             <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto">
@@ -879,9 +880,9 @@ const Index = () => {
                     <img src={member.image} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
                   </div>
                 </div>
-                <h3 className="text-2xl font-sans text-primary mb-2">{member.name}</h3>
-                <p className="text-[#b27b61] uppercase tracking-widest text-xs mb-4">{member.role}</p>
-                <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mx-auto text-justify">{member.bio}</p>
+                <h3 className="text-2xl font-sans text-white mb-2">{member.name}</h3>
+                <p className="text-[#d6bba3] uppercase tracking-widest text-xs mb-4">{member.role}</p>
+                <p className="text-gray-200 text-sm leading-relaxed max-w-sm mx-auto text-justify">{member.bio}</p>
               </div>
             ))}
           </div>
@@ -890,9 +891,9 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 md:py-32 bg-[#fdf2f2]">
-        <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
-          <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-primary mb-12 flex items-center justify-center gap-2 md:gap-4">
+      <section id="contact" className="py-20 md:py-32 bg-transparent">
+        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+          <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-white mb-12 flex items-center justify-center gap-2 md:gap-4">
             <img src={decoration} alt="" className="w-[60px] md:w-[100px] h-4 md:h-6 opacity-80" />
             <span className="shrink-0">Get in Touch</span>
             <img src={decoration} alt="" className="w-[60px] md:w-[100px] h-4 md:h-6 opacity-80" />
@@ -900,15 +901,15 @@ const Index = () => {
 
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div className="observe-scroll opacity-0">
-              <h3 className="text-2xl font-sans font-semibold text-primary mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-sans font-semibold text-white mb-6">Contact Information</h3>
               <div className="space-y-4">
-                <p className="text-muted-foreground">
+                <p className="text-gray-200">
                   <strong>Email:</strong> <span dangerouslySetInnerHTML={{ __html: contactEmail }} />
                 </p>
-                <p className="text-muted-foreground">
+                <p className="text-gray-200">
                   <strong>Phone:</strong> <span dangerouslySetInnerHTML={{ __html: contactPhone }} />
                 </p>
-                <p className="text-muted-foreground">
+                <p className="text-gray-200">
                   <strong>Address:</strong> <span dangerouslySetInnerHTML={{ __html: contactAddress }} />
                 </p>
                 <div className="flex gap-4 mt-6">
@@ -925,7 +926,7 @@ const Index = () => {
               <form className="space-y-4" onSubmit={handleFormSubmit}>
                 <Input
                   placeholder="Your Name"
-                  className="bg-background"
+                  className="bg-black/20 text-white border-white/20 placeholder:text-gray-400"
                   name="name"
                   value={formData.name}
                   onChange={handleFormChange}
@@ -934,26 +935,26 @@ const Index = () => {
                 <Input
                   type="email"
                   placeholder="Your Email"
-                  className="bg-background"
+                  className="bg-black/20 text-white border-white/20 placeholder:text-gray-400"
                   name="email"
                   value={formData.email}
                   onChange={handleFormChange}
                   required
                 />
                 <select
-                  className="w-full px-3 py-2 bg-background border border-input rounded-md text-sm"
+                  className="w-full px-3 py-2 bg-black/20 border border-white/20 rounded-md text-sm text-white"
                   name="service"
                   value={formData.service}
                   onChange={handleFormChange}
                 >
-                  <option value="wedding-planning">Wedding Planning</option>
-                  <option value="baptism">Baptism & Christening</option>
-                  <option value="corporate">Corporate Events</option>
+                  <option value="wedding-planning" className="bg-gray-800">Wedding Planning</option>
+                  <option value="baptism" className="bg-gray-800">Baptism & Christening</option>
+                  <option value="corporate" className="bg-gray-800">Corporate Events</option>
                 </select>
                 <Textarea
                   placeholder="Your Message"
                   rows={5}
-                  className="bg-background"
+                  className="bg-black/20 text-white border-white/20 placeholder:text-gray-400"
                   name="message"
                   value={formData.message}
                   onChange={handleFormChange}

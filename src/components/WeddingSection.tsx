@@ -8,16 +8,16 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     return (
-        <section className="py-20 md:py-32 bg-[#fffdf5] overflow-hidden">
+        <section className="py-20 md:py-32 bg-transparent overflow-hidden">
             <div className="container mx-auto px-4 text-center mb-12">
-                <div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-10 border border-white/50 inline-block">
+                <div className="bg-black/30 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-10 border border-white/10 inline-block">
                     <p
-                        className="text-4xl md:text-6xl text-[#8b6247] mb-2"
+                        className="text-4xl md:text-6xl text-white mb-2"
                         style={{ fontFamily: "'Cormorant Garamond', serif" }}
                     >
                         We're getting married!
                     </p>
-                    <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto font-light tracking-wide">
+                    <p className="text-sm md:text-base text-gray-200 max-w-xl mx-auto font-light tracking-wide">
                         A glimpse into our journey and the moments we cherish.
                     </p>
                 </div>
@@ -40,15 +40,15 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
                                     transform: `rotate(${index % 2 === 0 ? '2deg' : '-2deg'})`,
                                 }}
                             >
-                                <div className="bg-white p-4 pb-12 shadow-lg rounded-sm w-[280px] md:w-[320px] border border-gray-100">
-                                    <div className="aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
+                                <div className="bg-black/30 backdrop-blur-md p-4 pb-12 shadow-lg rounded-sm w-[280px] md:w-[320px] border border-white/10">
+                                    <div className="aspect-[4/5] overflow-hidden bg-gray-800 mb-4">
                                         <img
                                             src={src}
                                             alt={caption}
                                             className="w-full h-full object-cover filter sepia-[0.2] contrast-[1.05]"
                                         />
                                     </div>
-                                    <div className="font-handwriting text-center text-gray-500 text-sm transform -rotate-1">
+                                    <div className="font-handwriting text-center text-gray-300 text-sm transform -rotate-1">
                                         {caption}
                                     </div>
                                 </div>
