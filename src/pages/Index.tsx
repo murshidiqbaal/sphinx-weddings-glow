@@ -338,7 +338,7 @@ const Index = () => {
       {/* Hero Transition Section */}
       <section className="relative bg-transparent pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden z-20">
         {/* <div className="brush-edge" aria-hidden="true" /> */}
-        <div className="container mx-auto px-4 relative"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+        <div className="container mx-auto px-4 relative"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] items-center">
             <div className="relative w-full max-w-md mx-auto lg:mx-0">
               {/* Arched Image */}
@@ -378,7 +378,7 @@ const Index = () => {
 
       {/* Intro Section */}
       <section className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <div className="max-w-4xl mx-auto text-center observe-scroll opacity-0">
             <div
               className="text-2xl md:text-4xl font-sans font-light text-white mb-8 leading-tight"
@@ -398,7 +398,7 @@ const Index = () => {
         id="about"
         className="relative py-12 md:py-32 bg-transparent"
       >
-        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[24px] md:rounded-[40px] shadow-sm p-6 md:p-10 border border-white/10">
+        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[24px] md:rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-6 md:p-10 border border-white/20">
           <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-12 items-center">
             <div className="observe-scroll opacity-0 flex flex-col justify-center py-2 md:py-4">
               <p className="text-[#d6bba3] text-xl md:text-2xl mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
@@ -529,7 +529,7 @@ const Index = () => {
         //   backgroundSize: "1200px 120px",
         // }}
         />
-        <div className="container mx-auto px-4 relative"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+        <div className="container mx-auto px-4 relative"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-center">
             <div className="flex flex-col items-center lg:items-start gap-8">
               <div className="relative w-full max-w-sm">
@@ -602,7 +602,7 @@ const Index = () => {
 
       {/* Values Section */}
       <section className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -639,7 +639,7 @@ const Index = () => {
 
       {/* Recent Works Section */}
       <section id="our-works" className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-sm tracking-[0.4em] text-sage uppercase font-light">Recent Work</p>
             <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
@@ -672,7 +672,7 @@ const Index = () => {
               {finalWorks.map((item, index) => (
                 <SwiperSlide key={`${item.id}-${index}`}>
                   <div
-                    className="bg-black/40 backdrop-blur-md rounded-[28px] p-4 border border-white/10 h-full"
+                    className="bg-black/20 backdrop-blur-md rounded-[28px] p-4 border border-white/10 h-full"
                   >
                     <div className="rounded-[20px] overflow-hidden h-[380px]">
                       <img src={item.image_url} alt={item.caption} className="w-full h-full object-cover" />
@@ -698,7 +698,7 @@ const Index = () => {
 
       {/* Services Section */}
       <section className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <div className="text-center max-w-3xl mx-auto mb-16">
 
             <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">Our Expertise</p>
@@ -799,13 +799,14 @@ const Index = () => {
           Hear From Our Clients
           <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
         </h2>
-        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+
+        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
 
           <div className="grid md:grid-cols-3 gap-8">
             {displayedTestimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="observe-scroll opacity-0 bg-black/40 p-8 rounded-lg shadow-sm border border-white/5"
+                className="observe-scroll opacity-0 bg-black/20 backdrop-blur-md p-8 rounded-lg shadow-sm border border-white/10"
               >
                 <div className="flex items-center mb-6">
                   <div className="w-14 h-14 rounded-full bg-sage flex items-center justify-center text-white font-semibold text-lg mr-4">
@@ -841,7 +842,7 @@ const Index = () => {
 
       {/* Team Section */}
       <section id="team" className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <div className="text-center mb-16">
             <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">The People</p>
             <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
@@ -892,7 +893,7 @@ const Index = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/40 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-12 border border-white/10">
+        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-white mb-12 flex items-center justify-center gap-2 md:gap-4">
             <img src={decoration} alt="" className="w-[60px] md:w-[100px] h-4 md:h-6 opacity-80" />
             <span className="shrink-0">Get in Touch</span>
@@ -999,7 +1000,7 @@ const Index = () => {
           <p className="text-sm text-white/60">© 2025 SphinxWeddings. All rights reserved.</p>
         </div>
       </footer>
-    </div>
+    </div >
   );
 };
 
