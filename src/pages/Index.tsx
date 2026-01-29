@@ -1,3 +1,4 @@
+import landingImage from "@/assets/Gride 21.jpg.jpeg";
 import celebrationToast from "@/assets/imgs/IMG_7349.JPEG.jpg";
 import logo from "@/assets/logo/logo1.png";
 import decoration from "@/assets/logo/vector1.png";
@@ -47,7 +48,8 @@ const Index = () => {
 
   const heroTitle = getText("hero-title");
   const heroSubtitle = getText("hero-subtitle");
-  const heroImageUrl = getImage("hero-image");
+  // const heroImageUrl = getImage("hero-image");
+  const heroImageUrl = landingImage;
   const introTitle = getText("intro-title");
   const introDescription = getText("intro-description");
   const aboutTitle = getText("about-title");
@@ -246,7 +248,7 @@ const Index = () => {
               <img
                 src={logo}
                 alt="Logo"
-                className={`h-16 transition-all duration-300 ${headerDark ? "filter-none" : "filter brightness-0 invert"}`}
+                className="h-16 transition-all duration-300"
               />
               <span className={`text-xl font-bold ${headerDark ? "text-foreground" : "text-white"} transition-colors`}>
                 {getText("site-title")}
@@ -318,7 +320,7 @@ const Index = () => {
       >
         <div className="container mx-auto px-4 z-10">
           <div
-            className="text-4xl md:text-6xl lg:text-7xl font-sans font-light-bold text-white mb-6 leading-tight"
+            className="text-3xl md:text-5xl lg:text-6xl font-sans font-light-bold text-white mb-6 leading-tight"
             dangerouslySetInnerHTML={{ __html: heroTitle }}
           />
           <div
@@ -354,8 +356,8 @@ const Index = () => {
 
             <div className="text-center lg:text-left space-y-6">
               <p className="text-xs uppercase tracking-[0.4em] text-[#b27b61] font-medium">Sphinx Weddings</p>
-              <h2 className="text-5xl md:text-7xl font-sans text-primary leading-none">
-                <span className="font-script text-[#b27b61] text-6xl md:text-8xl block mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>unique</span>
+              <h2 className="text-4xl md:text-6xl font-sans text-primary leading-none">
+                <span className="font-script text-[#b27b61] text-5xl md:text-7xl block mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>unique</span>
                 WEDDING
               </h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed text-justify">
@@ -363,7 +365,7 @@ const Index = () => {
                 production, we create artful timelines, manage every vendor, and keep you present in every moment.
               </p>
               <div className="pt-4">
-                <Button className="bg-[#b27b61] hover:bg-[#a06d52] text-white px-10 py-6 rounded-full text-sm uppercase tracking-widest transition-all hover:shadow-lg hover:-translate-y-1">
+                <Button variant="outline" className="border-2 border-[#b27b61] text-[#b27b61] hover:bg-[#b27b61] hover:text-white px-10 py-6 rounded-full text-sm uppercase tracking-widest transition-all hover:shadow-lg hover:-translate-y-1">
                   Let&apos;s create magic
                 </Button>
               </div>
@@ -378,7 +380,7 @@ const Index = () => {
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-12 border border-white/50">
           <div className="max-w-4xl mx-auto text-center observe-scroll opacity-0">
             <div
-              className="text-3xl md:text-5xl font-sans font-light text-primary mb-8 leading-tight"
+              className="text-2xl md:text-4xl font-sans font-light text-primary mb-8 leading-tight"
               dangerouslySetInnerHTML={{ __html: introTitle }}
             />
             <div
@@ -398,12 +400,12 @@ const Index = () => {
         <div className="container mx-auto px-4"><div className="bg-white/60 backdrop-blur-md rounded-[24px] md:rounded-[40px] shadow-sm p-6 md:p-10 border border-white/50">
           <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-12 items-center">
             <div className="observe-scroll opacity-0 flex flex-col justify-center py-2 md:py-4">
-              <p className="text-[#b27b61] text-2xl md:text-3xl mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              <p className="text-[#b27b61] text-xl md:text-2xl mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
                 Who We Are
               </p>
 
               <div
-                className="text-2xl md:text-4xl font-sans font-light text-primary mb-4 md:mb-6 leading-tight"
+                className="text-xl md:text-3xl font-sans font-light text-primary mb-4 md:mb-6 leading-tight"
                 dangerouslySetInnerHTML={{ __html: aboutTitle }}
               />
 
@@ -551,7 +553,7 @@ const Index = () => {
               <div className="text-center lg:text-left">
                 <p className="uppercase tracking-[0.35em] text-xs text-sage">Sphinx</p>
                 {/* <p className="text-4xl md:text-5xl font-sans text-primary mt-2 whitespace-nowrap"></p> */}
-                <p className="text-4xl md:text-5xl font-sans text-primary mt-2">
+                <p className="text-3xl md:text-4xl font-sans text-primary mt-2">
                   <span className="italic text-[#b27b61]">unique</span> wedding planning + coordination
                 </p>
               </div>
@@ -567,7 +569,7 @@ const Index = () => {
                     and want help with all the things, we&apos;re here to help you celebrate your intimate Sphinx wedding in
                     a big way.
                   </p>
-                  <Button className="bg-[#b27b61] hover:bg-[#a06d52] text-white px-8 py-6 rounded-full w-fit">
+                  <Button variant="outline" className="border-2 border-[#b27b61] text-[#b27b61] hover:bg-[#b27b61] hover:text-white px-8 py-6 rounded-full w-fit">
                     Let&apos;s create something incredible
                   </Button>
                 </div>
@@ -640,7 +642,7 @@ const Index = () => {
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-sm tracking-[0.4em] text-sage uppercase font-light">Recent Work</p>
             <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-            <h2 className="text-3xl md:text-4xl font-sans text-primary leading-snug mt-4">
+            <h2 className="text-2xl md:text-3xl font-sans text-primary leading-snug mt-4">
               A living reel of the tender, modern celebrations we design.
             </h2>
             <p className="text-muted-foreground text-base leading-relaxed mt-4 text-center">
@@ -700,7 +702,7 @@ const Index = () => {
 
             <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">Our Expertise</p>
             <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-            <h2 className="text-4xl md:text-6xl font-sans font-light text-primary mb-6">
+            <h2 className="text-3xl md:text-5xl font-sans font-light text-primary mb-6">
               Curated Celebrations
             </h2>
             {/* <p className="text-muted-foreground text-lg font-light text-justify">
@@ -792,7 +794,7 @@ const Index = () => {
       {/* Testimonials Section */}
       <section className="py-20 md:py-32 bg-[#fffdf5]">
 
-        <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-primary mb-12">
+        <h2 className="text-2xl md:text-4xl font-sans font-light text-center text-primary mb-12">
           Hear From Our Clients
           <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
         </h2>
@@ -964,7 +966,8 @@ const Index = () => {
                 )}
                 <Button
                   type="submit"
-                  className="w-full bg-sage hover:bg-sage/90 text-white"
+                  variant="outline"
+                  className="w-full border-2 border-sage text-sage hover:bg-sage hover:text-white"
                   disabled={formSubmitting}
                 >
                   {formSubmitting ? "Sending..." : "Send Message"}

@@ -11,8 +11,10 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* SphinxWeddings Color Palette */
-    --background: 60 20% 98%; /* #fafaf8 - Soft cream white */
-    --foreground: 108 16% 20%; /* #2d3d2a - Deep forest */
+    --background: 60 20% 98%;
+    /* #fafaf8 - Soft cream white */
+    --foreground: 108 16% 20%;
+    /* #2d3d2a - Deep forest */
 
     --card: 60 20% 98%;
     --card-foreground: 108 16% 20%;
@@ -20,16 +22,21 @@ All colors MUST be HSL.
     --popover: 60 20% 98%;
     --popover-foreground: 108 16% 20%;
 
-    --primary: 108 16% 20%; /* Deep forest green */
-    --primary-foreground: 60 20% 98%; /* Cream white */
+    --primary: 108 16% 20%;
+    /* Deep forest green */
+    --primary-foreground: 60 20% 98%;
+    /* Cream white */
 
-    --secondary: 96 19% 54%; /* #859a77 - Sage green */
+    --secondary: 96 19% 54%;
+    /* #859a77 - Sage green */
     --secondary-foreground: 60 20% 98%;
 
-    --muted: 40 14% 90%; /* #e8e6e3 - Light beige */
+    --muted: 40 14% 90%;
+    /* #e8e6e3 - Light beige */
     --muted-foreground: 108 16% 35%;
 
-    --accent: 96 19% 54%; /* Sage green */
+    --accent: 96 19% 54%;
+    /* Sage green */
     --accent-foreground: 60 20% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -40,7 +47,7 @@ All colors MUST be HSL.
     --ring: 96 19% 54%;
 
     --radius: 0.5rem;
-    
+
     /* Custom wedding theme colors */
     --cream: 60 20% 98%;
     --beige: 40 14% 90%;
@@ -103,8 +110,13 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-sans;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-sans;
   }
 }
@@ -113,42 +125,47 @@ All colors MUST be HSL.
   .animate-fade-in {
     animation: fadeIn 0.8s ease-out forwards;
   }
-  
+
   .animate-slide-up {
     animation: slideUp 0.8s ease-out forwards;
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  
+
   @keyframes slideUp {
     from {
       opacity: 0;
       transform: translateY(30px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  
+
   @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-10px);
     }
   }
-  
+
   .animate-bounce-slow {
     animation: bounce 2s ease-in-out infinite;
   }
@@ -157,6 +174,7 @@ All colors MUST be HSL.
     from {
       transform: translateX(0);
     }
+
     to {
       transform: translateX(-50%);
     }
@@ -170,6 +188,7 @@ All colors MUST be HSL.
     from {
       transform: translateX(-50%);
     }
+
     to {
       transform: translateX(0);
     }
@@ -211,8 +230,8 @@ All colors MUST be HSL.
   }
 
   .brush-edge-white {
-     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100H1440V0C1440 0 1380 20 1320 30C1260 40 1200 20 1140 10C1080 0 1020 30 960 40C900 50 840 20 780 10C720 0 660 30 600 40C540 50 480 20 420 10C360 0 300 30 240 40C180 50 120 20 60 10C30 5 15 2 0 0V100Z' fill='white'/%3E%3C/svg%3E");
-     height: 100px;
-     top: -99px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100H1440V0C1440 0 1380 20 1320 30C1260 40 1200 20 1140 10C1080 0 1020 30 960 40C900 50 840 20 780 10C720 0 660 30 600 40C540 50 480 20 420 10C360 0 300 30 240 40C180 50 120 20 60 10C30 5 15 2 0 0V100Z' fill='white'/%3E%3C/svg%3E");
+    height: 100px;
+    top: -99px;
   }
 }

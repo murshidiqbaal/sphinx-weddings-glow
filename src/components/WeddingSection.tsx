@@ -13,7 +13,7 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
                 <div className="bg-white/60 backdrop-blur-md rounded-[40px] shadow-sm p-8 md:p-10 border border-white/50 inline-block">
                     <p
                         className="text-4xl md:text-6xl text-[#8b6247] mb-2"
-                        style={{ fontFamily: "'Great Vibes', cursive" }}
+                        style={{ fontFamily: "'Cormorant Garamond', serif" }}
                     >
                         We're getting married!
                     </p>
