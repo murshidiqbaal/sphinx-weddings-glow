@@ -1,3 +1,4 @@
+import mobileBg from "@/assets/ben wed0234.JPG.jpeg";
 import landingImage from "@/assets/Gride 21.jpg.jpeg";
 import celebrationToast from "@/assets/imgs/IMG_7349.JPEG.jpg";
 import logo from "@/assets/logo/logo1.png";
@@ -268,13 +269,26 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full font-sans text-foreground relative selection:bg-sage/30">
       {/* Background Layer */}
+      {/* Background Layer - Desktop */}
       <div
-        className={`fixed inset-0 z-[-1] bg-cover bg-center transition-all duration-1000 transform scale-105 ${headerDark ? "blur-md" : "blur-0"}`}
+        className={`hidden md:block fixed inset-0 z-[-1] bg-cover bg-center transition-all duration-1000 transform scale-105 ${headerDark ? "blur-md" : "blur-0"}`}
         style={{
           backgroundImage: `
             radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 50%),
             linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.8) 100%),
             url('${landingImage}')
+          `
+        }}
+      />
+
+      {/* Background Layer - Mobile */}
+      <div
+        className={`md:hidden fixed inset-0 z-[-1] bg-cover bg-center transition-all duration-1000 transform scale-105 ${headerDark ? "blur-md" : "blur-0"}`}
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 50%),
+            linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.8) 100%),
+            url('${mobileBg}')
           `
         }}
       />
