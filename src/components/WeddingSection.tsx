@@ -10,7 +10,8 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
     return (
         <section className="py-20 md:py-32 bg-transparent overflow-hidden">
             <div className="container mx-auto px-4 text-center mb-12">
-                <div className="bg-black/30 backdrop-blur-xl rounded-[40px] shadow-sm p-8 md:p-10 border border-white/10 inline-block">
+                <div className="relative inline-block py-4">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[150%] bg-[radial-gradient(circle,rgba(255,255,255,0.15)_0%,transparent_70%)] blur-2xl -z-10" />
                     <p
                         className="text-4xl md:text-6xl text-white mb-2"
                         style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -21,6 +22,7 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
                         A glimpse into our journey and the moments we cherish.
                     </p>
                 </div>
+
             </div>
 
             <div className="relative w-full overflow-hidden">
@@ -40,15 +42,15 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
                                     transform: `rotate(${index % 2 === 0 ? '2deg' : '-2deg'})`,
                                 }}
                             >
-                                <div className="bg-black/30 backdrop-blur-md p-4 pb-12 shadow-lg rounded-sm w-[280px] md:w-[320px] border border-white/10">
-                                    <div className="aspect-[4/5] overflow-hidden bg-gray-800 mb-4">
+                                <div className="bg-white/[0.02] backdrop-blur-md p-4 pb-12 shadow-lg rounded-sm w-[280px] md:w-[320px] border border-white/10">
+                                    <div className="aspect-[4/5] overflow-hidden bg-white/5 mb-4">
                                         <img
                                             src={src}
                                             alt={caption}
                                             className="w-full h-full object-cover filter sepia-[0.2] contrast-[1.05]"
                                         />
                                     </div>
-                                    <div className="font-handwriting text-center text-gray-300 text-sm transform -rotate-1">
+                                    <div className="font-handwriting text-center text-gray-200 text-sm transform -rotate-1">
                                         {caption}
                                     </div>
                                 </div>
@@ -57,9 +59,7 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
                     })}
                 </div>
 
-                {/* Gradient masks for smooth fade at edges */}
-                <div className="absolute inset-y-0 left-0 w-12 md:w-32 bg-gradient-to-r from-[#fffdf5] to-transparent pointer-events-none z-10" />
-                <div className="absolute inset-y-0 right-0 w-12 md:w-32 bg-gradient-to-l from-[#fffdf5] to-transparent pointer-events-none z-10" />
+                {/* Gradient masks removed for transparency */}
             </div>
         </section>
     );

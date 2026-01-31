@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./styles/glass-theme.css";
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
@@ -109,6 +111,16 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans;
+    cursor: none;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    cursor: none;
   }
 
   h1,

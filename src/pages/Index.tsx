@@ -89,6 +89,32 @@ const Index = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const cards = document.querySelectorAll(".glass-card");
+      cards.forEach((card) => {
+        const item = card as HTMLElement;
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Calculate rotation for tilt effect (max 2 degrees for subtle movement)
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -2; // Inverted for natural feel
+        const rotateY = ((x - centerX) / centerX) * 2;
+
+        item.style.setProperty("--mouse-x", `${x}px`);
+        item.style.setProperty("--mouse-y", `${y}px`);
+        item.style.setProperty("--rotate-x", `${rotateX}deg`);
+        item.style.setProperty("--rotate-y", `${rotateY}deg`);
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -240,42 +266,61 @@ const Index = () => {
   const cardDescription = "Layered styling, thoughtful pacing, and a dedicated team on-site.";
 
   return (
-    <div
-      className="min-h-screen w-full bg-fixed bg-cover bg-center font-sans text-foreground"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${landingImage}')`
-      }}
-    >
+    <div className="min-h-screen w-full font-sans text-foreground relative selection:bg-sage/30">
+      {/* Background Layer */}
+      <div
+        className={`fixed inset-0 z-[-1] bg-cover bg-center transition-all duration-1000 transform scale-105 ${headerDark ? "blur-md" : "blur-0"}`}
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 50%),
+            linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.8) 100%),
+            url('${landingImage}')
+          `
+        }}
+      />
+
       <CursorGlow />
+      <div className="bg-noise" />
+      {/* Accent Blobs */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow" />
+        <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] mix-blend-screen animate-pulse-slow delay-700" />
+        <div className="absolute top-[40%] left-[60%] w-[300px] h-[300px] bg-pink-500/10 rounded-full blur-[80px] mix-blend-screen animate-pulse-slow delay-1000" />
+      </div>
       {/* Header backdrop-blur-sm border-b border-border/50 */}
-      <header className="fixed top-0 left-0 right-0 z-50 ">
-        <div className="container mx-auto px-4 py-4">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerDark || mobileMenuOpen ? 'py-2' : 'py-4'}`}>
+        <div className={`container mx-auto px-4 transition-all duration-300 ${headerDark ? 'bg-black/20 backdrop-blur-md rounded-full mt-2 py-2 border border-white/10 shadow-lg max-w-5xl' : ''}`}>
           <div className="flex justify-between items-center">
-            <Link to="/" onClick={() => scrollToSection("home")} className="flex items-center gap-2 drop-shadow-xl">
+            <Link to="/" onClick={() => scrollToSection("home")} className="flex items-center gap-2 drop-shadow-xl pl-2">
               <img
                 src={logo}
                 alt="Logo"
-                className="h-16 transition-all duration-300"
+                className="h-12 transition-all duration-300 brightness-0 invert"
               />
-              <span className={`text-xl font-bold ${headerDark ? "text-foreground" : "text-white"} transition-colors`}>
-                {getText("site-title")}
-              </span>
+              <div className="flex flex-col items-center">
+                <span className="text-xl font-bold tracking-[0.2em] leading-none text-white transition-colors uppercase">
+                  Sphinx
+                </span>
+                <span className="text-[6px] tracking-widest font-light text-white/80 transition-colors uppercase">
+                  Events & Wedding Planning
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex gap-8">
+            <nav className="hidden md:flex gap-8 pr-4">
               {["home", "our-works", "about", "contact"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className={`text-sm font-medium ${headerDark ? "text-foreground" : "text-white"} hover:text-sage transition-colors capitalize`}
+                  className="text-xs font-medium text-white/90 hover:text-white hover:tracking-widest transition-all duration-300 uppercase tracking-wide"
                 >
                   {item === "our-works" ? "Our Works" : item}
                 </button>
               ))}
               <Link
                 to="/gallery"
-                className={`text-sm font-medium ${headerDark ? "text-foreground" : "text-white"} hover:text-sage transition-colors`}
+                className="text-xs font-medium text-white/90 hover:text-white hover:tracking-widest transition-all duration-300 uppercase tracking-wide"
               >
                 Gallery
               </Link>
@@ -283,7 +328,7 @@ const Index = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className={`md:hidden ${headerDark ? "text-foreground" : "text-white"} transition-colors`}
+              className="md:hidden text-white transition-colors pr-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -292,12 +337,12 @@ const Index = () => {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <nav className="md:hidden mt-4 pb-4 flex flex-col gap-4">
+            <nav className="md:hidden mt-4 pb-4 flex flex-col gap-4 pl-2">
               {["home", "our-works", "about", "contact"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className={`text-left text-sm font-medium ${headerDark ? "text-foreground" : "text-white"} hover:text-sage transition-colors capitalize`}
+                  className="text-left text-sm font-medium text-white hover:text-sage transition-colors capitalize"
                 >
                   {item === "our-works" ? "Our Works" : item}
                 </button>
@@ -305,7 +350,7 @@ const Index = () => {
               <Link
                 to="/gallery"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-left text-sm font-medium ${headerDark ? "text-foreground" : "text-white"} hover:text-sage transition-colors`}
+                className="text-left text-sm font-medium text-white hover:text-sage transition-colors"
               >
                 Gallery
               </Link>
@@ -321,7 +366,7 @@ const Index = () => {
       >
         <div className="container mx-auto px-4 z-10">
           <div
-            className="text-3xl md:text-5xl lg:text-6xl font-sans font-light-bold text-white mb-6 leading-tight"
+            className="text-3xl md:text-5xl lg:text-4xl font-sans font-light-bold text-white mb-6 leading-tight"
             dangerouslySetInnerHTML={{ __html: heroTitle }}
           />
           <div
@@ -338,58 +383,63 @@ const Index = () => {
       {/* Hero Transition Section */}
       <section className="relative bg-transparent pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden z-20">
         {/* <div className="brush-edge" aria-hidden="true" /> */}
-        <div className="container mx-auto px-4 relative"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] items-center">
-            <div className="relative w-full max-w-md mx-auto lg:mx-0">
-              {/* Arched Image */}
-              <div className="relative z-10">
-                <div className="overflow-hidden rounded-[40px] h-[400px] md:h-[500px] w-full bg-white/95 border border-[#f5e7db] shadow-[0_30px_80px_rgba(0,0,0,0.18)] p-2">
-                  <img src={galleryImages[0]} alt="Featured celebration" className="w-full h-full object-cover rounded-[32px]" />
+        <div className="container mx-auto px-4 relative">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+            <div className="shimmer absolute inset-0 pointer-events-none" />
+            <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] items-center">
+              <div className="relative w-full max-w-md mx-auto lg:mx-0">
+                {/* Arched Image */}
+                <div className="relative z-10">
+                  <div className="overflow-hidden rounded-[40px] h-[400px] md:h-[500px] w-full bg-white/95 border border-[#f5e7db] shadow-[0_30px_80px_rgba(0,0,0,0.18)] p-[1.5px]">
+                    <img src={galleryImages[0]} alt="Featured celebration" className="w-full h-full object-cover rounded-[32px]" />
+                  </div>
                 </div>
-                <div className="w-full flex justify-center mt-2">
-                  <img src={decoration} alt="" className="w-[140px] h-8 ml-2 inline-block opacity-80" />
-                </div>
-              </div>
-              {/* Decorative elements behind */}
-              {/* <div className="absolute top-10 -left-4 w-full h-full rounded-t-full border border-[#b27b61]/30 -z-10 transform -rotate-3" />
+                {/* Decorative elements behind */}
+                {/* <div className="absolute top-10 -left-4 w-full h-full rounded-t-full border border-[#b27b61]/30 -z-10 transform -rotate-3" />
               <div className="absolute top-10 -right-4 w-full h-full rounded-t-full border border-[#b27b61]/30 -z-10 transform rotate-3" /> */}
-            </div>
+              </div>
 
-            <div className="text-center lg:text-left space-y-6">
-              <p className="text-xs uppercase tracking-[0.4em] text-[#d6bba3] font-medium">Sphinx Weddings</p>
-              <h2 className="text-4xl md:text-6xl font-sans text-white leading-none">
-                <span className="font-script text-[#d6bba3] text-5xl md:text-7xl block mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>unique</span>
-                WEDDING
-              </h2>
-              <p className="text-base md:text-lg text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed text-justify">
-                Personalized wedding planning for couples livin&apos; it up in KCMO. From one-hour consults to full-scale
-                production, we create artful timelines, manage every vendor, and keep you present in every moment.
-              </p>
-              <div className="pt-4">
-                <Button variant="outline" className="border-2 border-[#b27b61] text-[#b27b61] hover:bg-[#b27b61] hover:text-white px-10 py-6 rounded-full text-sm uppercase tracking-widest transition-all hover:shadow-lg hover:-translate-y-1">
-                  Let&apos;s create magic
-                </Button>
+              <div className="text-center lg:text-left space-y-6">
+                <div className="flex items-center justify-start gap-1">
+                  <img src={decoration} alt="" className="w-12 h-auto opacity-80" />
+                  <p className="text-xs uppercase tracking-[0.4em] text-[#d6bba3] font-medium">Sphinx Weddings</p>
+                  <img src={decoration} alt="" className="w-12 h-auto opacity-80 transform scale-x-[-1]" />
+                </div>
+                <h2 className="text-4xl md:text-6xl font-sans text-white leading-none">
+                  <span className="font-script text-[#d6bba3] text-5xl md:text-7xl block mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>unique</span>
+                  WEDDING
+                </h2>
+                <p className="text-base md:text-lg text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed text-justify">
+                  Personalized wedding planning for couples livin&apos; it up in KCMO. From one-hour consults to full-scale
+                  production, we create artful timelines, manage every vendor, and keep you present in every moment.
+                </p>
+                <div className="pt-4">
+                  <Button variant="outline" className="border-2 border-[#b27b61] text-[#b27b61] hover:bg-[#b27b61] hover:text-white px-10 py-6 rounded-full text-sm uppercase tracking-widest transition-all hover:shadow-lg hover:-translate-y-1">
+                    Let&apos;s create magic
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
 
       {/* Intro Section */}
       <section className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
-          <div className="max-w-4xl mx-auto text-center observe-scroll opacity-0">
-            <div
-              className="text-2xl md:text-4xl font-sans font-light text-white mb-8 leading-tight"
-              dangerouslySetInnerHTML={{ __html: introTitle }}
-            />
-            <div
-              className="text-base md:text-lg text-gray-200 leading-relaxed text-justify"
-              dangerouslySetInnerHTML={{ __html: introDescription }}
-            />
+        <div className="container mx-auto px-4">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+            <div className="shimmer absolute inset-0 pointer-events-none" />
+            <div className="max-w-4xl mx-auto text-center observe-scroll opacity-0">
+              <div
+                className="text-2xl md:text-4xl font-sans font-light text-white mb-8 leading-tight"
+                dangerouslySetInnerHTML={{ __html: introTitle }}
+              />
+              <div
+                className="text-base md:text-lg text-gray-200 leading-relaxed text-justify"
+                dangerouslySetInnerHTML={{ __html: introDescription }}
+              />
+            </div>
           </div>
-        </div>
         </div>
       </section>
 
@@ -398,7 +448,7 @@ const Index = () => {
         id="about"
         className="relative py-12 md:py-32 bg-transparent"
       >
-        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[24px] md:rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-6 md:p-10 border border-white/20">
+        <div className="container mx-auto px-4"><div className="glass-card p-6 md:p-10">
           <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-12 items-center">
             <div className="observe-scroll opacity-0 flex flex-col justify-center py-2 md:py-4">
               <p className="text-[#d6bba3] text-xl md:text-2xl mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
@@ -436,11 +486,15 @@ const Index = () => {
                   Read Our Story
                 </Button>
 
-                <div className="text-right hidden sm:block">
-                  <p className="text-sm text-muted-foreground uppercase tracking-widest mb-1">With Love,</p>
-                  <p className="text-2xl text-[#b27b61]" style={{ fontFamily: "'Great Vibes', cursive" }}>
-                    Sphinx Team
-                  </p>
+                <div className="hidden sm:flex items-center gap-3">
+                  <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
+                  <div className="text-center">
+                    <p className="text-sm text-muted-foreground uppercase tracking-widest leading-none mb-1">With Love,</p>
+                    <p className="text-2xl text-[#b27b61] leading-none" style={{ fontFamily: "'Great Vibes', cursive" }}>
+                      Sphinx Team
+                    </p>
+                  </div>
+                  <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
                 </div>
               </div>
             </div>
@@ -459,9 +513,7 @@ const Index = () => {
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </div>
-                <div className="w-full flex justify-center mt-2">
-                  <img src={decoration} alt="" className="w-[100px] h-6 ml-2 inline-block opacity-80" />
-                </div>
+
               </div>
 
 
@@ -529,58 +581,62 @@ const Index = () => {
         //   backgroundSize: "1200px 120px",
         // }}
         />
-        <div className="container mx-auto px-4 relative"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-center">
-            <div className="flex flex-col items-center lg:items-start gap-8">
-              <div className="relative w-full max-w-sm">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#fce7d4] to-[#f4d5bf] blur-[40px] opacity-50" />
-                <div className="relative bg-black/30 backdrop-blur-md border border-white/10 rounded-[40px] shadow-[0_30px_80px_rgba(0,0,0,0.18)] overflow-hidden">
-                  <div className="absolute -top-6 -left-6 bg-[#b27b61] text-white text-xs uppercase tracking-[0.4em] px-4 py-2 rounded-full shadow-lg">
-                    Est. 2025
+        <div className="container mx-auto px-4 relative">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+            <div className="shimmer absolute inset-0 pointer-events-none" />
+            <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-center">
+              <div className="flex flex-col items-center lg:items-start gap-8">
+                <div className="relative w-full max-w-sm">
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#fce7d4] to-[#f4d5bf] blur-[40px] opacity-50" />
+                  <div className="relative bg-black/30 backdrop-blur-md border border-white/10 rounded-[40px] shadow-[0_30px_80px_rgba(0,0,0,0.18)] overflow-hidden">
+                    <div className="absolute -top-6 -left-6 bg-[#b27b61] text-white text-xs uppercase tracking-[0.4em] px-4 py-2 rounded-full shadow-lg">
+                      Est. 2025
+                    </div>
+                    <img src={celebrationToast} alt="Celebration toast" className="w-full h-[360px] object-cover" />
+                    <div className="px-8 py-6 text-center space-y-2">
+                      <p className="text-xs uppercase tracking-[0.4em] text-sage">Signature curation</p>
+                      <p className="text-sm text-gray-300">
+                        Layered textures, soft light, elevated palettes.
+                      </p>
+                    </div>
+                    <div className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/10 shadow-xl" />
                   </div>
-                  <img src={celebrationToast} alt="Celebration toast" className="w-full h-[360px] object-cover" />
-                  <div className="px-8 py-6 text-center space-y-2">
-                    <p className="text-xs uppercase tracking-[0.4em] text-sage">Signature curation</p>
-                    <p className="text-sm text-gray-300">
-                      Layered textures, soft light, elevated palettes.
+
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="flex items-center justify-center lg:justify-start gap-1 mb-0">
+                    <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
+                    <p className="uppercase tracking-[0.35em] text-xs text-sage">Sphinx</p>
+                    <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
+                  </div>
+                  {/* <p className="text-4xl md:text-5xl font-sans text-primary mt-2 whitespace-nowrap"></p> */}
+                  <p className="text-3xl md:text-4xl font-sans text-white mt-0">
+                    <span className="italic text-[#d6bba3]">unique</span> wedding planning + coordination
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <div className="flex flex-col md:flex-row md:items-center gap-8">
+                  <div className="space-y-4 max-w-lg">
+                    <p className="text-lg uppercase tracking-[0.2em] text-[#d6bba3]">
+                      Personalized wedding planning for couples livin&apos; it up in KCMO
                     </p>
+                    <p className="text-sm text-gray-200 leading-relaxed text-justify">
+                      Whether you&apos;ve got it all together and just need a day-of coordinator or feel a little overwhelmed
+                      and want help with all the things, we&apos;re here to help you celebrate your intimate Sphinx wedding in
+                      a big way.
+                    </p>
+                    <Button variant="outline" className="border-2 border-[#b27b61] text-[#b27b61] hover:bg-[#b27b61] hover:text-white px-8 py-6 rounded-full w-fit">
+                      Let&apos;s create something incredible
+                    </Button>
                   </div>
-                  <div className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/10 shadow-xl" />
-                </div>
-                <div className="w-full flex justify-center mt-4">
-                  <img src={decoration} alt="" className="w-[100px] h-6 inline-block opacity-80" />
-                </div>
-              </div>
-              <div className="text-center lg:text-left">
-                <p className="uppercase tracking-[0.35em] text-xs text-sage">Sphinx</p>
-                {/* <p className="text-4xl md:text-5xl font-sans text-primary mt-2 whitespace-nowrap"></p> */}
-                <p className="text-3xl md:text-4xl font-sans text-white mt-2">
-                  <span className="italic text-[#d6bba3]">unique</span> wedding planning + coordination
-                </p>
-              </div>
-            </div>
-            <div className="space-y-8">
-              <div className="flex flex-col md:flex-row md:items-center gap-8">
-                <div className="space-y-4 max-w-lg">
-                  <p className="text-lg uppercase tracking-[0.2em] text-[#d6bba3]">
-                    Personalized wedding planning for couples livin&apos; it up in KCMO
-                  </p>
-                  <p className="text-sm text-gray-200 leading-relaxed text-justify">
-                    Whether you&apos;ve got it all together and just need a day-of coordinator or feel a little overwhelmed
-                    and want help with all the things, we&apos;re here to help you celebrate your intimate Sphinx wedding in
-                    a big way.
-                  </p>
-                  <Button variant="outline" className="border-2 border-[#b27b61] text-[#b27b61] hover:bg-[#b27b61] hover:text-white px-8 py-6 rounded-full w-fit">
-                    Let&apos;s create something incredible
-                  </Button>
-                </div>
-                {/* <div className="self-start border border-[#d6bba3] rounded-full w-32 h-32 flex flex-col items-center justify-center text-xs uppercase tracking-[0.3em] text-[#b27b61]">
+                  {/* <div className="self-start border border-[#d6bba3] rounded-full w-32 h-32 flex flex-col items-center justify-center text-xs uppercase tracking-[0.3em] text-[#b27b61]">
                   Est 2025
                   <span className="tracking-[0.1em] text-[10px] text-muted-foreground mt-1">Sphinx</span>
                   <span className="text-[9px] tracking-[0.4em] mt-1">Weddings</span>
                 </div> */}
-              </div>
-              {/* <div className="grid grid-cols-3 gap-4">
+                </div>
+                {/* <div className="grid grid-cols-3 gap-4">
                 {[galleryImages[2], galleryImages[3], galleryImages[5]].map((img, index) => (
                   <div
                     key={img}
@@ -594,15 +650,15 @@ const Index = () => {
                   </div>
                 ))}
               </div> */}
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
 
       {/* Values Section */}
       <section className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -623,10 +679,11 @@ const Index = () => {
             ].map((value, index) => (
               <div
                 key={index}
-                className="observe-scroll opacity-0 text-center p-8 bg-black/20 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                className="glass-card observe-scroll opacity-0 text-center p-8 relative overflow-hidden group"
               >
-                <div className="flex justify-center mb-6">{value.icon}</div>
-                <h3 className="text-xl md:text-2xl font-sans font-semibold text-white mb-4">
+                <div className="shimmer absolute inset-0 pointer-events-none" />
+                <div className="flex justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">{value.icon}</div>
+                <h3 className="text-xl md:text-2xl font-sans font-semibold text-white mb-4 tracking-widest">
                   {value.title}
                 </h3>
                 <p className="text-gray-200 leading-relaxed text-center">{value.description}</p>
@@ -634,266 +691,284 @@ const Index = () => {
             ))}
           </div>
         </div>
-        </div>
       </section>
 
       {/* Recent Works Section */}
       <section id="our-works" className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="text-sm tracking-[0.4em] text-sage uppercase font-light">Recent Work</p>
-            <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-            <h2 className="text-2xl md:text-3xl font-sans text-white leading-snug mt-4">
-              A living reel of the tender, modern celebrations we design.
-            </h2>
-            <p className="text-gray-200 text-base leading-relaxed mt-4 text-center">
-              Drift through a continuous ribbon of moments from our gallery. Each card is a real couple, a real story,
-              and a glimpse into the ambience we create before mapping out your service suite below.
-            </p>
-          </div>
+        <div className="container mx-auto px-4">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+            <div className="shimmer absolute inset-0 pointer-events-none" />
+            <div className="text-center max-w-2xl mx-auto">
+              <div className="flex items-center justify-center gap-4">
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
+                <p className="text-sm tracking-[0.4em] text-sage uppercase font-light">Recent Work</p>
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-sans text-white mt-2 mb-2">
+                Real Love Stories
+              </h2>
+              <p className="text-gray-300 text-sm font-light max-w-lg mx-auto">
+                A collection of tender moments and modern celebrations.
+              </p>
+            </div>
 
-          <div className="mt-12">
-            <Swiper
-              modules={[Autoplay]}
-              spaceBetween={10}
-              slidesPerView={1.2}
-              breakpoints={{
-                640: { slidesPerView: 2.2 },
-                1024: { slidesPerView: 4 },
-              }}
-              autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-              }}
-              loop={true}
-              grabCursor={true}
-              className="pb-12"
-            >
-              {finalWorks.map((item, index) => (
-                <SwiperSlide key={`${item.id}-${index}`}>
-                  <div
-                    className="bg-black/20 backdrop-blur-md rounded-[28px] p-4 border border-white/10 h-full"
-                  >
-                    <div className="rounded-[20px] overflow-hidden h-[380px]">
-                      <img src={item.image_url} alt={item.caption} className="w-full h-full object-cover" />
+            <div className="mt-12">
+              <Swiper
+                modules={[Autoplay]}
+                spaceBetween={10}
+                slidesPerView={1.2}
+                breakpoints={{
+                  640: { slidesPerView: 2.2 },
+                  1024: { slidesPerView: 4 },
+                }}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                loop={true}
+                grabCursor={true}
+                className="pb-12"
+              >
+                {finalWorks.map((item, index) => (
+                  <SwiperSlide key={`${item.id}-${index}`}>
+                    <div
+                      className="glass-card rounded-[28px] p-4 border border-white/10 h-full"
+                    >
+                      <div className="rounded-[20px] overflow-hidden h-[380px]">
+                        <img src={item.image_url} alt={item.caption} className="w-full h-full object-cover" />
+                      </div>
+                      {/* <img src={decoration} alt="" className="w-[200px] h-8 ml-2 inline-block opacity-80" /> */}
+                      <div className="mt-4">
+                        <p className="text-lg font-sans text-white">
+                          {item.caption}
+                        </p>
+                        <p className={`${item.description?.length > 80 ? "text-xs" : item.description?.length > 40 ? "text-sm" : "text-base"
+                          } text-gray-300 text-justify`}>
+                          {item.description}
+                        </p>
+                      </div>
                     </div>
-                    {/* <img src={decoration} alt="" className="w-[200px] h-8 ml-2 inline-block opacity-80" /> */}
-                    <div className="mt-4">
-                      <p className="text-lg font-sans text-white">
-                        {item.caption}
-                      </p>
-                      <p className={`${item.description?.length > 80 ? "text-xs" : item.description?.length > 40 ? "text-sm" : "text-base"
-                        } text-gray-300 text-justify`}>
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
         </div>
-        </div>
-      </section>
+      </section >
 
       {/* Services Section */}
       <section className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="container mx-auto px-4">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+            <div className="shimmer absolute inset-0 pointer-events-none" />
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
+                <p className="text-xs uppercase tracking-[0.4em] text-sage">Our Expertise</p>
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
+              </div>
 
-            <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">Our Expertise</p>
-            <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-            <h2 className="text-3xl md:text-5xl font-sans font-light text-white mb-6">
-              Curated Celebrations
-            </h2>
-            {/* <p className="text-muted-foreground text-lg font-light text-justify">
+              <h2 className="text-3xl md:text-5xl font-sans font-light text-white mb-6">
+                Curated Celebrations
+              </h2>
+              {/* <p className="text-muted-foreground text-lg font-light text-justify">
               From intimate gatherings to grand affairs, we craft every detail with precision and grace.
             </p> */}
-          </div>
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
-            {[
-              {
-                id: "engagement",
-                title: "Engagement",
-                image: getImage("gallery-image-5"), // rings
-                description: "The beginning of your forever, marked with elegance.",
-              },
-              {
-                id: "wedding-planning",
-                title: "Wedding Planning",
-                image: getImage("wedding-image-stacked-2"),
-                description: "Full-service coordination for your perfect day.",
-              },
-              {
-                id: "reception",
-                title: "Reception",
-                image: getImage("gallery-image-1"), // weddingTable
-                description: "An evening of joy, dining, and unforgettable toasts.",
-              },
-              {
-                id: "haldi",
-                title: "Haldi Ceremony",
-                image: getImage("gallery-image-1"), // Placeholder, reusing weddingTable
-                description: "Vibrant traditions soaked in love and laughter.",
-              },
-              {
-                id: "mehandi",
-                title: "Mehandi",
-                image: getImage("wedding-image-wide"), // coupleHands
-                description: "Intricate artistry and festive pre-wedding vibes.",
-              },
-              {
-                id: "baptism",
-                title: "Baptism",
-                image: getImage("gallery-image-3"), // bouquet
-                description: "Welcoming new life with grace and sanctity.",
-              },
-              {
-                id: "birthday",
-                title: "Birthday Bash",
-                image: getImage("gallery-image-4"), // venueLights
-                description: "Celebrating another year of life in style.",
-              },
-              {
-                id: "corporate",
-                title: "Corporate Events",
-                image: getImage("gallery-image-6"), // plannerConsultation
-                description: "Professional gatherings executed with flawlessness.",
-              },
-            ].map((service) => (
-              <div
-                key={service.id}
-                className="group relative h-[380px] overflow-hidden rounded-[16px] cursor-pointer"
-                onClick={() => setSelectedService(service.id)}
-              >
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors duration-500 z-10" />
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
-                />
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
+              {[
+                {
+                  id: "engagement",
+                  title: "Engagement",
+                  image: getImage("gallery-image-5"), // rings
+                  description: "The beginning of your forever, marked with elegance.",
+                },
+                {
+                  id: "wedding-planning",
+                  title: "Wedding Planning",
+                  image: getImage("wedding-image-stacked-2"),
+                  description: "Full-service coordination for your perfect day.",
+                },
+                {
+                  id: "reception",
+                  title: "Reception",
+                  image: getImage("gallery-image-1"), // weddingTable
+                  description: "An evening of joy, dining, and unforgettable toasts.",
+                },
+                {
+                  id: "haldi",
+                  title: "Haldi Ceremony",
+                  image: getImage("gallery-image-1"), // Placeholder, reusing weddingTable
+                  description: "Vibrant traditions soaked in love and laughter.",
+                },
+                {
+                  id: "mehandi",
+                  title: "Mehandi",
+                  image: getImage("wedding-image-wide"), // coupleHands
+                  description: "Intricate artistry and festive pre-wedding vibes.",
+                },
+                {
+                  id: "baptism",
+                  title: "Baptism",
+                  image: getImage("gallery-image-3"), // bouquet
+                  description: "Welcoming new life with grace and sanctity.",
+                },
+                {
+                  id: "birthday",
+                  title: "Birthday Bash",
+                  image: getImage("gallery-image-4"), // venueLights
+                  description: "Celebrating another year of life in style.",
+                },
+                {
+                  id: "corporate",
+                  title: "Corporate Events",
+                  image: getImage("gallery-image-6"), // plannerConsultation
+                  description: "Professional gatherings executed with flawlessness.",
+                },
+              ].map((service) => (
+                <div
+                  key={service.id}
+                  className="group relative h-[380px] overflow-hidden rounded-[16px] cursor-pointer"
+                  onClick={() => setSelectedService(service.id)}
+                >
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/50 transition-colors duration-500 z-10" />
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                  />
 
-                <div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-2xl font-sans text-white mb-2 italic">
-                      {service.title}
-                    </h3>
-                    <p className="text-white/90 font-light text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 transform translate-y-4 group-hover:translate-y-0 leading-relaxed text-justify">
-                      {service.description}
-                    </p>
-                    <div className="mt-4 w-8 h-[1px] bg-white/60 group-hover:w-full transition-all duration-700" />
+                  <div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="text-2xl md:text-3xl text-white mb-2 tracking-wide" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                        {service.title}
+                      </h3>
+                      <p className="text-white/90 font-light text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 transform translate-y-4 group-hover:translate-y-0 leading-relaxed text-justify">
+                        {service.description}
+                      </p>
+                      <div className="mt-4 w-8 h-[1px] bg-white/60 group-hover:w-full transition-all duration-700" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-        </div>
-      </section>
+      </section >
 
       {/* Testimonials Section */}
       <section className="py-20 md:py-32 bg-transparent">
 
-        <h2 className="text-2xl md:text-4xl font-sans font-light text-center text-white mb-12">
-          Hear From Our Clients
-          <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-        </h2>
 
-        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {displayedTestimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="observe-scroll opacity-0 bg-black/20 backdrop-blur-md p-8 rounded-lg shadow-sm border border-white/10"
-              >
-                <div className="flex items-center mb-6">
-                  <div className="w-14 h-14 rounded-full bg-sage flex items-center justify-center text-white font-semibold text-lg mr-4">
-                    {testimonial.initials}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-300">{testimonial.type}</p>
-                  </div>
-                </div>
-                <p className="text-gray-200 leading-relaxed italic text-justify">
-                  "{testimonial.testimonial}"
-                </p>
+        <div className="container mx-auto px-4">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+            <div className="shimmer absolute inset-0 pointer-events-none" />
+            <h2 className="text-2xl md:text-4xl font-sans font-light text-center text-white mb-12">
+              <div className="flex items-center justify-center gap-4">
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
+                <span>Hear From Our Clients</span>
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
               </div>
-            ))}
-          </div>
-
-          {allTestimonials.length > 3 && (
-            <div className="flex justify-center mt-12">
-              <Button
-                variant="outline"
-                onClick={() => setShowAllTestimonials(!showAllTestimonials)}
-                className="rounded-full px-8 border-sage text-sage hover:bg-sage hover:text-white transition-colors"
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
-              >
-                {showAllTestimonials ? "Show Less" : "See More Testimonials"}
-              </Button>
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {displayedTestimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="observe-scroll opacity-0 bg-black/10 backdrop-blur-md p-8 rounded-lg shadow-sm border border-white/10"
+                >
+                  <div className="flex items-center mb-6">
+                    <div className="w-14 h-14 rounded-full bg-sage flex items-center justify-center text-white font-semibold text-lg mr-4">
+                      {testimonial.initials}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-300">{testimonial.type}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-200 leading-relaxed text-justify">
+                    "{testimonial.testimonial}"
+                  </p>
+                </div>
+              ))}
             </div>
-          )}
-        </div>
+
+            {allTestimonials.length > 3 && (
+              <div className="flex justify-center mt-12">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowAllTestimonials(!showAllTestimonials)}
+                  className="rounded-full px-8 border-sage text-sage hover:bg-sage hover:text-white transition-colors"
+                  style={{ fontFamily: "'Montserrat', sans-serif" }}
+                >
+                  {showAllTestimonials ? "Show Less" : "See More Testimonials"}
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
       {/* Team Section */}
       <section id="team" className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
-          <div className="text-center mb-16">
-            <p className="text-xs uppercase tracking-[0.4em] text-sage mb-4">The People</p>
-            <img src={decoration} alt="" className="w-[100px] h-6 mx-auto opacity-80" />
-            <h2 className="text-4xl md:text-6xl font-sans font-light text-white mb-6">
-              Meet The Team
-            </h2>
-            <p className="text-muted-foreground text-lg font-light max-w-2xl mx-auto">
-              The creative minds and dedicated hearts behind every perfect celebration.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Murshid Iqbaal",
-                role: "Founder & Lead Planner",
-                image: getImage("about-image"),
-                bio: "With a passion for storytelling and an eye for detail, Murshid crafts weddings that are as unique as the couples he serves."
-              },
-              {
-                name: "Sarah Jenkins",
-                role: "Creative Director",
-                image: getImage("gallery-image-3"),
-                bio: "Bringing dreams to visual reality through color, texture, and light arrangement."
-              },
-              {
-                name: "David Chen",
-                role: "Event Coordinator",
-                image: getImage("gallery-image-6"),
-                bio: "Ensuring every logistical element flows seamlessly, so you can focus on the celebration."
-              }
-            ].map((member, index) => (
-              <div key={index} className="group text-center">
-                <div className="relative mb-6 inline-block">
-                  <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
-                    <img src={member.image} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-sans text-white mb-2">{member.name}</h3>
-                <p className="text-[#d6bba3] uppercase tracking-widest text-xs mb-4">{member.role}</p>
-                <p className="text-gray-200 text-sm leading-relaxed max-w-sm mx-auto text-justify">{member.bio}</p>
+        <div className="container mx-auto px-4">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+            <div className="shimmer absolute inset-0 pointer-events-none" />
+            <div className="text-center mb-16">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
+                <p className="text-xs uppercase tracking-[0.4em] text-sage">The People</p>
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
               </div>
-            ))}
+              <h2 className="text-4xl md:text-6xl font-sans font-light text-white mb-6">
+                Meet The Team
+              </h2>
+              <p className="text-gray-200 text-lg font-light max-w-2xl mx-auto">
+                The creative minds and dedicated hearts behind every perfect celebration.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  name: "Murshid Iqbaal",
+                  role: "Founder & Lead Planner",
+                  image: getImage("about-image"),
+                  bio: "With a passion for storytelling and an eye for detail, Murshid crafts weddings that are as unique as the couples he serves."
+                },
+                {
+                  name: "Sarah Jenkins",
+                  role: "Creative Director",
+                  image: getImage("gallery-image-3"),
+                  bio: "Bringing dreams to visual reality through color, texture, and light arrangement."
+                },
+                {
+                  name: "David Chen",
+                  role: "Event Coordinator",
+                  image: getImage("gallery-image-6"),
+                  bio: "Ensuring every logistical element flows seamlessly, so you can focus on the celebration."
+                }
+              ].map((member, index) => (
+                <div key={index} className="group text-center">
+                  <div className="relative mb-6 inline-block">
+                    <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
+                      <img src={member.image} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-sans text-white mb-2">{member.name}</h3>
+                  <p className="text-[#d6bba3] uppercase tracking-widest text-xs mb-4">{member.role}</p>
+                  <p className="text-gray-200 text-sm leading-relaxed max-w-sm mx-auto text-justify">{member.bio}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        </div>
-      </section>
+      </section >
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4"><div className="bg-black/20 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
+      < section id="contact" className="py-20 md:py-32 bg-transparent" >
+        <div className="container mx-auto px-4"><div className="bg-black/10 backdrop-blur-2xl rounded-[40px] shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] p-8 md:p-12 border border-white/20">
           <h2 className="text-3xl md:text-5xl font-sans font-light text-center text-white mb-12 flex items-center justify-center gap-2 md:gap-4">
             <img src={decoration} alt="" className="w-[60px] md:w-[100px] h-4 md:h-6 opacity-80" />
             <span className="shrink-0">Get in Touch</span>
@@ -927,7 +1002,7 @@ const Index = () => {
               <form className="space-y-4" onSubmit={handleFormSubmit}>
                 <Input
                   placeholder="Your Name"
-                  className="bg-black/20 text-white border-white/20 placeholder:text-gray-400"
+                  className="bg-black/10 text-white border-white/20 placeholder:text-gray-400"
                   name="name"
                   value={formData.name}
                   onChange={handleFormChange}
@@ -936,7 +1011,7 @@ const Index = () => {
                 <Input
                   type="email"
                   placeholder="Your Email"
-                  className="bg-black/20 text-white border-white/20 placeholder:text-gray-400"
+                  className="bg-black/10 text-white border-white/20 placeholder:text-gray-400"
                   name="email"
                   value={formData.email}
                   onChange={handleFormChange}
@@ -1000,7 +1075,7 @@ const Index = () => {
           <p className="text-sm text-white/60">© 2025 SphinxWeddings. All rights reserved.</p>
         </div>
       </footer>
-    </div >
+    </div>
   );
 };
 
