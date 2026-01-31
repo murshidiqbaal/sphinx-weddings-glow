@@ -748,7 +748,7 @@ const Index = () => {
                     <div
                       className="glass-card rounded-[28px] p-4 border border-white/10 h-full"
                     >
-                      <div className="rounded-[20px] overflow-hidden h-[380px]">
+                      <div className="rounded-[20px] overflow-hidden h-[250px] md:h-[380px]">
                         <img src={item.image_url} alt={item.caption} className="w-full h-full object-cover" />
                       </div>
                       {/* <img src={decoration} alt="" className="w-[200px] h-8 ml-2 inline-block opacity-80" /> */}
