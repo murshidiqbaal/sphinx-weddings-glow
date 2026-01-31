@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 @import "./styles/glass-theme.css";
+@import "./styles/night-theme.css";
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
@@ -112,6 +113,17 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-sans;
     cursor: none;
+  }
+
+  body.admin-mode,
+  body.admin-mode a,
+  body.admin-mode button,
+  body.admin-mode [role="button"],
+  body.admin-mode input,
+  body.admin-mode select,
+  body.admin-mode textarea,
+  body.admin-mode * {
+    cursor: auto !important;
   }
 
   a,

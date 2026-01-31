@@ -9,13 +9,18 @@ import {
     Type,
     X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const AdminLayout = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    useEffect(() => {
+        document.body.classList.add("admin-mode");
+        return () => document.body.classList.remove("admin-mode");
+    }, []);
 
     const handleLogout = async () => {
         await supabase.auth.signOut();

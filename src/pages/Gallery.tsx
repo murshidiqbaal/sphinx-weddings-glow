@@ -1,4 +1,7 @@
+import landingImage from "@/assets/Gride 21.jpg.jpeg";
+import mobileBg from "@/assets/ben wed0234.JPG.jpeg";
 import logo from "@/assets/logo/logo1.png";
+import CursorGlow from "@/components/CursorGlow";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/hooks/useContent";
 import { useGallery } from "@/hooks/useGallery";
@@ -24,6 +27,32 @@ const Gallery = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const cards = document.querySelectorAll(".glass-card");
+      cards.forEach((card) => {
+        const item = card as HTMLElement;
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Calculate rotation for tilt effect
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -2;
+        const rotateY = ((x - centerX) / centerX) * 2;
+
+        item.style.setProperty("--mouse-x", `${x}px`);
+        item.style.setProperty("--mouse-y", `${y}px`);
+        item.style.setProperty("--rotate-x", `${rotateX}deg`);
+        item.style.setProperty("--rotate-y", `${rotateY}deg`);
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const { getText, getImage } = useContent();
@@ -168,24 +197,56 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#fdf8f4]">
+    <div className="min-h-screen w-full font-sans text-foreground relative selection:bg-sage/30">
+      {/* Background Layer - Desktop */}
+      <div
+        className={`hidden md:block fixed inset-0 z-[-1] bg-cover bg-center transition-all duration-1000 transform scale-105 ${headerDark ? "blur-md" : "blur-0"}`}
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 50%),
+            linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.8) 100%),
+            url('${landingImage}')
+          `
+        }}
+      />
+
+      {/* Background Layer - Mobile */}
+      <div
+        className={`md:hidden fixed inset-0 z-[-1] bg-cover bg-center transition-all duration-1000 transform scale-105 ${headerDark ? "blur-md" : "blur-0"}`}
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 50%),
+            linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.8) 100%),
+            url('${mobileBg}')
+          `
+        }}
+      />
+
+      <CursorGlow />
+      <div className="bg-noise" />
+      {/* Accent Blobs */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow" />
+        <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] mix-blend-screen animate-pulse-slow delay-700" />
+      </div>
+
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50  border-white/20">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex justify-between items-center">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4`}>
+        <div className="container mx-auto px-4">
+          <div className="bg-black/20 backdrop-blur-md rounded-full py-2 px-6 border border-white/10 shadow-lg flex justify-between items-center max-w-5xl mx-auto">
             <Link to="/" className="flex items-center gap-2 drop-shadow-xl">
               <img
                 src={logo}
                 alt="Logo"
-                className={`h-16 transition-all duration-300 ${headerDark ? "filter-none" : "filter brightness-0 invert"}`}
+                className="h-12 transition-all duration-300 brightness-0 invert"
               />
-              <span className={`text-xl font-bold ${headerDark ? "text-foreground" : "text-white"} transition-colors`}>
+              <span className="text-xl font-bold text-white transition-colors tracking-widest uppercase">
                 {getText("site-title")}
               </span>
             </Link>
 
             <Link to="/">
-              <Button variant="ghost" size="sm" className="gap-2 hover:bg-white/10" style={{ color: "#859a77" }}>
+              <Button variant="ghost" size="sm" className="gap-2 text-white hover:text-white hover:bg-white/10 rounded-full">
                 <Home className="w-4 h-4" />
                 <span className="hidden sm:inline">Home</span>
               </Button>
@@ -198,7 +259,7 @@ const Gallery = () => {
       <section className="pt-32 pb-12 md:pt-40 md:pb-20">
         <div className="container mx-auto px-4 text-center">
           <div
-            className="text-5xl md:text-7xl font-sans font-light text-sage mb-8 tracking-wide animate-fade-in"
+            className="text-5xl md:text-7xl font-sans font-light text-white mb-8 tracking-wide animate-fade-in"
             dangerouslySetInnerHTML={{ __html: getText("gallery-title") }}
           />
 
@@ -226,17 +287,17 @@ const Gallery = () => {
       </section>
 
       {/* Filter Navigation */}
-      <section className="py-8 bg-background border-b border-sage/20">
+      <section className="py-8 bg-transparent">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 glass-card p-4 rounded-full max-w-3xl mx-auto">
             {categories.map((category) => (
               <Button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                variant={selectedCategory === category.id ? "default" : "ghost"}
-                className={`gap-2 font-light ${selectedCategory === category.id
-                  ? "bg-sage hover:bg-sage/90 text-background"
-                  : "text-sage hover:bg-sage/10"
+                variant="ghost"
+                className={`gap-2 font-light rounded-full transition-all duration-300 ${selectedCategory === category.id
+                  ? "bg-white/20 text-white shadow-lg"
+                  : "text-white/70 hover:bg-white/10 hover:text-white"
                   }`}
               >
                 {category.icon}
@@ -248,31 +309,34 @@ const Gallery = () => {
       </section>
 
       {/* Gallery Grid */}
-      <section className="py-12 md:py-20 bg-[#fdf8f4]">
+      <section className="py-12 md:py-20 bg-transparent">
         <div className="container mx-auto px-4">
-          <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-2 space-y-4">
+          <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-1">
             {filteredImages.map((image, index) => (
               <div
                 key={`${image.src}-${index}`}
-                className="group relative overflow-hidden cursor-pointer bg-muted/30 transition-all duration-500 break-inside-avoid mb-4 rounded-lg"
+                className="glass-card group relative overflow-hidden cursor-pointer break-inside-avoid mb-2 p-2"
                 onClick={() => setSelectedImage(image.src)}
               >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-sage/0 group-hover:bg-sage/10 transition-all duration-500">
-                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                <div className="shimmer absolute inset-0 pointer-events-none" />
+                <div className="overflow-hidden rounded-[32px]">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-[32px]">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-all duration-500 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
                     <div
-                      className="text-white font-sans text-xl font-light"
+                      className="text-white font-sans text-xl font-light tracking-wide"
                       dangerouslySetInnerHTML={{ __html: image.title }}
                     />
                     <div className="flex gap-2 mt-2 flex-wrap">
                       {image.category.map((cat) => (
                         <span
                           key={cat}
-                          className="text-xs px-2 py-1 bg-white/20 rounded-full text-white font-light"
+                          className="text-[10px] uppercase tracking-widest px-3 py-1 bg-white/10 border border-white/20 rounded-full text-white/90 font-light backdrop-blur-md"
                         >
                           {cat}
                         </span>
