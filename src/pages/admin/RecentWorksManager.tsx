@@ -69,19 +69,19 @@ const RecentWorksManager = () => {
 
             const fileExt = file.name.split(".").pop();
             const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-            const filePath = `recent-works/${fileName}`;
 
             // Upload to Storage
+            const bucketName = "recent-works";
             const { error: uploadError } = await supabase.storage
-                .from("gallery-images") // Reusing existing bucket
-                .upload(filePath, file);
+                .from(bucketName)
+                .upload(fileName, file);
 
             if (uploadError) throw uploadError;
 
             // Get Public URL
             const { data: { publicUrl } } = supabase.storage
-                .from("gallery-images")
-                .getPublicUrl(filePath);
+                .from(bucketName)
+                .getPublicUrl(fileName);
 
             // Insert into Database with default text
             const { error: dbError } = await supabase

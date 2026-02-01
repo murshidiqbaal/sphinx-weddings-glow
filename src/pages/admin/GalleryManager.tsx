@@ -65,19 +65,23 @@ const GalleryManager = () => {
             const uploadPromises = Array.from(files).map(async (file) => {
                 const fileExt = file.name.split(".").pop();
                 const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-                const filePath = `${activeTab}-images/${fileName}`;
 
-                // Upload to Storage
+                // Determine bucket based on active tab
+                let bucketName = "gallery-images";
+                if (activeTab === "outdoor") bucketName = "outdoor";
+                if (activeTab === "night") bucketName = "night";
+
+                // Upload to Storage (Root of bucket)
                 const { error: uploadError } = await supabase.storage
-                    .from("gallery-images")
-                    .upload(filePath, file);
+                    .from(bucketName)
+                    .upload(fileName, file);
 
                 if (uploadError) throw uploadError;
 
                 // Get Public URL
                 const { data: { publicUrl } } = supabase.storage
-                    .from("gallery-images")
-                    .getPublicUrl(filePath);
+                    .from(bucketName)
+                    .getPublicUrl(fileName);
 
                 // Insert into Database
                 const { error: dbError } = await supabase

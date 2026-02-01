@@ -16,7 +16,7 @@ const Dashboard = () => {
         const fetchStats = async () => {
             try {
                 const { count: galleryCount } = await supabase
-                    .from("gallery_images")
+                    .from("gallery")
                     .select("*", { count: "exact", head: true });
 
                 const { count: recentWorksCount } = await supabase

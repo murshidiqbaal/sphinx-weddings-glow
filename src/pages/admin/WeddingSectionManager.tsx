@@ -58,19 +58,19 @@ const WeddingSectionManager = () => {
             const file = files[0];
             const fileExt = file.name.split(".").pop();
             const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-            const filePath = `wedding-moments/${fileName}`;
 
             // Upload to Storage
+            const bucketName = "wedding_moments";
             const { error: uploadError } = await supabase.storage
-                .from("gallery-images") // Reusing existing bucket
-                .upload(filePath, file);
+                .from(bucketName)
+                .upload(fileName, file);
 
             if (uploadError) throw uploadError;
 
             // Get Public URL
             const { data: { publicUrl } } = supabase.storage
-                .from("gallery-images")
-                .getPublicUrl(filePath);
+                .from(bucketName)
+                .getPublicUrl(fileName);
 
             // Insert into Database with default text
             const { error: dbError } = await supabase

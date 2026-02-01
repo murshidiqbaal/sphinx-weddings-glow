@@ -44,19 +44,18 @@ const ImageManager = () => {
         try {
             const fileExt = file.name.split(".").pop();
             const fileName = `${item.field_key}-${Date.now()}.${fileExt}`;
-            const filePath = `site-images/${fileName}`;
 
             // Upload to Storage
             const { error: uploadError } = await supabase.storage
                 .from("site-images")
-                .upload(filePath, file);
+                .upload(fileName, file);
 
             if (uploadError) throw uploadError;
 
             // Get Public URL
             const { data: { publicUrl } } = supabase.storage
                 .from("site-images")
-                .getPublicUrl(filePath);
+                .getPublicUrl(fileName);
 
             // Update Database
             const { error: dbError } = await supabase

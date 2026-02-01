@@ -42,7 +42,7 @@ const Migration = () => {
                     try {
                         const response = await fetch(item.defaultValue);
                         const blob = await response.blob();
-                        const fileName = `${section}/${item.id}.jpg`;
+                        const fileName = `${item.id}.jpg`;
 
                         const { error: uploadError } = await supabase.storage
                             .from("site-images")
