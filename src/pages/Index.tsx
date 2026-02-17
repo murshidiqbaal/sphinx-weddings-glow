@@ -38,6 +38,7 @@ const Index = () => {
   const [weddingMoments, setWeddingMoments] = useState<any[]>([]);
   const [showAllTestimonials, setShowAllTestimonials] = useState(false);
   const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [teamMembers, setTeamMembers] = useState<any[]>([]);
 
   const galleryImages = [
     getImage("gallery-image-1"),
@@ -219,6 +220,18 @@ const Index = () => {
       }
     };
     fetchTestimonials();
+
+    const fetchTeam = async () => {
+      const { data } = await supabase
+        .from("team")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      if (data && data.length > 0) {
+        setTeamMembers(data);
+      }
+    };
+    fetchTeam();
   }, []);
 
 
@@ -944,30 +957,30 @@ const Index = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {[
+              {(teamMembers.length > 0 ? teamMembers : [
                 {
-                  name: "Murshid Iqbaal",
+                  name: "Zakaria Mohan",
                   role: "Founder & Lead Planner",
-                  image: getImage("about-image"),
-                  bio: "With a passion for storytelling and an eye for detail, Murshid crafts weddings that are as unique as the couples he serves."
+                  image_url: getImage("about-image"),
+                  bio: "With a passion for storytelling and an eye for detail, zakaria crafts weddings that are as unique as the couples he serves."
                 },
                 {
-                  name: "Sarah Jenkins",
+                  name: "Sreejith ",
                   role: "Creative Director",
-                  image: getImage("gallery-image-3"),
+                  image_url: getImage("gallery-image-3"),
                   bio: "Bringing dreams to visual reality through color, texture, and light arrangement."
                 },
                 {
-                  name: "David Chen",
+                  name: "Basil ",
                   role: "Event Coordinator",
-                  image: getImage("gallery-image-6"),
+                  image_url: getImage("gallery-image-6"),
                   bio: "Ensuring every logistical element flows seamlessly, so you can focus on the celebration."
                 }
-              ].map((member, index) => (
+              ]).map((member, index) => (
                 <div key={index} className="group text-center">
                   <div className="relative mb-6 inline-block">
                     <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                      <img src={member.image_url} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
                     </div>
                   </div>
                   <h3 className="text-2xl font-sans text-white mb-2">{member.name}</h3>

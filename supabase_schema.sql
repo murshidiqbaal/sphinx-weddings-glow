@@ -154,3 +154,30 @@ ALTER TABLE outdoor ADD COLUMN IF NOT EXISTS category TEXT[];
 ALTER TABLE night ADD COLUMN IF NOT EXISTS title TEXT;
 ALTER TABLE night ADD COLUMN IF NOT EXISTS alt TEXT;
 ALTER TABLE night ADD COLUMN IF NOT EXISTS category TEXT[];
+
+-- Team table
+CREATE TABLE IF NOT EXISTS team (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  role TEXT NOT NULL,
+  image_url TEXT,
+  bio TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Enable Row Level Security
+ALTER TABLE team ENABLE ROW LEVEL SECURITY;
+
+-- Team Policies
+CREATE POLICY "Public team members are viewable by everyone" ON team
+  FOR SELECT USING (true);
+
+CREATE POLICY "Authenticated users can insert team members" ON team
+  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated users can update team members" ON team
+  FOR UPDATE USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated users can delete team members" ON team
+  FOR DELETE USING (auth.role() = 'authenticated');
+

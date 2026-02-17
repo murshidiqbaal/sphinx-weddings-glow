@@ -41,8 +41,11 @@
 }
 
 .glass-card:hover {
-    @apply bg-black/30 backdrop-blur-3xl scale-[1.005] shadow-[0_20px_40px_rgba(0, 0, 0, 0.4)] border-white/20;
+    @apply bg-black/30 backdrop-blur-3xl scale-[1.005] border-white/20;
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
+
 
 /* Shimmer Effect */
 .shimmer {

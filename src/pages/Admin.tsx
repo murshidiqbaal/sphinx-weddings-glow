@@ -190,8 +190,8 @@ const Admin = () => {
             {savedMessage && (
               <p
                 className={`text-sm ${savedMessage.includes("successfully")
-                    ? "text-green-600"
-                    : "text-red-600"
+                  ? "text-green-600"
+                  : "text-red-600"
                   }`}
               >
                 {savedMessage}
@@ -237,8 +237,8 @@ const Admin = () => {
             {savedMessage && (
               <div
                 className={`mb-6 p-4 rounded-lg ${savedMessage.includes("successfully")
-                    ? "bg-green-100 text-green-800"
-                    : "bg-red-100 text-red-800"
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
                   }`}
               >
                 {savedMessage}

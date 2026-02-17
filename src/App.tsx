@@ -11,12 +11,14 @@ import OutdoorEvents from "./pages/OutdoorEvents";
 
 import AdminLayout from "./components/admin/AdminLayout";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
+import WhatsAppButton from "./components/WhatsAppButton";
 import Dashboard from "./pages/admin/Dashboard";
 import GalleryManager from "./pages/admin/GalleryManager";
 import ImageManager from "./pages/admin/ImageManager";
 import Login from "./pages/admin/Login";
 import Migration from "./pages/admin/Migration";
 import RecentWorksManager from "./pages/admin/RecentWorksManager";
+import TeamManager from "./pages/admin/TeamManager";
 import TestimonialsManager from "./pages/admin/TestimonialsManager";
 import TextManager from "./pages/admin/TextManager";
 import WeddingSectionManager from "./pages/admin/WeddingSectionManager";
@@ -49,6 +51,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AdminShortcut />
+        <WhatsAppButton />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/gallery" element={<Gallery />} />
@@ -66,6 +69,7 @@ const App = () => (
               <Route path="recent-works" element={<RecentWorksManager />} />
               <Route path="wedding-section" element={<WeddingSectionManager />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
+              <Route path="team" element={<TeamManager />} />
               <Route path="migration" element={<Migration />} />
             </Route>
           </Route>

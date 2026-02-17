@@ -9,6 +9,7 @@ const Dashboard = () => {
         galleryCount: 0,
         recentWorksCount: 0,
         weddingMomentsCount: 0,
+        teamCount: 0,
     });
     const [loading, setLoading] = useState(true);
 
@@ -27,10 +28,15 @@ const Dashboard = () => {
                     .from("wedding_moments")
                     .select("*", { count: "exact", head: true });
 
+                const { count: teamCount } = await supabase
+                    .from("team")
+                    .select("*", { count: "exact", head: true });
+
                 setStats({
                     galleryCount: galleryCount || 0,
                     recentWorksCount: recentWorksCount || 0,
                     weddingMomentsCount: weddingMomentsCount || 0,
+                    teamCount: teamCount || 0,
                 });
             } catch (error) {
                 console.error("Error fetching stats:", error);
@@ -77,6 +83,13 @@ const Dashboard = () => {
             path: "/admin/images",
             description: "Update static site images",
             color: "bg-orange-50 text-orange-600",
+        },
+        {
+            title: "Team Manager",
+            icon: <LayoutDashboard className="w-4 h-4" />,
+            path: "/admin/team",
+            description: "Manage the people behind Sphinx",
+            color: "bg-red-50 text-red-600",
         },
     ];
 
@@ -129,6 +142,21 @@ const Dashboard = () => {
                         </div>
                         <p className="text-xs text-muted-foreground">
                             Images in the marquee
+                        </p>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">Team Members</CardTitle>
+                        <LayoutDashboard className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">
+                            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : stats.teamCount}
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                            Creative professionals
                         </p>
                     </CardContent>
                 </Card>

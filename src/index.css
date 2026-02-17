@@ -1,11 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
 
+@import "./styles/glass-theme.css";
+@import "./styles/night-theme.css";
+@import "react-quill/dist/quill.snow.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "./styles/glass-theme.css";
-@import "./styles/night-theme.css";
+
+
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
