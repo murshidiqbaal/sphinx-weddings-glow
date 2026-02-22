@@ -938,60 +938,43 @@ const Index = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4">
-          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
-            <div className="shimmer absolute inset-0 pointer-events-none" />
-            <div className="text-center mb-16">
-              <div className="flex items-center justify-center gap-4 mb-4">
-                <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
-                <p className="text-xs uppercase tracking-[0.4em] text-sage">The People</p>
-                <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
-              </div>
-              <h2 className="text-4xl md:text-6xl font-sans font-light text-white mb-6">
-                Meet The Team
-              </h2>
-              <p className="text-gray-200 text-lg font-light max-w-2xl mx-auto">
-                The creative minds and dedicated hearts behind every perfect celebration.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {(teamMembers.length > 0 ? teamMembers : [
-                {
-                  name: "Zakaria Mohan",
-                  role: "Founder & Lead Planner",
-                  image_url: getImage("about-image"),
-                  bio: "With a passion for storytelling and an eye for detail, zakaria crafts weddings that are as unique as the couples he serves."
-                },
-                {
-                  name: "Sreejith ",
-                  role: "Creative Director",
-                  image_url: getImage("gallery-image-3"),
-                  bio: "Bringing dreams to visual reality through color, texture, and light arrangement."
-                },
-                {
-                  name: "Basil ",
-                  role: "Event Coordinator",
-                  image_url: getImage("gallery-image-6"),
-                  bio: "Ensuring every logistical element flows seamlessly, so you can focus on the celebration."
-                }
-              ]).map((member, index) => (
-                <div key={index} className="group text-center">
-                  <div className="relative mb-6 inline-block">
-                    <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
-                      <img src={member.image_url} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-sans text-white mb-2">{member.name}</h3>
-                  <p className="text-[#d6bba3] uppercase tracking-widest text-xs mb-4">{member.role}</p>
-                  <p className="text-gray-200 text-sm leading-relaxed max-w-sm mx-auto text-justify">{member.bio}</p>
+      {teamMembers.length > 0 && (
+        <section id="team" className="py-20 md:py-32 bg-transparent">
+          <div className="container mx-auto px-4">
+            <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+              <div className="shimmer absolute inset-0 pointer-events-none" />
+              <div className="text-center mb-16">
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
+                  <p className="text-xs uppercase tracking-[0.4em] text-sage">The People</p>
+                  <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
                 </div>
-              ))}
+                <h2 className="text-4xl md:text-6xl font-sans font-light text-white mb-6">
+                  Meet The Team
+                </h2>
+                <p className="text-gray-200 text-lg font-light max-w-2xl mx-auto">
+                  The creative minds and dedicated hearts behind every perfect celebration.
+                </p>
+              </div>
+
+              <div className={`grid gap-8 ${teamMembers.length === 1 ? "max-w-md mx-auto" : teamMembers.length === 2 ? "md:grid-cols-2 max-w-3xl mx-auto" : "md:grid-cols-3"}`}>
+                {teamMembers.map((member, index) => (
+                  <div key={index} className="group text-center">
+                    <div className="relative mb-6 inline-block">
+                      <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
+                        <img src={member.image_url} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-sans text-white mb-2">{member.name}</h3>
+                    <p className="text-[#d6bba3] uppercase tracking-widest text-xs mb-4">{member.role}</p>
+                    <p className="text-gray-200 text-sm leading-relaxed max-w-sm mx-auto text-justify">{member.bio}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section >
+        </section >
+      )}
 
       {/* Contact Section */}
       < section id="contact" className="py-20 md:py-32 bg-transparent" >
