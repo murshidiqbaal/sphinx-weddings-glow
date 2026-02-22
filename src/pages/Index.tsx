@@ -58,7 +58,7 @@ const Index = () => {
   const aboutTitle = getText("about-title");
   const aboutImageUrl = getImage("about-image");
   const contactEmail = getText("contact-email");
-  const contactPhone = getText("contact-phone");
+  const contactPhone = "9400043516";
   const contactAddress = getText("contact-address");
 
   useEffect(() => {
@@ -325,7 +325,7 @@ const Index = () => {
                 className="h-12 transition-all duration-300 brightness-0 invert"
               />
               <div className="flex flex-col items-center">
-                <span className="text-xl font-bold tracking-[0.2em] leading-none text-white transition-colors uppercase">
+                <span className="text-xl font-lightbold tracking-[0.2em] leading-none text-white transition-colors uppercase">
                   Sphinx
                 </span>
                 <span className="text-[6px] tracking-widest font-light text-white/80 transition-colors uppercase">
@@ -957,9 +957,9 @@ const Index = () => {
                 </p>
               </div>
 
-              <div className={`grid gap-8 ${teamMembers.length === 1 ? "max-w-md mx-auto" : teamMembers.length === 2 ? "md:grid-cols-2 max-w-3xl mx-auto" : "md:grid-cols-3"}`}>
+              <div className="flex flex-wrap justify-center gap-8 md:gap-12 max-w-6xl mx-auto">
                 {teamMembers.map((member, index) => (
-                  <div key={index} className="group text-center">
+                  <div key={index} className="group text-center w-full sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-3rem)] max-w-[350px]">
                     <div className="relative mb-6 inline-block">
                       <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
                         <img src={member.image_url} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
@@ -999,10 +999,10 @@ const Index = () => {
                   <strong>Address:</strong> <span dangerouslySetInnerHTML={{ __html: contactAddress }} />
                 </p>
                 <div className="flex gap-4 mt-6">
-                  <Button variant="outline" size="icon" className="rounded-full">
+                  <Button variant="outline" size="icon" className="rounded-full" onClick={() => window.open('https://www.facebook.com/sphinxinternational', '_blank')}>
                     <Facebook className="w-5 h-5" />
                   </Button>
-                  <Button variant="outline" size="icon" className="rounded-full">
+                  <Button variant="outline" size="icon" className="rounded-full" onClick={() => window.open('https://www.instagram.com/ms_sphinx_decore/', '_blank')}>
                     <Instagram className="w-5 h-5" />
                   </Button>
                 </div>
@@ -1074,15 +1074,16 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-2xl font-sans font-semibold mb-2">SphinxWeddings</h3>
           <p className="text-white/80 mb-6">Event Management and Wedding Planning</p>
-          <div className="flex justify-center gap-4 mb-6">
-            <Button variant="ghost" size="icon" className="text-white hover:text-sage" onClick={() => window.open('https://www.facebook.com/sphinxinternational', '_blank')}>
-              <Facebook className="w-5 h-5" />
+          <p className="text-[#d6bba3] text-3xl md:text-4xl mb-6 mt-4" style={{ fontFamily: "'Great Vibes', cursive" }}>Stay Connected With Us</p>
+          <div className="flex justify-center gap-8 mb-10 items-center">
+            <Button variant="ghost" className="text-white hover:text-sage hover:bg-transparent p-0 h-auto" onClick={() => window.open('https://www.facebook.com/sphinxinternational', '_blank')}>
+              <Facebook size={100} strokeWidth={1.5} className="!w-[30px] !h-[30px] md:!w-[40px] md:!h-[40px]" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-white hover:text-sage" onClick={() => window.open('https://www.instagram.com/ms_sphinx_decore/', '_blank')}>
-              <Instagram className="w-5 h-5" />
+            <Button variant="ghost" className="text-white hover:text-sage hover:bg-transparent p-0 h-auto" onClick={() => window.open('https://www.instagram.com/ms_sphinx_decore/', '_blank')}>
+              <Instagram size={100} strokeWidth={1.5} className="!w-[30px] !h-[30px] md:!w-[40px] md:!h-[40px]" />
             </Button>
           </div>
-          <p className="text-sm text-white/60">© 2025 SphinxWeddings. All rights reserved.</p>
+          <p className="text-sm text-white/60">© 2005 SphinxWeddings. All rights reserved.</p>
         </div>
       </footer>
     </div>
