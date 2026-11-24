@@ -1,9 +1,9 @@
-import landingImage from "@/assets/Gride 21.jpg.jpeg";
-import mobileBg from "@/assets/ben wed0234.JPG.jpeg";
-import coupleHands from "@/assets/imgs/IMG_6172.JPEG.jpg";
-import bouquet from "@/assets/imgs/IMG_7448.JPG";
-import venueLights from "@/assets/imgs/IMG_7842.JPG";
-import weddingCeremony from "@/assets/wedding-ceremony.jpg";
+import landingImage from "@/assets/gride-21.webp";
+import mobileBg from "@/assets/ben-wed0234.webp";
+import coupleHands from "@/assets/imgs/IMG_6172.webp";
+import bouquet from "@/assets/imgs/IMG_7448.webp";
+import venueLights from "@/assets/imgs/IMG_7842.webp";
+import weddingCeremony from "@/assets/wedding-ceremony.webp";
 import CursorGlow from "@/components/CursorGlow";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/hooks/useContent";
@@ -42,29 +42,26 @@ const OutdoorEvents = () => {
   }, []);
 
   useEffect(() => {
+    let rafId: number | null = null;
     const handleMouseMove = (e: MouseEvent) => {
-      const cards = document.querySelectorAll(".glass-card");
-      cards.forEach((card) => {
-        const item = card as HTMLElement;
-        const rect = item.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        // Calculate rotation for tilt effect
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -2;
-        const rotateY = ((x - centerX) / centerX) * 2;
-
-        item.style.setProperty("--mouse-x", `${x}px`);
-        item.style.setProperty("--mouse-y", `${y}px`);
-        item.style.setProperty("--rotate-x", `${rotateX}deg`);
-        item.style.setProperty("--rotate-y", `${rotateY}deg`);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const target = e.target as HTMLElement | null;
+        const card = target?.closest?.(".glass-card") as HTMLElement | null;
+        if (card) {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+          card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        }
       });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
@@ -154,6 +151,8 @@ const OutdoorEvents = () => {
                   <img
                     src={image.src}
                     alt={image.alt}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>

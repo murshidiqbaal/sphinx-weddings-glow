@@ -1,12 +1,12 @@
-import rings from "@/assets/imgs/IMG_6162.JPEG.jpg";
-import { default as aboutImage, default as plannerConsultation } from "@/assets/imgs/IMG_6163.JPEG.jpg";
-import weddingDetail from "@/assets/imgs/IMG_6166.JPEG.jpg";
-import coupleHands from "@/assets/imgs/IMG_6172.JPEG.jpg";
-import weddingAtmosphere from "@/assets/imgs/IMG_7428.JPG";
-import bouquet from "@/assets/imgs/IMG_7448.JPG";
-import weddingTable from "@/assets/imgs/IMG_7841.JPG";
-import venueLights from "@/assets/imgs/IMG_7842.JPG";
-import weddingCeremony from "@/assets/wedding-ceremony.jpg";
+import rings from "@/assets/imgs/IMG_6162.webp";
+import { default as aboutImage, default as plannerConsultation } from "@/assets/imgs/IMG_6163.webp";
+import weddingDetail from "@/assets/imgs/IMG_6166.webp";
+import coupleHands from "@/assets/imgs/IMG_6172.webp";
+import weddingAtmosphere from "@/assets/imgs/IMG_7428.webp";
+import bouquet from "@/assets/imgs/IMG_7448.webp";
+import weddingTable from "@/assets/imgs/IMG_7841.webp";
+import venueLights from "@/assets/imgs/IMG_7842.webp";
+import weddingCeremony from "@/assets/wedding-ceremony.webp";
 
 export type ContentType = "text" | "textarea" | "image";
 

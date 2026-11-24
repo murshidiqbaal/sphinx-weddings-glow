@@ -1,27 +1,27 @@
 [
     {
-        "filename": "IMG_6172.JPEG.jpg",
+        "filename": "IMG_6172.webp",
         "title": "Elegant Garden Wedding",
         "caption": "Sarah & Michael • Summer 2023",
         "categories": ["wedding"],
         "pages": ["gallery", "index"]
     },
     {
-        "filename": "IMG_6166.JPEG.jpg",
+        "filename": "IMG_6166.webp",
         "title": "Beachfront Celebration",
         "caption": "Jessica & David • Spring 2023",
         "categories": ["wedding"],
         "pages": ["gallery", "index"]
     },
     {
-        "filename": "IMG_5914.PNG",
+        "filename": "IMG_5914.webp",
         "title": "Annual Gala",
         "caption": "Tech Solutions Inc. • Winter 2023",
         "categories": ["corporate"],
         "pages": ["gallery"]
     },
     {
-        "filename": "assets/imgs/IMG_6163.JPEG.jpg",
+        "filename": "assets/imgs/IMG_6163.webp",
         "title": "Product Launch Event",
         "caption": "Innovatech Corp. • Fall 2023",
         "categories": ["corporate"],
@@ -29,7 +29,7 @@
     },
 
     {
-        "filename": "assets/imgs/IMG_6162.JPEG.jpg",
+        "filename": "assets/imgs/IMG_6162.webp",
         "title": "Annual Gala",
         "caption": "Tech Solutions Inc. • Winter 2023",
         "categories": ["corporate"],

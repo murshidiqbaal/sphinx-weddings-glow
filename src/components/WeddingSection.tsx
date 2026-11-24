@@ -37,16 +37,18 @@ const WeddingSection = ({ images = [] }: WeddingSectionProps) => {
                         return (
                             <div
                                 key={`${index}`}
-                                className="flex-none transform transition-transform hover:scale-105 duration-300"
+                                className="flex-none"
                                 style={{
                                     transform: `rotate(${index % 2 === 0 ? '2deg' : '-2deg'})`,
                                 }}
                             >
-                                <div className="bg-white/[0.02] backdrop-blur-md p-4 pb-12 shadow-lg rounded-sm w-[280px] md:w-[320px] border border-white/10">
+                                <div className="bg-white/[0.02] backdrop-blur-md p-4 pb-12 shadow-lg rounded-sm w-[280px] md:w-[320px] border border-white/10 transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-2xl">
                                     <div className="aspect-[4/5] overflow-hidden bg-white/5 mb-4">
                                         <img
                                             src={src}
                                             alt={caption}
+                                            loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-cover filter sepia-[0.2] contrast-[1.05]"
                                         />
                                     </div>

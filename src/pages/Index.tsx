@@ -1,8 +1,8 @@
-import mobileBg from "@/assets/ben wed0234.JPG.jpeg";
-import landingImage from "@/assets/Gride 21.jpg.jpeg";
-import celebrationToast from "@/assets/imgs/IMG_7349.JPEG.jpg";
-import logo from "@/assets/logo/logo1.png";
-import decoration from "@/assets/logo/vector1.png";
+import mobileBg from "@/assets/ben-wed0234.webp";
+import landingImage from "@/assets/gride-21.webp";
+import celebrationToast from "@/assets/imgs/IMG_7349.webp";
+import logo from "@/assets/logo/logo1.webp";
+import decoration from "@/assets/logo/vector1.webp";
 import CursorGlow from "@/components/CursorGlow";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -92,29 +92,26 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
+    let rafId: number | null = null;
     const handleMouseMove = (e: MouseEvent) => {
-      const cards = document.querySelectorAll(".glass-card");
-      cards.forEach((card) => {
-        const item = card as HTMLElement;
-        const rect = item.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        // Calculate rotation for tilt effect (max 2 degrees for subtle movement)
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -2; // Inverted for natural feel
-        const rotateY = ((x - centerX) / centerX) * 2;
-
-        item.style.setProperty("--mouse-x", `${x}px`);
-        item.style.setProperty("--mouse-y", `${y}px`);
-        item.style.setProperty("--rotate-x", `${rotateX}deg`);
-        item.style.setProperty("--rotate-y", `${rotateY}deg`);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const target = e.target as HTMLElement | null;
+        const card = target?.closest?.(".glass-card") as HTMLElement | null;
+        if (card) {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+          card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        }
       });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -418,7 +415,7 @@ const Index = () => {
                 {/* Arched Image */}
                 <div className="relative z-10">
                   <div className="overflow-hidden rounded-[40px] h-[400px] md:h-[500px] w-full bg-white/95 border border-[#f5e7db] shadow-[0_30px_80px_rgba(0,0,0,0.18)] p-[1.5px]">
-                    <img src={galleryImages[0]} alt="Featured celebration" className="w-full h-full object-cover rounded-[32px]" />
+                    <img src={galleryImages[0]} alt="Featured celebration" loading="lazy" decoding="async" className="w-full h-full object-cover rounded-[32px]" />
                   </div>
                 </div>
                 {/* Decorative elements behind */}
@@ -537,6 +534,8 @@ const Index = () => {
                   <img
                     src={aboutImageUrl}
                     alt="About Sphinx Weddings"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </div>
@@ -619,7 +618,7 @@ const Index = () => {
                     <div className="absolute -top-6 -left-6 bg-[#b27b61] text-white text-xs uppercase tracking-[0.4em] px-4 py-2 rounded-full shadow-lg">
                       Est. 2025
                     </div>
-                    <img src={celebrationToast} alt="Celebration toast" className="w-full h-[360px] object-cover" />
+                    <img src={celebrationToast} alt="Celebration toast" loading="lazy" decoding="async" className="w-full h-[360px] object-cover" />
                     <div className="px-8 py-6 text-center space-y-2">
                       <p className="text-xs uppercase tracking-[0.4em] text-sage">Signature curation</p>
                       <p className="text-sm text-gray-300">
@@ -762,7 +761,7 @@ const Index = () => {
                       className="glass-card rounded-[28px] p-4 border border-white/10 h-full"
                     >
                       <div className="rounded-[20px] overflow-hidden h-[250px] md:h-[380px]">
-                        <img src={item.image_url} alt={item.caption} className="w-full h-full object-cover" />
+                        <img src={item.image_url} alt={item.caption} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                       </div>
                       {/* <img src={decoration} alt="" className="w-[200px] h-8 ml-2 inline-block opacity-80" /> */}
                       <div className="mt-4">
@@ -863,6 +862,8 @@ const Index = () => {
                   <img
                     src={service.image}
                     alt={service.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                   />
 
@@ -962,7 +963,7 @@ const Index = () => {
                   <div key={index} className="group text-center w-full sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-3rem)] max-w-[350px]">
                     <div className="relative mb-6 inline-block">
                       <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto">
-                        <img src={member.image_url} alt={member.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                        <img src={member.image_url} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
                       </div>
                     </div>
                     <h3 className="text-2xl font-sans text-white mb-2">{member.name}</h3>

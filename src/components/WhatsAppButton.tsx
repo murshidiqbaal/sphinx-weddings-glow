@@ -35,7 +35,7 @@ const WhatsAppButton = () => {
                 </div>
 
                 {/* Decorative Ring */}
-                <div className="absolute inset-0 rounded-full bg-sage/30 animate-ping duration-[3000ms]" />
+                <div className="absolute inset-0 rounded-full bg-sage/30 animate-ping" style={{ animationDuration: '3000ms' }} />
 
                 {/* Main Button */}
                 <div className="relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-forest text-white shadow-[0_10px_30px_rgba(45,61,42,0.3)] border border-white/10 overflow-hidden transition-transform duration-500 group-hover:scale-110 group-active:scale-95">
