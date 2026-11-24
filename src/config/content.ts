@@ -266,6 +266,40 @@ export const contentItems: ContentItemDefinition[] = [
   { id: "gallery-item-11-title", label: "Gallery Item 11 Title", type: "text", defaultValue: "Forever Yours" },
   { id: "gallery-item-12-src", label: "Gallery Item 12 Image", type: "image", defaultValue: weddingCeremony },
   { id: "gallery-item-12-title", label: "Gallery Item 12 Title", type: "text", defaultValue: "Vows Exchange" },
+  // SEO & Meta Configuration (Manageable via Admin CMS)
+  {
+    id: "meta-home-title",
+    label: "SEO - Home Title",
+    type: "text",
+    defaultValue: "Sphinx Wedding | Luxury Wedding Planner & Event Management in Kerala",
+  },
+  {
+    id: "meta-home-description",
+    label: "SEO - Home Meta Description",
+    type: "textarea",
+    defaultValue:
+      "Sphinx Wedding is Kerala's premier wedding planning and event management company based in Kothamangalam, Kochi. We specialize in bespoke stage decor, luxury destination weddings, and flawless coordination across Kerala.",
+  },
+  {
+    id: "meta-home-keywords",
+    label: "SEO - Home Keywords",
+    type: "textarea",
+    defaultValue:
+      "Wedding Planner Kerala, Wedding Event Management Kochi, Best Wedding Organizers Kothamangalam, Luxury Wedding Planner Kerala, Destination Wedding Planner Kerala, Wedding Decoration Services Ernakulam",
+  },
+  {
+    id: "meta-gallery-title",
+    label: "SEO - Gallery Title",
+    type: "text",
+    defaultValue: "Wedding & Event Portfolio | Sphinx Wedding Gallery Kerala",
+  },
+  {
+    id: "meta-gallery-description",
+    label: "SEO - Gallery Meta Description",
+    type: "textarea",
+    defaultValue:
+      "Explore the bespoke wedding and celebration portfolio by Sphinx Wedding. View our luxury stage decors, traditional ceremonies, outdoor garden events, and night celebrations in Kerala.",
+  },
 ];
 
 export const defaultContentMap = contentItems.reduce<Record<string, string>>((acc, item) => {

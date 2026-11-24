@@ -5,6 +5,7 @@ import weddingTable from "@/assets/imgs/IMG_7841.webp";
 import venueLights from "@/assets/imgs/IMG_7842.webp";
 import weddingCeremony from "@/assets/wedding-ceremony.webp";
 import CursorGlow from "@/components/CursorGlow";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/hooks/useContent";
 import { useGallery } from "@/hooks/useGallery";
@@ -82,6 +83,36 @@ const NightEvents = () => {
 
   return (
     <div className="min-h-screen w-full font-sans text-foreground relative selection:bg-sage/30">
+      <SEOHead
+        title="Night Wedding Events & Starlit Receptions in Kerala | Sphinx Wedding"
+        description="Discover starlit evening receptions, fairy-light tunnels, and illuminated twilight wedding celebrations in Kerala planned by Sphinx Wedding."
+        canonicalUrl="https://sphinxweddings.com/gallery/night-events"
+        keywords="Night Wedding Kerala, Twilight Wedding Reception Kochi, Starlit Wedding Venue, Fairy Light Wedding Decor"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://sphinxweddings.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Gallery",
+              "item": "https://sphinxweddings.com/gallery"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Night Events",
+              "item": "https://sphinxweddings.com/gallery/night-events"
+            }
+          ]
+        }}
+      />
       {/* Background Layer - Desktop (Darker for Night Effect) */}
       <div
         className={`hidden md:block fixed inset-0 z-[-1] bg-cover bg-center transition-all duration-1000 transform scale-105 ${headerDark ? "blur-md" : "blur-0"}`}
@@ -147,9 +178,9 @@ const NightEvents = () => {
         <div className="container mx-auto px-4">
           <div className="bg-black/40 backdrop-blur-md rounded-full py-2 px-6 border border-white/5 shadow-lg flex justify-between items-center max-w-5xl mx-auto">
             <Link to="/" className="flex flex-col">
-              <h1 className="text-xl md:text-2xl font-sans font-light text-white tracking-wider">
+              <span className="text-xl md:text-2xl font-sans font-light text-white tracking-wider">
                 SphinxWeddings
-              </h1>
+              </span>
             </Link>
 
             <Link to="/gallery">
@@ -171,7 +202,7 @@ const NightEvents = () => {
             <Star className="w-8 h-8 text-blue-200 relative z-10 animate-pulse" />
             <Sparkles className="w-8 h-8 text-blue-200 relative z-10 animate-pulse delay-700" />
           </div>
-          <div
+          <h1
             className="text-5xl md:text-7xl font-sans font-light text-white mb-6 tracking-wide drop-shadow-[0_0_25px_rgba(100,149,237,0.6)]"
             dangerouslySetInnerHTML={{ __html: getText("night-title") }}
           />

@@ -13,8 +13,20 @@ const Login = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
+        document.title = "Admin Portal | Sphinx Wedding";
+        let meta = document.querySelector('meta[name="robots"]');
+        if (!meta) {
+            meta = document.createElement("meta");
+            meta.setAttribute("name", "robots");
+            document.head.appendChild(meta);
+        }
+        meta.setAttribute("content", "noindex, nofollow");
+
         document.body.classList.add("admin-mode");
-        return () => document.body.classList.remove("admin-mode");
+        return () => {
+            document.body.classList.remove("admin-mode");
+            if (meta) meta.setAttribute("content", "index, follow");
+        };
     }, []);
 
     const handleLogin = async (e: React.FormEvent) => {

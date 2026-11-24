@@ -2,6 +2,7 @@ import landingImage from "@/assets/gride-21.webp";
 import mobileBg from "@/assets/ben-wed0234.webp";
 import logo from "@/assets/logo/logo1.webp";
 import CursorGlow from "@/components/CursorGlow";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/hooks/useContent";
 import { useGallery } from "@/hooks/useGallery";
@@ -220,6 +221,30 @@ const Gallery = () => {
       />
 
       <CursorGlow />
+      <SEOHead
+        title={getText("meta-gallery-title") || "Wedding & Event Portfolio | Sphinx Wedding Gallery Kerala"}
+        description={getText("meta-gallery-description") || "Explore the bespoke wedding and celebration portfolio by Sphinx Wedding. View our luxury stage decors, traditional ceremonies, outdoor garden events, and night celebrations in Kerala."}
+        canonicalUrl="https://sphinxweddings.com/gallery"
+        keywords="Wedding Gallery Kerala, Event Management Portfolio Kochi, Bridal Stage Photos, Mandap Decoration Photos Kerala"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://sphinxweddings.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Gallery",
+              "item": "https://sphinxweddings.com/gallery"
+            }
+          ]
+        }}
+      />
       <div className="bg-noise" />
       {/* Accent Blobs */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -255,7 +280,7 @@ const Gallery = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-12 md:pt-40 md:pb-20">
         <div className="container mx-auto px-4 text-center">
-          <div
+          <h1
             className="text-5xl md:text-7xl font-sans font-light text-white mb-8 tracking-wide animate-fade-in"
             dangerouslySetInnerHTML={{ __html: getText("gallery-title") }}
           />

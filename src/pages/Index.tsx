@@ -4,6 +4,8 @@ import celebrationToast from "@/assets/imgs/IMG_7349.webp";
 import logo from "@/assets/logo/logo1.webp";
 import decoration from "@/assets/logo/vector1.webp";
 import CursorGlow from "@/components/CursorGlow";
+import SEOHead from "@/components/SEOHead";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -60,6 +62,66 @@ const Index = () => {
   const contactEmail = getText("contact-email");
   const contactPhone = "9400043516";
   const contactAddress = getText("contact-address");
+
+  const seoTitle = getText("meta-home-title") || "Sphinx Wedding | Luxury Wedding Planner & Event Management in Kerala";
+  const seoDescription = getText("meta-home-description") || "Sphinx Wedding is Kerala's premier wedding planning and event management company in Kothamangalam, Kochi. Specializing in bespoke stage decoration, luxury destination weddings, and seamless event coordination.";
+  const seoKeywords = getText("meta-home-keywords") || "Wedding Planner Kerala, Wedding Event Management Kochi, Best Wedding Planners Kothamangalam, Luxury Wedding Planner Kerala, Destination Wedding Planner Kerala, Wedding Decoration Services Ernakulam";
+
+  const faqs = [
+    {
+      question: "What does a wedding planner do?",
+      answer:
+        "A wedding planner orchestrates every aspect of your wedding celebration, including venue selection, vendor negotiations, budget allocation, bespoke decor design, and complete day-of coordination. At Sphinx Wedding, we manage timelines, logistical flow, and guest hospitality so couples and families can savor their day without stress.",
+    },
+    {
+      question: "Why should I hire a professional wedding planner in Kerala?",
+      answer:
+        "Hiring a professional wedding planner in Kerala ensures seamless coordination between diverse traditional rituals, multi-day celebrations, and premier local vendors. Sphinx Wedding leverages established regional connections across Kothamangalam, Kochi, and Kerala to secure top-tier venues, caterers, and florists while preventing costly logistical pitfalls.",
+    },
+    {
+      question: "How much does wedding planning cost in Kerala?",
+      answer:
+        "Wedding planning costs in Kerala vary based on guest count, venue choice, decor complexity, and event duration. Standard coordination packages typically range from moderate investments to luxury productions. Sphinx Wedding offers transparent pricing and tailored packages to maximize value and ensure your budget is managed efficiently without hidden fees.",
+    },
+    {
+      question: "What is included in Sphinx Wedding's event management services?",
+      answer:
+        "Our complete wedding management services encompass full-scale conceptual styling, custom bridal stage decorations, floral design, lighting, catering coordination, sound/AV management, and on-site day-of supervision. We oversee all events from engagement, Haldi, and Mehandi ceremonies to the grand reception.",
+    },
+    {
+      question: "What is the difference between a wedding planner and a venue manager?",
+      answer:
+        "A venue manager only oversees venue-specific facilities such as heating, air conditioning, and hall rules. In contrast, Sphinx Wedding acts entirely as your personal advocate—managing all outside vendors, wedding itineraries, bridal party needs, guest transfers, and real-time ceremony execution.",
+    },
+    {
+      question: "How early should we hire Sphinx Wedding before our wedding date?",
+      answer:
+        "We recommend booking Sphinx Wedding 6 to 12 months before your wedding date, particularly for peak Kerala wedding seasons (September through February). Early booking secures high-demand venues, bespoke stage fabricators, and premier wedding photographers, though we also accommodate shorter planning timelines.",
+    },
+    {
+      question: "Does Sphinx Wedding manage custom stage decorations and floral setups?",
+      answer:
+        "Yes, Sphinx Wedding specializes in bespoke stage decoration, authentic mandap architecture, contemporary floral installations, and thematic ambient lighting. Every design is custom-crafted to reflect the couple's personal story, cultural traditions, and preferred color palette.",
+    },
+    {
+      question: "How does destination wedding planning work in Kerala?",
+      answer:
+        "Sphinx Wedding coordinates full-service destination weddings in Kerala's most picturesque locales, including the misty hills of Munnar, serene backwaters of Kumarakom, and beachfront resorts in Kochi. We manage guest accommodations, airport transfers, permits, local vendor logistics, and multi-day experiential itineraries.",
+    },
+  ];
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  };
 
   useEffect(() => {
     const observerOptions = {
@@ -304,6 +366,13 @@ const Index = () => {
       />
 
       <CursorGlow />
+      <SEOHead
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        canonicalUrl="https://sphinxweddings.com/"
+        structuredData={faqSchema}
+      />
       <div className="bg-noise" />
       {/* Accent Blobs */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -333,13 +402,13 @@ const Index = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex gap-8 pr-4">
-              {["home", "our-works", "about", "contact"].map((item) => (
+              {["home", "our-works", "about", "faq", "contact"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
                   className="text-xs font-medium text-white/90 hover:text-white hover:tracking-widest transition-all duration-300 uppercase tracking-wide"
                 >
-                  {item === "our-works" ? "Our Works" : item}
+                  {item === "our-works" ? "Our Works" : item === "faq" ? "FAQ" : item}
                 </button>
               ))}
               <Link
@@ -362,13 +431,13 @@ const Index = () => {
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
             <nav className="md:hidden mt-4 pb-4 flex flex-col gap-4 pl-2">
-              {["home", "our-works", "about", "contact"].map((item) => (
+              {["home", "our-works", "about", "faq", "contact"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
                   className="text-left text-sm font-medium text-white hover:text-sage transition-colors capitalize"
                 >
-                  {item === "our-works" ? "Our Works" : item}
+                  {item === "our-works" ? "Our Works" : item === "faq" ? "FAQ" : item}
                 </button>
               ))}
               <Link
@@ -389,7 +458,7 @@ const Index = () => {
         className="relative h-screen flex items-center justify-center text-center mt-0"
       >
         <div className="container mx-auto px-4 z-10">
-          <div
+          <h1
             className="text-3xl md:text-5xl lg:text-4xl font-sans font-light-bold text-white mb-6 leading-tight"
             dangerouslySetInnerHTML={{ __html: heroTitle }}
           />
@@ -434,8 +503,8 @@ const Index = () => {
                   WEDDING
                 </h2>
                 <p className="text-base md:text-lg text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed text-justify">
-                  Personalized wedding planning for couples livin&apos; it up in KCMO. From one-hour consults to full-scale
-                  production, we create artful timelines, manage every vendor, and keep you present in every moment.
+                  Personalized wedding planning for couples wildly in love in Kerala. From intimate bespoke consults to full-scale
+                  production, we curate artful timelines, coordinate premier vendors, and keep you present in every unforgettable moment.
                 </p>
                 <div className="pt-4">
                   <Button variant="outline" className="border-2 border-[#b27b61] text-[#b27b61] hover:bg-[#b27b61] hover:text-white px-10 py-6 rounded-full text-sm uppercase tracking-widest transition-all hover:shadow-lg hover:-translate-y-1">
@@ -645,7 +714,7 @@ const Index = () => {
                 <div className="flex flex-col md:flex-row md:items-center gap-8">
                   <div className="space-y-4 max-w-lg">
                     <p className="text-lg uppercase tracking-[0.2em] text-[#d6bba3]">
-                      Personalized wedding planning for couples livin&apos; it up in KCMO
+                      Personalized wedding planning for couples wildly in love in Kerala
                     </p>
                     <p className="text-sm text-gray-200 leading-relaxed text-justify">
                       Whether you&apos;ve got it all together and just need a day-of coordinator or feel a little overwhelmed
@@ -976,6 +1045,47 @@ const Index = () => {
           </div>
         </section >
       )}
+
+      {/* FAQ & AEO Section */}
+      <section id="faq" className="py-20 md:py-32 bg-transparent">
+        <div className="container mx-auto px-4">
+          <div className="glass-card p-8 md:p-12 relative overflow-hidden group">
+            <div className="shimmer absolute inset-0 pointer-events-none" />
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80" />
+                <p className="text-xs uppercase tracking-[0.4em] text-sage font-medium">Clear Answers</p>
+                <img src={decoration} alt="" className="w-16 h-auto opacity-80 transform scale-x-[-1]" />
+              </div>
+              <h2 className="text-3xl md:text-5xl font-sans font-light text-white mb-6">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-gray-200 text-lg font-light">
+                Helpful answers about our luxury wedding planning, stage decor, and event coordination services in Kerala.
+              </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <Accordion type="single" collapsible className="w-full space-y-4">
+                {faqs.map((faq, index) => (
+                  <AccordionItem
+                    key={index}
+                    value={`item-${index}`}
+                    className="border border-white/10 rounded-2xl px-6 bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]"
+                  >
+                    <AccordionTrigger className="text-left text-white text-lg md:text-xl font-sans font-light hover:no-underline hover:text-sage py-5">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-300 text-base leading-relaxed pt-2 pb-6 text-justify">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Contact Section */}
       < section id="contact" className="py-20 md:py-32 bg-transparent" >
