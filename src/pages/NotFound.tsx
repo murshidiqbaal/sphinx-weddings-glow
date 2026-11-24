@@ -14,7 +14,7 @@ const NotFound = () => {
       <SEOHead
         title="404 Page Not Found | Sphinx Wedding"
         description="The page you are looking for does not exist. Explore Sphinx Wedding services, gallery, and wedding management in Kerala."
-        canonicalUrl="https://sphinxweddings.com/404"
+        canonicalUrl="https://www.sphinxwedding.com/404"
       />
       <div className="text-center px-4">
         <h1 className="mb-4 text-6xl font-light text-sage">404</h1>

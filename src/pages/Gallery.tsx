@@ -224,7 +224,7 @@ const Gallery = () => {
       <SEOHead
         title={getText("meta-gallery-title") || "Wedding & Event Portfolio | Sphinx Wedding Gallery Kerala"}
         description={getText("meta-gallery-description") || "Explore the bespoke wedding and celebration portfolio by Sphinx Wedding. View our luxury stage decors, traditional ceremonies, outdoor garden events, and night celebrations in Kerala."}
-        canonicalUrl="https://sphinxweddings.com/gallery"
+        canonicalUrl="https://www.sphinxwedding.com/gallery"
         keywords="Wedding Gallery Kerala, Event Management Portfolio Kochi, Bridal Stage Photos, Mandap Decoration Photos Kerala"
         structuredData={{
           "@context": "https://schema.org",
@@ -234,13 +234,13 @@ const Gallery = () => {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://sphinxweddings.com/"
+              "item": "https://www.sphinxwedding.com/"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Gallery",
-              "item": "https://sphinxweddings.com/gallery"
+              "item": "https://www.sphinxwedding.com/gallery"
             }
           ]
         }}

@@ -10,8 +10,8 @@ interface SEOHeadProps {
   structuredData?: Record<string, any> | Array<Record<string, any>>;
 }
 
-const DEFAULT_IMAGE = "https://sphinxweddings.com/logo1.webp";
-const BASE_URL = "https://sphinxweddings.com";
+const DEFAULT_IMAGE = "https://www.sphinxwedding.com/logo1.webp";
+const BASE_URL = "https://www.sphinxwedding.com";
 
 export const SEOHead = ({
   title,

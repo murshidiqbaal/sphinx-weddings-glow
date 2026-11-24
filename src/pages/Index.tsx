@@ -370,7 +370,7 @@ const Index = () => {
         title={seoTitle}
         description={seoDescription}
         keywords={seoKeywords}
-        canonicalUrl="https://sphinxweddings.com/"
+        canonicalUrl="https://www.sphinxwedding.com/"
         structuredData={faqSchema}
       />
       <div className="bg-noise" />

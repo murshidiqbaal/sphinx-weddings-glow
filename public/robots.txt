@@ -1,6 +1,6 @@
 # =====================================================
 # SPHINX WEDDING - PRODUCTION ROBOTS.TXT
-# https://sphinxweddings.com
+# https://www.sphinxwedding.com
 # =====================================================
 
 User-agent: *
@@ -47,4 +47,4 @@ User-agent: facebookexternalhit
 Allow: /
 
 # Sitemap Location
-Sitemap: https://sphinxweddings.com/sitemap.xml
+Sitemap: https://www.sphinxwedding.com/sitemap.xml

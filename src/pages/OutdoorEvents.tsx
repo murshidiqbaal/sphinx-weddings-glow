@@ -70,7 +70,7 @@ const OutdoorEvents = () => {
       <SEOHead
         title="Outdoor & Garden Wedding Events in Kerala | Sphinx Wedding"
         description="Explore breathtaking outdoor garden weddings, open-air lawn receptions, and bespoke floral pavilions across Kerala crafted by Sphinx Wedding."
-        canonicalUrl="https://sphinxweddings.com/gallery/outdoor-events"
+        canonicalUrl="https://www.sphinxwedding.com/gallery/outdoor-events"
         keywords="Outdoor Weddings Kerala, Garden Wedding Venues Kochi, Lawn Wedding Decor Kerala, Al Fresco Wedding Reception"
         structuredData={{
           "@context": "https://schema.org",
@@ -80,19 +80,19 @@ const OutdoorEvents = () => {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://sphinxweddings.com/"
+              "item": "https://www.sphinxwedding.com/"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Gallery",
-              "item": "https://sphinxweddings.com/gallery"
+              "item": "https://www.sphinxwedding.com/gallery"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Outdoor Events",
-              "item": "https://sphinxweddings.com/gallery/outdoor-events"
+              "item": "https://www.sphinxwedding.com/gallery/outdoor-events"
             }
           ]
         }}

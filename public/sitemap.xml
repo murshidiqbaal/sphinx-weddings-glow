@@ -3,12 +3,12 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <!-- Homepage: Sphinx Wedding Planning & Event Management -->
   <url>
-    <loc>https://sphinxweddings.com/</loc>
+    <loc>https://www.sphinxwedding.com/</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://sphinxweddings.com/logo1.webp</image:loc>
+      <image:loc>https://www.sphinxwedding.com/logo1.webp</image:loc>
       <image:title>Sphinx Wedding Brand Logo</image:title>
       <image:caption>Sphinx Wedding - Luxury Wedding Planners in Kerala</image:caption>
     </image:image>
@@ -16,12 +16,12 @@
 
   <!-- Full Wedding Portfolio & Gallery -->
   <url>
-    <loc>https://sphinxweddings.com/gallery</loc>
+    <loc>https://www.sphinxwedding.com/gallery</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://sphinxweddings.com/logo1.webp</image:loc>
+      <image:loc>https://www.sphinxwedding.com/logo1.webp</image:loc>
       <image:title>Sphinx Wedding Gallery</image:title>
       <image:caption>Curated Wedding &amp; Event Management Portfolio in Kerala</image:caption>
     </image:image>
@@ -29,12 +29,12 @@
 
   <!-- Outdoor Wedding & Garden Events -->
   <url>
-    <loc>https://sphinxweddings.com/gallery/outdoor-events</loc>
+    <loc>https://www.sphinxwedding.com/gallery/outdoor-events</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://sphinxweddings.com/logo1.webp</image:loc>
+      <image:loc>https://www.sphinxwedding.com/logo1.webp</image:loc>
       <image:title>Outdoor Wedding Events in Kerala</image:title>
       <image:caption>Bespoke Al Fresco and Lawn Wedding Ceremonies by Sphinx Wedding</image:caption>
     </image:image>
@@ -42,12 +42,12 @@
 
   <!-- Night Events & Starlit Receptions -->
   <url>
-    <loc>https://sphinxweddings.com/gallery/night-events</loc>
+    <loc>https://www.sphinxwedding.com/gallery/night-events</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://sphinxweddings.com/logo1.webp</image:loc>
+      <image:loc>https://www.sphinxwedding.com/logo1.webp</image:loc>
       <image:title>Night Wedding Events in Kerala</image:title>
       <image:caption>Starlit Evening Receptions and Illuminated Wedding Ceremonies</image:caption>
     </image:image>

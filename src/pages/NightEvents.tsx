@@ -86,7 +86,7 @@ const NightEvents = () => {
       <SEOHead
         title="Night Wedding Events & Starlit Receptions in Kerala | Sphinx Wedding"
         description="Discover starlit evening receptions, fairy-light tunnels, and illuminated twilight wedding celebrations in Kerala planned by Sphinx Wedding."
-        canonicalUrl="https://sphinxweddings.com/gallery/night-events"
+        canonicalUrl="https://www.sphinxwedding.com/gallery/night-events"
         keywords="Night Wedding Kerala, Twilight Wedding Reception Kochi, Starlit Wedding Venue, Fairy Light Wedding Decor"
         structuredData={{
           "@context": "https://schema.org",
@@ -96,19 +96,19 @@ const NightEvents = () => {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://sphinxweddings.com/"
+              "item": "https://www.sphinxwedding.com/"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Gallery",
-              "item": "https://sphinxweddings.com/gallery"
+              "item": "https://www.sphinxwedding.com/gallery"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Night Events",
-              "item": "https://sphinxweddings.com/gallery/night-events"
+              "item": "https://www.sphinxwedding.com/gallery/night-events"
             }
           ]
         }}
