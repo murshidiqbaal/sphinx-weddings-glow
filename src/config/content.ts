@@ -71,7 +71,7 @@ export const contentItems: ContentItemDefinition[] = [
   },
   {
     id: "gallery-image-2",
-    label: "Gallery Image 2 (Couple Hands)",
+    label: "Gallery Image 2 (Haldi Ceremony)",
     type: "image",
     defaultValue: coupleHands,
   },

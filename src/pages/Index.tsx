@@ -825,7 +825,7 @@ const Index = () => {
                 {
                   id: "haldi",
                   title: "Haldi Ceremony",
-                  image: getImage("gallery-image-1"), // Placeholder, reusing weddingTable
+                  image: getImage("gallery-image-2"),
                   description: "Vibrant traditions soaked in love and laughter.",
                 },
                 {
